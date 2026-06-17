@@ -1,0 +1,51 @@
+---
+const heroPills = ['Landing estatica', 'Scroll suave', 'Animacion editorial'];
+---
+
+<section id="top" class="relative overflow-hidden">
+	<div class="mx-auto grid min-h-[calc(100vh-1.5rem)] max-w-7xl items-center gap-12 px-4 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-6 lg:py-12">
+		<div class="relative z-10">
+			<p class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">Torre Mejanell / static retreat</p>
+			<h1 class="max-w-[11ch] text-5xl leading-[0.92] tracking-[-0.04em] text-[#1f1a17] sm:text-6xl lg:text-[7.5rem]">
+				Casas rurales con atmosfera, animacion y una direccion visual intensa.
+			</h1>
+			<p class="mt-6 max-w-2xl text-lg leading-8 text-[#6b5f56]">
+				Un punto de partida para un sitio estatica con presencia editorial, capas suaves y una experiencia visual que se siente viva sin perder ligereza.
+			</p>
+			<div class="mt-8 flex flex-wrap gap-3">
+				<a class="inline-flex items-center justify-center rounded-full border border-[#1f1a17] bg-[#1f1a17] px-5 py-3 text-sm font-bold text-[#f8f4ec] transition-transform duration-200 hover:-translate-y-0.5" href="#estancias">Explorar estancias</a>
+				<a class="inline-flex items-center justify-center rounded-full border border-black/10 bg-white/70 px-5 py-3 text-sm font-bold text-[#1f1a17] transition-transform duration-200 hover:-translate-y-0.5" href="#experiencias">Ver experiencias</a>
+				<a class="inline-flex items-center justify-center rounded-full border border-black/10 bg-white/70 px-5 py-3 text-sm font-bold text-[#1f1a17] transition-transform duration-200 hover:-translate-y-0.5" href="/preus-i-ocupacio">Preus i ocupació</a>
+			</div>
+			<ul class="mt-6 flex flex-wrap gap-3" aria-label="Puntos clave del proyecto">
+				{heroPills.map((pill) => (
+					<li class="rounded-full border border-black/10 bg-white/60 px-4 py-2 text-sm text-[#4a413a] backdrop-blur-md">{pill}</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="relative flex min-h-[540px] items-center justify-center lg:min-h-[680px]">
+			<div aria-hidden="true" class="absolute right-6 top-10 h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(236,180,108,0.9),rgba(236,180,108,0))] blur-3xl motion-safe:animate-[drift_14s_ease-in-out_infinite]"></div>
+			<div aria-hidden="true" class="absolute bottom-10 left-0 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(87,123,108,0.72),rgba(87,123,108,0))] blur-3xl motion-safe:animate-[drift_14s_ease-in-out_infinite] [animation-delay:-4s]"></div>
+			<article class="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/90 p-5 text-[#f7efe6] shadow-[0_30px_90px_rgba(18,25,26,0.3)]">
+				<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,180,108,0.28),transparent_42%)]"></div>
+				<p class="relative z-10 text-xs font-bold uppercase tracking-[0.2em] text-white/65">Escapada de fin de semana</p>
+				<p class="relative z-10 mt-4 max-w-[10ch] text-4xl leading-[0.95] tracking-[-0.04em] sm:text-5xl">Luz suave, jardines amplios y ritmo lento.</p>
+				<div class="relative z-10 mt-5 grid grid-cols-2 gap-3">
+					<div class="group min-h-32 rounded-[1.4rem] border border-white/12 bg-white/10 p-4 backdrop-blur-xl transition-transform duration-200 hover:-translate-y-1 hover:bg-white/15">
+						<span class="block text-xs font-bold uppercase tracking-[0.15em] text-white/60">Amanecer</span>
+						<strong class="mt-10 block text-2xl leading-none">06:42</strong>
+					</div>
+					<div class="group min-h-32 rounded-[1.4rem] border border-white/12 bg-white/10 p-4 backdrop-blur-xl transition-transform duration-200 hover:-translate-y-1 hover:bg-white/15">
+						<span class="block text-xs font-bold uppercase tracking-[0.15em] text-white/60">Piscina</span>
+						<strong class="mt-10 block text-2xl leading-none">Agua quieta</strong>
+					</div>
+					<div class="group min-h-32 rounded-[1.4rem] border border-white/12 bg-white/10 p-4 backdrop-blur-xl transition-transform duration-200 hover:-translate-y-1 hover:bg-white/15 md:col-span-2">
+						<span class="block text-xs font-bold uppercase tracking-[0.15em] text-white/60">Jardin</span>
+						<strong class="mt-10 block text-2xl leading-none">Sombras largas</strong>
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
+</section>

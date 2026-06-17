@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+	--color-bg: #f6efe4;
+	--color-bg-alt: #efe3d0;
+	--color-ink: #1f1a17;
+	--color-muted: #6b5f56;
+	--color-accent: #7a5a3d;
+	--color-border: rgba(35, 28, 24, 0.12);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: 'Manrope', 'Segoe UI', sans-serif;
+	color: var(--color-ink);
+	background:
+		radial-gradient(circle at top left, rgba(255, 255, 255, 0.66), transparent 28%),
+		radial-gradient(circle at 82% 12%, rgba(236, 180, 108, 0.28), transparent 22%),
+		radial-gradient(circle at 18% 82%, rgba(87, 123, 108, 0.18), transparent 26%),
+		linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+	overflow-x: hidden;
+}
+
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background-image:
+		radial-gradient(rgba(31, 26, 23, 0.05) 0.8px, transparent 0.8px),
+		radial-gradient(rgba(31, 26, 23, 0.03) 0.6px, transparent 0.6px);
+	background-position: 0 0, 12px 12px;
+	background-size: 24px 24px;
+	opacity: 0.3;
+	mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.2));
+	z-index: -1;
+}
+
+h1,
+h2,
+h3 {
+	font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+img,
+svg,
+video {
+	display: block;
+	max-width: 100%;
+}
+
+a {
+	color: inherit;
+}
+
+::selection {
+	background: rgba(122, 90, 61, 0.2);
+	color: var(--color-ink);
+}
+
+@keyframes drift {
+	0%,
+	100% {
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+
+	50% {
+		transform: translate3d(0, -18px, 0) scale(1.04);
+	}
+}
+
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-50%);
+	}
+}

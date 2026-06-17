@@ -1,0 +1,23 @@
+---
+export const lang = 'ca';
+export const slug = '';
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/home/HeroSection.astro';
+import MarqueeBar from '../components/home/MarqueeBar.astro';
+import IntroStats from '../components/home/IntroStats.astro';
+import StaysGrid from '../components/home/StaysGrid.astro';
+import ExperiencesSection from '../components/home/ExperiencesSection.astro';
+import ClosingCta from '../components/home/ClosingCta.astro';
+---
+
+
+<Layout lang={lang} slug={slug} title="Torre Mejanell | Escapada visual" description="Landing estatica con hero editorial, animaciones suaves y secciones de alta presencia visual.">
+	<main>
+		<HeroSection />
+		<MarqueeBar />
+		<IntroStats />
+		<StaysGrid />
+		<ExperiencesSection />
+		<ClosingCta />
+	</main>
+</Layout>

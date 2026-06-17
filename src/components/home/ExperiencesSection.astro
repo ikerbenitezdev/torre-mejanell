@@ -1,0 +1,28 @@
+---
+const experiences = [
+	'Maridaje de vinos y quesos con ritmo lento.',
+	'Secretos naturales para caminar y volver con la cabeza limpia.',
+	'Catering privado para reuniones con mucha presencia.',
+];
+---
+
+<section id="experiencias" class="mx-auto grid max-w-7xl gap-4 px-4 py-16 lg:grid-cols-2 lg:px-6 lg:py-24">
+	<div class="rounded-[1.75rem] border border-black/10 bg-white/70 p-6 shadow-[0_16px_42px_rgba(39,29,22,0.08)] lg:p-8">
+		<p class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">Experiencias</p>
+		<h2 class="max-w-[13ch] text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
+			Todo lo que ocurre sin necesidad de cargar la pagina con ruido.
+		</h2>
+		<p class="mt-5 max-w-[48ch] text-base leading-8 text-[#6b5f56]">
+			Piezas visuales amplias, estados hover cuidadosos y una arquitectura lista para crecer hacia una web completa de reservas, contenidos y campanas.
+		</p>
+	</div>
+
+	<div class="rounded-[1.75rem] border border-black/10 bg-white/70 p-6 shadow-[0_16px_42px_rgba(39,29,22,0.08)] lg:p-8">
+		{experiences.map((experience, index) => (
+			<article class="grid gap-4 border-b border-black/10 py-4 first:pt-0 last:border-b-0 last:pb-0 sm:grid-cols-[auto_1fr] sm:items-start">
+				<span class="font-serif text-3xl leading-none text-[#7a5a3d]">0{index + 1}</span>
+				<p class="m-0 text-base leading-7 text-[#6b5f56]">{experience}</p>
+			</article>
+		))}
+	</div>
+</section>

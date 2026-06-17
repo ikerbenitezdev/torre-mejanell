@@ -1,0 +1,98 @@
+---
+type Lang = 'ca' | 'es' | 'en';
+type RouteGroup = Record<Lang, string>;
+
+const {
+	title = 'Torre Mejanell',
+	description = 'Sitio estatica con una direccion visual amplia, atmosfera suave y animaciones editoriales.',
+	lang = 'ca',
+	slug = '',
+	translations = {},
+} = Astro.props as {
+	title?: string;
+	description?: string;
+	lang?: Lang;
+	slug?: string;
+	translations?: Partial<RouteGroup>;
+};
+
+import '../styles/global.css';
+
+// Base site; prefer Astro.site if configured, fallback to production hostname
+const SITE = Astro.site ?? 'https://castelldemejanell.com';
+
+// base path per language
+const basePaths: RouteGroup = { ca: '/', es: '/es/', en: '/en/' };
+
+// Known route groups for this site. Each group maps a single content page across languages.
+const routeGroups: RouteGroup[] = [
+	{ ca: '', es: '', en: '' },
+	{ ca: 'historia', es: 'historia', en: 'history' },
+	{ ca: 'la-casa', es: 'la-casa', en: 'the-house' },
+	{ ca: 'entorn', es: 'entorno', en: 'surroundings' },
+	{ ca: 'localitzacio', es: 'como-llegar', en: 'location' },
+	{ ca: 'fotos', es: 'fotos', en: 'photos' },
+	{ ca: 'preus-i-reserves', es: 'precios-y-reservas', en: 'prices-and-booking' },
+	{ ca: 'turisme', es: 'turismo', en: 'tourism' },
+	{ ca: 'opinions', es: 'opiniones', en: 'reviews' },
+	{ ca: 'preus-i-ocupacio', es: 'precios-y-ocupacion', en: 'prices-and-occupancy' },
+];
+
+const normSlug = slug ? (slug.startsWith('/') ? slug.slice(1) : slug) : '';
+const routeGroup = routeGroups.find((group) => group[lang] === normSlug) ?? null;
+
+const localizedSlugs = routeGroup
+	? routeGroup
+	: {
+		ca: translations.ca ?? normSlug,
+		es: translations.es ?? normSlug,
+		en: translations.en ?? normSlug,
+	};
+
+const makeUrl = (langKey: Lang) => {
+	const base = basePaths[langKey] ?? '/';
+	const targetSlug = localizedSlugs[langKey] ?? '';
+	if (!targetSlug) return new URL(base, SITE).toString();
+	const path = `${base}${targetSlug}`.replace(/\/+/g, '/');
+	return new URL(path.endsWith('/') ? path : `${path}/`, SITE).toString();
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#f6efe4" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+		<!-- canonical for current language/page -->
+		<link rel="canonical" href={makeUrl(lang)} />
+
+		<!-- hreflang alternates -->
+		<link rel="alternate" href={makeUrl('ca')} hreflang="ca" />
+		<link rel="alternate" href={makeUrl('es')} hreflang="es" />
+		<link rel="alternate" href={makeUrl('en')} hreflang="en" />
+		<link rel="alternate" href={makeUrl('ca')} hreflang="x-default" />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	body {
+		background: #f6efe4;
+	}
+</style>

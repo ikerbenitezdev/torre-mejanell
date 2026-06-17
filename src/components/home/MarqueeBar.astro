@@ -1,0 +1,13 @@
+---
+const items = ['Desconexion natural', 'Capacidad visual', 'Motion suave', 'Escapada estatica'];
+---
+
+<section aria-hidden="true" class="border-y border-black/10 bg-white/50 backdrop-blur-md">
+	<div class="mx-auto max-w-7xl overflow-hidden px-4 lg:px-6">
+		<div class="flex w-max gap-8 py-4 motion-safe:animate-[marquee_28s_linear_infinite]">
+			{items.concat(items).map((item) => (
+				<span class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#4a413a]">{item}</span>
+			))}
+		</div>
+	</div>
+</section>
