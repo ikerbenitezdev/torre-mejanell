@@ -1,0 +1,99 @@
+---
+const { lang = 'ca', slug = '' } = Astro.props as {
+	lang?: 'ca' | 'es' | 'en';
+	slug?: string;
+};
+
+import logo from '../../assets/Logo-Blanc-Torre de Mejanell.svg';
+
+const basePaths = { ca: '/', es: '/es/', en: '/en/' } as const;
+
+const pages = [
+	{ labels: { ca: 'Història', es: 'Historia', en: 'History' }, slugs: { ca: 'historia', es: 'historia', en: 'history' } },
+	{ labels: { ca: 'La Casa', es: 'La Casa', en: 'The House' }, slugs: { ca: 'la-casa', es: 'la-casa', en: 'the-house' } },
+	{ labels: { ca: 'Entorn', es: 'Entorno', en: 'Surroundings' }, slugs: { ca: 'entorn', es: 'entorno', en: 'surroundings' } },
+	{ labels: { ca: 'Localització', es: 'Cómo llegar', en: 'Location' }, slugs: { ca: 'localitzacio', es: 'como-llegar', en: 'location' } },
+	{ labels: { ca: 'Fotos', es: 'Fotos', en: 'Photos' }, slugs: { ca: 'fotos', es: 'fotos', en: 'photos' } },
+	{ labels: { ca: 'Preus i reserves', es: 'Precios y reservas', en: 'Prices and booking' }, slugs: { ca: 'preus-i-reserves', es: 'precios-y-reservas', en: 'prices-and-booking' } },
+	{ labels: { ca: 'Turisme', es: 'Turismo', en: 'Tourism' }, slugs: { ca: 'turisme', es: 'turismo', en: 'tourism' } },
+	{ labels: { ca: 'Opinions', es: 'Opiniones', en: 'Reviews' }, slugs: { ca: 'opinions', es: 'opiniones', en: 'reviews' } },
+];
+
+const currentItem = pages.find((item) => Object.values(item.slugs).includes(slug)) ?? null;
+
+const buildPath = (targetLang: 'ca' | 'es' | 'en', itemSlug: string) => {
+	const base = basePaths[targetLang];
+	return itemSlug ? `${base}${itemSlug}/` : base;
+};
+
+const languageLinks = [
+	{ code: 'ca', label: 'CA' },
+	{ code: 'es', label: 'ES' },
+	{ code: 'en', label: 'EN' },
+] as const;
+
+const currentPath = currentItem ? currentItem.slugs[lang] : slug;
+const isHome = !slug;
+---
+
+
+<header class:list={[
+	'isolate z-50 w-full',
+	isHome ? 'absolute top-0 left-0 right-0 border-transparent bg-transparent text-white' : 'sticky top-0 border-b border-black/10 bg-[#f6efe4]/85 text-[#1f1a17] backdrop-blur-xl',
+]}>
+	<div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 lg:px-6">
+		<a href={basePaths[lang]} class:list={[
+			'flex items-center gap-3 px-2 py-1 transition-opacity hover:opacity-90',
+			isHome ? 'text-white' : 'text-[#1f1a17]',
+		]}>
+			<img src={logo.src} alt="Castell de Mejanell" class="h-16 w-auto" />
+		</a>
+
+		<nav class="hidden flex-1 items-center justify-center gap-6 xl:flex" aria-label="Principal">
+			{pages.map((item) => {
+				const href = buildPath(lang, item.slugs[lang]);
+				const isActive = currentPath === item.slugs[lang];
+				return (
+					<a
+						href={href}
+						class:list={[
+							'relative text-md font-semibold tracking-tight transition-colors hover:text-[#d8a25d]',
+							isHome ? 'text-white/90' : 'text-current',
+							isActive && (isHome ? 'text-[#f5d3a0]' : 'text-[#7a5a3d]'),
+						]}
+					>
+						{item.labels[lang]}
+					</a>
+				);
+			})}
+		</nav>
+
+		<div class="ml-auto flex items-center gap-2">
+			<!-- <div class:list={['hidden items-center gap-1 rounded-full p-1 md:flex', isHome ? 'border border-white/20 bg-white/10' : 'border border-black/10 bg-white/70']}>
+				{languageLinks.map((item) => {
+					const targetItem = currentItem ?? pages[0];
+					const href = buildPath(item.code, targetItem.slugs[item.code]);
+					return (
+						<a href={href} class:list={['rounded-full px-3 py-1 text-sm font-extrabold tracking-[0.18em] transition-colors', item.code === lang ? (isHome ? 'bg-white text-[#1f1a17]' : 'bg-[#1f1a17] text-white') : isHome ? 'text-white/80 hover:text-white' : 'text-[#4a413a] hover:text-[#1f1a17]']}>
+							{item.label}
+						</a>
+					);
+				})}
+			</div> -->
+
+			<a href={buildPath(lang, 'preus-i-ocupacio')} class:list={[
+				'inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-bold transition-transform duration-200 hover:-translate-y-0.5',
+				isHome ? 'border border-[#d08a3b] bg-[#c07a2a] text-white' : 'border border-[#1f1a17] bg-[#1f1a17] text-[#f8f4ec]',
+			]}>
+				Preus i ocupació
+			</a>
+
+			<button type="button" class:list={[
+				'inline-flex items-center justify-center rounded-full border px-3 py-2 text-sm transition-colors xl:hidden',
+				isHome ? 'border-white/25 text-white' : 'border-black/10 text-[#1f1a17]',
+			]} aria-label="Menu">
+				<span class="text-lg leading-none">☰</span>
+			</button>
+		</div>
+	</div>
+</header>

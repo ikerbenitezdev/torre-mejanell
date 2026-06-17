@@ -1,4 +1,7 @@
 ---
+import basicImage1 from '../../assets/pages/home/exterior-torre-mejanell.webp';
+import basicImage2 from '../../assets/pages/home/escales-torre-mejanell.webp';
+
 const metrics = [
 	{ value: '04', label: 'capas visuales' },
 	{ value: '12', label: 'bloques animados' },
@@ -6,19 +9,27 @@ const metrics = [
 ];
 ---
 
-<section class="mx-auto grid max-w-7xl gap-8 px-4 py-16 lg:grid-cols-[1fr_auto] lg:px-6 lg:py-24">
-	<div class="max-w-3xl">
-		<p class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">Direccion de arte</p>
-		<h2 class="max-w-[13ch] text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
-			Una base limpia para crecer con galerias, historias y bloques mas complejos.
-		</h2>
-	</div>
-	<div class="grid gap-4 sm:grid-cols-3 lg:w-[42rem]">
-		{metrics.map((metric) => (
-			<article class="rounded-[1.5rem] border border-black/10 bg-white/70 p-5 shadow-[0_16px_42px_rgba(39,29,22,0.08)]">
-				<strong class="block text-4xl leading-none tracking-[-0.04em] text-[#1f1a17]">{metric.value}</strong>
-				<span class="mt-2 block text-sm leading-6 text-[#6b5f56]">{metric.label}</span>
-			</article>
-		))}
-	</div>
-</section>
+<section class="mx-auto max-w-7xl px-4 py-16">
+    <h2 class="mx-auto max-w-5xl text-center text-4xl leading-[1.1] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
+        Una antiga masia transformada en un refugi de turisme rural on els somnis es barregen amb l'encant de la natura.
+    </h2>
+
+    <div class="mt-12 grid gap-8 sm:grid-cols-2">
+        <div class="overflow-hidden rounded-lg">
+            <img 
+                src={basicImage1.src}
+                alt="Escala de caragol de pedra a la masia" 
+                class="h-[500px] w-full object-cover sm:h-[600px] lg:h-[700px]"
+            />
+        </div>
+
+        <div class="overflow-hidden rounded-lg">
+            <img 
+                src={basicImage2.src}
+                alt="Exterior de la masia de turisme rural amb torre de pedra" 
+                class="h-[500px] w-full object-cover sm:h-[600px] lg:h-[700px]"
+            />
+        </div>
+    </div>
+
+    </section>

@@ -1,36 +1,49 @@
 ---
-const stays = [
-	{
-		tone: 'Arena',
-		title: 'Masos Can Sot',
-		text: 'Calma abierta, patios amplios y una sensacion de refugio silencioso.',
-		meta: '6 estancias / 18 huespedes',
+const rooms = [
+    {
+        title: 'Habitació doble',
+        text: 'Habitació a la planta baixa per a dues persones. ',
+        // meta: '6 estancias / 18 huespedes',
+    },
+    {
+        title: 'Habitació doble',
+        text: 'Habitació a la planta baixa amb llit de matrimoni per a dues persones. ',
+        // meta: '6 estancias / 18 huespedes',
+    },
+    {
+		title: 'Habitació de 3 persones',
+		text: '',
+		// meta: 'Casa principal / reuniones',
 	},
-	{
-		tone: 'Bosque',
-		title: 'Mas Can Falques',
-		text: 'Una casa grande para grupos, cenas largas y escapadas que piden tiempo.',
-		meta: 'Casa principal / reuniones',
+    {
+		title: 'Habitació de 2 persones',
+		text: '2 adults | 1 child below 7',
+		// meta: 'Casa principal / reuniones',
 	},
-	{
-		tone: 'Luz',
-		title: 'Villa La Costa',
-		text: 'Volumen contemporaneo, detalles limpios y una narrativa muy visual.',
-		meta: 'Escapada premium / verano',
+    {
+		title: 'Habitació de 2 persones',
+		text: '2 adults | 1 child below 7',
+		// meta: 'Casa principal / reuniones',
 	},
+    {
+		title: 'Habitació de 2 persones',
+		text: '2 adults | 1 child below 7',
+		// meta: 'Casa principal / reuniones',
+	},
+	
 ];
 ---
 
 <section id="estancias" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24">
-	<div class="max-w-4xl">
-		<p class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">Las fincas</p>
-		<h2 class="max-w-[14ch] text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
-			Bloques editorialmente potentes, con tarjetas grandes y jerarquia clara.
-		</h2>
-	</div>
+	<div class="max-w-4xl mx-auto text-center">
+    <p class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">Elegància, calma, exclusivitat</p>
+    <h2 class="max-w-[14ch] mx-auto text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
+        Habitacions
+    </h2>
+</div>
 
 	<div class="mt-8 grid gap-4 lg:grid-cols-12">
-		{stays.map((stay, index) => (
+		{rooms.map((room, index) => (
 			<article class="overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/75 shadow-[0_16px_42px_rgba(39,29,22,0.08)] transition-transform duration-200 hover:-translate-y-2 lg:col-span-4">
 				<div class:list={[
 					'relative flex min-h-[300px] items-end justify-between overflow-hidden p-4',
@@ -38,13 +51,12 @@ const stays = [
 					index === 1 && 'bg-[linear-gradient(145deg,rgba(50,58,52,0.86),rgba(173,138,92,0.72))]',
 					index === 2 && 'bg-[linear-gradient(145deg,rgba(77,88,91,0.9),rgba(210,192,156,0.78))]',
 				]}>
-					<span class="relative z-10 rounded-full border border-white/15 bg-white/15 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white">{stay.tone}</span>
-					<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.4),transparent_42%)]"></div>
+                <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.4),transparent_42%)]"></div>
 				</div>
 				<div class="p-5">
-					<p class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#7a5a3d]">{stay.meta}</p>
-					<h3 class="mt-2 text-3xl leading-none tracking-[-0.03em] text-[#1f1a17]">{stay.title}</h3>
-					<p class="mt-3 text-base leading-7 text-[#6b5f56]">{stay.text}</p>
+					{/* <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#7a5a3d]">{room.meta}</p> */}
+					<h3 class="mt-2 text-3xl leading-none tracking-[-0.03em] text-[#1f1a17]">{room.title}</h3>
+					<p class="mt-3 text-base leading-7 text-[#6b5f56]">{room.text}</p>
 				</div>
 			</article>
 		))}

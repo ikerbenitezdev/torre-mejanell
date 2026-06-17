@@ -8,16 +8,18 @@ import IntroStats from '../components/home/IntroStats.astro';
 import StaysGrid from '../components/home/StaysGrid.astro';
 import ExperiencesSection from '../components/home/ExperiencesSection.astro';
 import ClosingCta from '../components/home/ClosingCta.astro';
+import HomeSlider from '../components/home/HomeSlider.astro';
 ---
 
 
 <Layout lang={lang} slug={slug} title="Torre Mejanell | Escapada visual" description="Landing estatica con hero editorial, animaciones suaves y secciones de alta presencia visual.">
 	<main>
 		<HeroSection />
-		<MarqueeBar />
 		<IntroStats />
+		<MarqueeBar />
+		<HomeSlider />
 		<StaysGrid />
-		<ExperiencesSection />
-		<ClosingCta />
+		<!-- <ExperiencesSection />
+		<ClosingCta /> -->
 	</main>
 </Layout>

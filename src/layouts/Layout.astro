@@ -17,6 +17,7 @@ const {
 };
 
 import '../styles/global.css';
+import Header from '../components/site/Header.astro';
 
 // Base site; prefer Astro.site if configured, fallback to production hostname
 const SITE = Astro.site ?? 'https://castelldemejanell.com';
@@ -80,6 +81,7 @@ const makeUrl = (langKey: Lang) => {
 		<link rel="alternate" href={makeUrl('ca')} hreflang="x-default" />
 	</head>
 	<body>
+		<Header lang={lang} slug={slug} />
 		<slot />
 	</body>
 </html>
