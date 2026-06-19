@@ -5,32 +5,61 @@ const heroPills = ['Cases rurals amb encant', 'Escapa’t a prop del mar o de la
 ---
 
 <section id="top" class="relative min-h-screen overflow-hidden text-white">
-	<div class="absolute inset-0">
-		<img src={heroImage.src} alt="Castell de Mejanell" class="h-full w-full object-cover" fetchpriority="high" loading="eager" decoding="async" />
-		<div class="absolute inset-0 bg-black/15"></div>
-		<div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.20)_0%,rgba(0,0,0,0.42)_100%)]"></div>
-	</div>
+    <div class="absolute inset-0">
+        <img src={heroImage.src} alt="Castell de Mejanell" class="h-full w-full object-cover" fetchpriority="high" loading="eager" decoding="async" />
+        <div class="absolute inset-0 bg-black/15"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.20)_0%,rgba(0,0,0,0.42)_100%)]"></div>
+    </div>
 
-	<div class="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-10 pt-24 lg:px-6 lg:pt-28">
-		<!-- <div class="flex-1"></div> -->
+    <div class="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-10 pt-24 lg:px-6 lg:pt-28">
+        
+        <div class="mx-auto mt-40 w-full max-w-5xl text-center">
+            <p id="hero-subtitle" class="mb-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-white/80 opacity-0">
+                Castell de Mejanell
+            </p>
+            <h1 id="hero-title" class="mx-auto max-w-[14ch] font-serif text-[clamp(3.6rem,8vw,7rem)] leading-[0.9] tracking-[-0.04em] text-white opacity-0">
+                Benvinguts a la Torre de Mejanell
+            </h1>
+            <p id="hero-description" class="mx-auto mt-5 max-w-2xl text-[clamp(1.05rem,1.7vw,1.35rem)] leading-8 text-white/85 opacity-0">
+                Escapa't a a un paradís rural amb molta historia
+            </p>
+        </div>
 
-		<div class="mx-auto mt-40 w-full max-w-5xl text-center">
-			<p class="mb-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-white/80">Castell de Mejanell</p>
-			<h1 class="mx-auto max-w-[14ch] font-serif text-[clamp(3.6rem,8vw,7rem)] leading-[0.9] tracking-[-0.04em] text-white">
-				Benvinguts a la Torre de Mejanell
-			</h1>
-			<p class="mx-auto mt-5 max-w-2xl text-[clamp(1.05rem,1.7vw,1.35rem)] leading-8 text-white/85">
-				Escapa't a a un paradís rural amb molta historia
-			</p>
-		</div>
-
-		<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-			<a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="#estancias">Explorar habitacions</a>
-			<a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="/preus-i-ocupacio">Preus i ocupació</a>
-		</div>
-
-		
-		
-	</div>
-	</div>
+        <div id="hero-buttons" class="mt-8 flex flex-wrap items-center justify-center gap-3 opacity-0">
+            <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="#estancias">Explorar habitacions</a>
+            <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="/preus-i-ocupacio">Preus i ocupació</a>
+        </div>
+        
+    </div>
 </section>
+<script>
+  import { animate } from "motion";
+
+  if (typeof window !== "undefined") {
+    // Definimos una configuración base forzando el tipo para evitar los errores ts(2769)
+    const opcionesConfig = { 
+      duration: 0.8, 
+      easing: "ease-out"
+    } as const;
+
+    // Pasamos los keyframes como un objeto limpio y casteamos la llamada
+    animate("#hero-subtitle", { opacity: [0, 1], y: [24, 0] } as any, opcionesConfig);
+    
+    animate("#hero-title", { opacity: [0, 1], y: [24, 0] } as any, { 
+      ...opcionesConfig, 
+      duration: 0.9, 
+      delay: 0.15 
+    });
+    
+    animate("#hero-description", { opacity: [0, 1], y: [24, 0] } as any, { 
+      ...opcionesConfig, 
+      duration: 0.9, 
+      delay: 0.3 
+    });
+    
+    animate("#hero-buttons", { opacity: [0, 1], y: [16, 0] } as any, { 
+      ...opcionesConfig, 
+      delay: 0.45 
+    });
+  }
+</script>

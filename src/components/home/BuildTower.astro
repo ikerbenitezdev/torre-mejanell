@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import torreLimpia from '../../assets/pages/historia/dibuix-torre3.webp';
+---
+
+<div class="building-container">
+  <Image 
+    src={torreLimpia} 
+    alt="Torre de Mejanell" 
+    width="800"
+    height="500"
+    class="building-image" 
+  />
+</div>
+
+<style>
+  .building-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .building-image {
+    width: 100%;
+    height: auto;
+    /* FILTRE INTENS: Escala de grisos al 100% i contrast augmentat */
+    filter: grayscale(100%) contrast(150%) brightness(90%);
+    mix-blend-mode: multiply; /* Fa que el blanc sigui transparent */
+    animation: revealEffect 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes revealEffect {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+</style>

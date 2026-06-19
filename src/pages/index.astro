@@ -9,17 +9,18 @@ import StaysGrid from '../components/home/StaysGrid.astro';
 import ExperiencesSection from '../components/home/ExperiencesSection.astro';
 import ClosingCta from '../components/home/ClosingCta.astro';
 import HomeSlider from '../components/home/HomeSlider.astro';
+import Footer from '../components/site/Footer.astro';
+
 ---
 
 
 <Layout lang={lang} slug={slug} title="Torre de Mejanell | Escapada rural" description="Descobreix la nostra casa rural: una antiga masia transformada en un refugi de turisme rural on els somnis es barregen amb l'encant de la natura.">
 	<main>
 		<HeroSection />
-		<IntroStats />
+		<!-- <IntroStats /> -->
+		<ExperiencesSection />
 		<MarqueeBar />
-		<HomeSlider />
 		<StaysGrid />
-		<!-- <ExperiencesSection />
-		<ClosingCta /> -->
+		<Footer/>
 	</main>
 </Layout>

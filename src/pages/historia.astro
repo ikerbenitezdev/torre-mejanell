@@ -2,12 +2,137 @@
 export const lang = 'ca';
 export const slug = 'historia';
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import BuildingAnimation from '../../src/components/home/BuildTower.astro';
+
+const wineImages = import.meta.glob<{ default: ImageMetadata }>('../assets/pages/history/*.{jpeg,jpg,png,gif,webp}');
+
+const wineSteps = [
+    {
+        num: "01",
+        title: "La Verema a Mà",
+        subtitle: "El respecte per la terra",
+        description: "Seleccionem els millors raïms directament de les nostres vinyes de forma manual durant la matinada, garantint que el fruit entri fresc i intacte a la bodega de la masia.",
+        image: "../assets/pages/history/verema.webp"
+    },
+    {
+        num: "02",
+        title: "El Premsat Tradicional",
+        subtitle: "L'extracció de l'ànima",
+        description: "Utilitzant els antics cups de pedra restaurats del segle XVIII, premsem el fruit suaument per obtenir el most flor, conservant tota la intensitat aromàtica i el caràcter del terreny.",
+        image: "../assets/pages/history/premsat.webp"
+    },
+    {
+        num: "03",
+        title: "La Criança en Silenci",
+        subtitle: "El temps dins la pedra",
+        description: "El vi madura sota els gruixuts murs medievals de la Torre, on la temperatura i la humitat constants creen un refugi perfecte perquè evolucioni en botes de roure.",
+        image: "../assets/pages/history/crianca.webp"
+    }
+];
 ---
 
-<Layout lang={lang} slug={slug} title="Història | Castell de Mejanell">
-  <main class="mx-auto max-w-5xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Història</h1>
-    <p class="text-base text-[#6b5f56]">Contingut d'exemple sobre la història del castell. Reemplaça per text real.</p>
-    <p class="mt-6"><a href="/" class="text-sm underline">← Tornar a l'inici</a></p>
+<Layout lang={lang} slug={slug} title="La nostra història i el vi | Torre de Mejanell">
+  <main class="bg-[#fcfbf9] text-[#1f1a17] overflow-x-hidden">
+    
+    <section class="relative min-h-[90vh] flex flex-col lg:flex-row items-center justify-center bg-[#1a1715] px-6 py-20 lg:py-0 gap-12 overflow-hidden border-b border-[#2d2a28]">
+        
+        <div class="absolute inset-0 bg-gradient-to-br from-[#26211e] via-[#1a1715] to-[#12100f] pointer-events-none"></div>
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+
+        <div class="w-full lg:w-1/2 max-w-xl relative z-10 space-y-8 text-left lg:pr-12">
+            <span class="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#c5a073]">
+                Llegat, pedra i transformació
+            </span>
+            <h1 id="hero-title" class="text-5xl md:text-7xl font-serif text-[#f4efe9] tracking-tight leading-[0.95]">
+                Com es va aixecar <br><span class="italic text-[#c5a073]">la nostra història</span>
+            </h1>
+            <p id="hero-desc" class="text-base text-[#d1ccc6] font-light leading-relaxed max-w-md border-l border-[#c5a073]/30 pl-6">
+                Des dels fonaments de guaita del segle XI fins a la seva evolució com a gran casa pairal. Un viatge arquitectònic esculpit a mà, pedra a pedra.
+            </p>
+        </div>
+
+        <div id="hero-animation" class="w-full lg:w-1/2 flex justify-center items-center relative z-10">
+            <div class="relative group">
+                <BuildingAnimation class="w-full h-auto max-w-[550px] lg:max-w-[650px] brightness-[1.1] contrast-[1.2]" />
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="max-w-3xl mx-auto text-center mb-24">
+            <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d] mb-3">El fruit de la segarra</p>
+            <h2 class="text-3xl sm:text-5xl font-serif tracking-tight text-[#1f1a17]">
+                Elaboració artesanal, <br><span class="italic text-[#7a5a3d]">pas a pas</span>
+            </h2>
+            <div class="w-12 h-[1px] bg-[#7a5a3d]/40 mx-auto mt-6"></div>
+        </div>
+
+        <div class="space-y-32 lg:space-y-40">
+            {wineSteps.map((step, index) => {
+                const isEven = index % 2 === 0;
+                return (
+                    <div class:list={[
+                        "wine-step opacity-0 flex flex-col lg:flex-row gap-10 lg:gap-20 items-center justify-between",
+                        isEven ? "" : "lg:flex-row-reverse"
+                    ]}>
+                        <div class="w-full lg:w-1/2 relative group overflow-hidden rounded-[2rem] border border-black/5 shadow-md aspect-[4/3]">
+                            {wineImages[step.image] ? (
+                                <Image src={wineImages[step.image]()} alt={step.title} width={800} height={600} class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                            ) : (
+                                <div class="w-full h-full bg-[#f6efe4] flex items-center justify-center text-[#7a5a3d]/40 text-xs italic"> [ Imatge: {step.title} ] </div>
+                            )}
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a17]/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="w-full lg:w-1/2 space-y-4 px-2 lg:px-10">
+                            <div class="flex items-center gap-4">
+                                <span class="font-serif text-5xl font-light text-[#7a5a3d]/30 tracking-tight">{step.num}</span>
+                                <div class="h-[1px] w-12 bg-[#7a5a3d]/20"></div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-[#7a5a3d]">{step.subtitle}</span>
+                            </div>
+                            <h3 class="text-3xl font-serif tracking-tight text-[#1f1a17]">{step.title}</h3>
+                            <p class="text-base text-[#6b5f56] leading-relaxed font-medium max-w-xl">{step.description}</p>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    </section>
+
+    <section class="bg-[#f6efe4] py-24 px-6 text-center relative border-t border-black/5">
+        <div class="max-w-2xl mx-auto space-y-6 relative z-10">
+            <h2 class="text-3xl font-serif text-[#1f1a17]">Vine a tastar la nostra història</h2>
+            <p class="text-sm md:text-base text-[#6b5f56] font-medium leading-relaxed">
+                Tots els nostres hostes reben una ampolla de benvinguda de la producció limitada de la masia i poden recórrer els antics cups on neix cada verema.
+            </p>
+            <div class="pt-4">
+                <a href="/preus-i-ocupacio" class="inline-flex items-center justify-center rounded-full text-xs px-8 py-4 font-bold bg-[#1f1a17] text-[#f8f4ec] hover:bg-[#7a5a3d] transition-all duration-300 shadow-md hover:-translate-y-0.5 uppercase tracking-wider">
+                    Reserva la teva estada
+                </a>
+            </div>
+        </div>
+    </section>
   </main>
 </Layout>
+
+<script>
+    import { animate, inView, cubicBezier } from "motion";
+
+    const premiumEase = cubicBezier(0.16, 1, 0.3, 1);
+
+    if (typeof window !== "undefined") {
+        animate("#hero-title, #hero-desc", { opacity: [0, 1], x: [-20, 0] }, { 
+            duration: 1.4, delay: 0.3, easing: premiumEase 
+        });
+
+        animate("#hero-animation", { opacity: [0, 1], scale: [0.95, 1] }, { 
+            duration: 1.8, easing: premiumEase 
+        });
+
+        inView(".wine-step", (info) => {
+            animate(info.target, { opacity: [0, 1], y: [40, 0] }, { 
+                duration: 1, easing: premiumEase 
+            });
+        }, { margin: "-20% 0px -20% 0px" });
+    }
+</script>

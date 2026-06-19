@@ -1,10 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 
+// 1. Definimos los tipos permitidos para el idioma de forma estricta
 interface Props {
     lang?: 'ca' | 'es' | 'en';
 }
 
+// 2. Asignamos un valor por defecto seguro
 const { lang = 'ca' } = Astro.props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/rooms/*.{jpeg,jpg,png,gif,webp}');
@@ -27,6 +29,7 @@ const rooms = [
     },
 ];
 
+// 3. Tipamos el objeto indicando que las claves son fijas ('ca', 'es', 'en')
 const localizedPaths: Record<'ca' | 'es' | 'en', string> = {
     ca: '/habitacions',
     es: '/es/habitaciones',
@@ -43,7 +46,7 @@ const featuredRooms = rooms.slice(0, 3);
 ---
 
 <section id="estancias" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24 overflow-hidden">
-    <div class="max-w-4xl mx-auto text-center mb-10">
+    <div class="max-w-4xl mx-auto text-center">
         <p id="room-title" class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d] opacity-0">
             Elegància, calma, exclusivitat
         </p>
@@ -52,14 +55,14 @@ const featuredRooms = rooms.slice(0, 3);
         </h2>
     </div>
 
-    <div class="mt-8 flex gap-5 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-none lg:grid lg:gap-4 lg:grid-cols-12 lg:overflow-x-visible lg:pb-0">
+    <div class="mt-8 grid gap-4 lg:grid-cols-12">
         {featuredRooms.map((room) => {
             if (!images[room.image]) {
                 throw new Error(`"${room.image}" no existeix o la ruta està mal escrita.`);
             }
 
             return (
-                <article class="room-card opacity-0 min-w-[85%] sm:min-w-[60%] snap-center relative overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/75 shadow-[0_16px_42px_rgba(39,29,22,0.08)] transition-transform duration-200 lg:min-w-0 lg:col-span-4 hover:-translate-y-2">
+                <article class="room-card opacity-0 relative overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/75 shadow-[0_16px_42px_rgba(39,29,22,0.08)] transition-transform duration-200 hover:-translate-y-2 lg:col-span-4">
                     <div class="w-full">
                         <Image
                             src={images[room.image]()}
@@ -92,38 +95,31 @@ const featuredRooms = rooms.slice(0, 3);
     </div>
 </section>
 
-<style>
-    /* Oculta la barra de scroll horizontal fea en móviles mientras mantiene el deslizamiento */
-    .scrollbar-none::-webkit-scrollbar {
-        display: none;
-    }
-    .scrollbar-none {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-</style>
-
 <script>
     import { animate, inView, stagger, cubicBezier } from "motion";
 
+    // Un easing rústico, fluido y elegante
     const transitionEase = cubicBezier(0.25, 1, 0.5, 1);
 
     if (typeof window !== "undefined") {
+        // Animació de la capçalera (títol i subtítol)
         inView("#estancias", () => {
             animate("#room-title", { opacity: [0, 1], y: [20, 0] } as any, { duration: 0.6, easing: transitionEase } as any);
             animate("#room-heading", { opacity: [0, 1], y: [30, 0] } as any, { duration: 0.8, delay: 0.15, easing: transitionEase } as any);
         }, { margin: "0px 0px -10% 0px" });
 
+        // Animació seqüencial de les targetes (cards)
         inView(".room-card", () => {
             animate(".room-card", { 
                 opacity: [0, 1], 
-                y: [40, 0]
+                y: [40, 0] // Cambiado 'transform' por 'y' que es más limpio para Motion y con el casting 'as any'
             } as any, { 
                 delay: stagger(0.15),
                 duration: 0.7, 
                 easing: transitionEase
             } as any);
 
+            // Animació del botó de sota
             animate("#room-btn", { opacity: [0, 1], y: [20, 0] } as any, { duration: 0.5, delay: 0.5, easing: transitionEase } as any);
         }, { margin: "0px 0px -15% 0px" });
     }

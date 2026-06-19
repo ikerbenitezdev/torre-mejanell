@@ -1,0 +1,66 @@
+---
+const { lang = 'ca' } = Astro.props as { lang?: 'ca' | 'es' | 'en' };
+
+import logoNegre from '../../assets/logo-torre-mejanell-negre.svg';
+
+// Traducciones para los enlaces legales
+const legalLabels = {
+    ca: { privacy: 'Política de privacitat', notices: 'Avís legals', cookies: 'Política de cookies' },
+    es: { privacy: 'Política de privacidad', notices: 'Aviso legal', cookies: 'Política de cookies' },
+    en: { privacy: 'Privacy policy', notices: 'Legal notice', cookies: 'Cookies policy' }
+};
+
+const basePaths = { ca: '/', es: '/es/', en: '/en/' } as const;
+const base = basePaths[lang];
+---
+
+<footer class="w-full bg-[#f6efe4] text-[#1f1a17] border-t border-black/5 py-12 md:py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <!-- Contenedor Grid con la misma distribución horizontal de image_491ec3.png -->
+        <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 items-start">
+            
+            <!-- Columna 1: Logo -->
+            <div class="flex items-center md:col-span-1">
+                <a href={base} class="transition-opacity hover:opacity-90">
+                    <img src={logoNegre.src} alt="Torre de Mejanell" class="h-14 md:h-16 w-auto" />
+                </a>
+            </div>
+
+            <!-- Columna 2: Ubicación -->
+            <div class="flex flex-col gap-1 text-sm">
+                <span class="font-bold uppercase tracking-wider text-xs text-[#7a5a3d]">Torre de Mejanell</span>
+                <p class="text-[#4a413a] font-medium mt-1">25215 Estaràs, Lleida</p>
+            </div>
+
+            <!-- Columna 3: Contacto -->
+            <div class="flex flex-col gap-1 text-sm md:col-span-1 lg:col-span-1">
+                <a href="mailto:rosa@castelldemejanell.com" class="text-[#4a413a] font-medium hover:text-[#7a5a3d] transition-colors break-words">
+                    rosa@castelldemejanell.com
+                </a>
+                <div class="flex flex-col mt-1 text-[#4a413a] font-medium">
+                    <a href="tel:+34610421113" class="hover:text-[#7a5a3d] transition-colors">(+34) 610 421 113</a>
+                    <a href="tel:+34687562123" class="hover:text-[#7a5a3d] transition-colors">(+34) 687 562 123</a>
+                </div>
+            </div>
+
+            <!-- Columna 4 y 5: Enlaces Legales alineados a la derecha -->
+            <div class="sm:col-span-2 md:col-span-1 lg:col-span-2 flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4 sm:gap-8 md:gap-3 lg:gap-8 md:items-start lg:items-center lg:justify-end text-sm">
+                <a href={`${base}politica-privacitat/`} class="text-[#4a413a] font-medium hover:text-[#7a5a3d] transition-colors whitespace-nowrap">
+                    {legalLabels[lang].privacy}
+                </a>
+                <a href={`${base}avis-legal/`} class="text-[#4a413a] font-medium hover:text-[#7a5a3d] transition-colors whitespace-nowrap">
+                    {legalLabels[lang].notices}
+                </a>
+                <a href={`${base}politica-cookies/`} class="text-[#4a413a] font-medium hover:text-[#7a5a3d] transition-colors whitespace-nowrap">
+                    {legalLabels[lang].cookies}
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Línea inferior de copyright opcional (puedes borrarla si buscas el vacío absoluto de la imagen) -->
+        <div class="mt-12 pt-6 border-t border-black/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[#6b5f56]/70 font-medium">
+            <p>&copy; {new Date().getFullYear()} Castell de Mejanell. All rights reserved.</p>
+        </div>
+    </div>
+</footer>

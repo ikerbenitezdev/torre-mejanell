@@ -1,0 +1,96 @@
+---
+// PricingTable.astro
+
+const tableData = {
+  title: "Llista de Preus de la Torre de Mejanell",
+  headers: ["Grup/persones", "Cap de setmana / 2 dies", "Setmana completa / 7 dies"],
+  rows: [
+    {
+      group: "Fins a 14 persones",
+      weekend: [
+        { text: "920 € (preu base)", isBold: true },
+        { text: "990 € (preu base Maig-Juny i Setembre)", isBold: false }
+      ],
+      fullWeek: [
+        { text: "Temporada baixa 1900 € (setmana)", isBold: false },
+        { text: "Juliol 2250 €", isBold: true, highlightWord: "2250 €" },
+        { text: "Agost 2600 €", isBold: false }
+      ]
+    },
+    {
+      group: "De 15 a 18 persones",
+      weekend: [
+        { text: "920 € (preu base) + 15 € persona/nit", isBold: true },
+        { text: "990 € (preu base Maig-Juny-Setembre) + 15 € persona/nit", isBold: false }
+      ],
+      fullWeek: [] // Cel·la buida com a la imatge
+    }
+  ]
+};
+---
+
+<div class="w-full max-w-5xl mx-auto my-12 px-4">
+  <!-- Títol de la taula -->
+  <h2 class="text-2xl md:text-3xl font-serif font-bold text-[#1f1a17] mb-6 tracking-tight">
+    {tableData.title}
+  </h2>
+
+  <!-- Contenidor amb scroll horitzontal per a pantalles petites -->
+  <div class="overflow-x-auto rounded-2xl border border-black/10 shadow-sm bg-white">
+    <table class="w-full text-left border-collapse min-w-[650px]">
+      <thead>
+        <tr class="bg-[#f6efe4] border-b border-black/10 text-[#1f1a17]">
+          {tableData.headers.map((header) => (
+            <th class="px-6 py-4 text-sm font-bold tracking-wide uppercase text-[#7a5a3d]">
+              {header}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      
+      <tbody class="divide-y divide-black/5 text-[#4a413a]">
+        {tableData.rows.map((row) => (
+          <tr class="hover:bg-[#fcfbf9] transition-colors">
+            <!-- Columna: Grup/persones -->
+            <td class="px-6 py-5 text-base font-semibold text-[#1f1a17] bg-[#fdfbfa]/50 w-1/4">
+              {row.group}
+            </td>
+            
+            <!-- Columna: Cap de setmana / 2 dies -->
+            <td class="px-6 py-5 text-sm md:text-base space-y-2 w-2/5">
+              {row.weekend.map((item) => (
+                <p class:list={[
+                  item.isBold ? 'font-bold text-[#1f1a17]' : 'text-[#6b5f56] font-medium'
+                ]}>
+                  {item.text}
+                </p>
+              ))}
+            </td>
+            
+            <!-- Columna: Setmana completa / 7 dies -->
+            <td class="px-6 py-5 text-sm md:text-base space-y-2 w-1/3">
+              {row.fullWeek.length > 0 ? (
+                row.fullWeek.map((item) => (
+                  <p class:list={[
+                    item.isBold ? 'text-[#1f1a17] font-medium' : 'text-[#6b5f56]'
+                  ]}>
+                    {/* Si té una paraula en negreta com 'Juliol 2250 €', ho gestionem aquí */}
+                    {item.highlightWord ? (
+                      <>
+                        Juliol <span class="font-bold text-[#1f1a17]">{item.highlightWord}</span>
+                      </>
+                    ) : (
+                      item.text
+                    )}
+                  </p>
+                ))
+              ) : (
+                <span class="text-gray-300 italic text-sm">—</span>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
