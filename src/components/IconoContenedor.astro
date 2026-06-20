@@ -1,0 +1,30 @@
+---
+// src/components/IconoContenedor.astro
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+<div class:list={["icono-contenedor", className]}>
+  <slot />
+</div>
+
+<style>
+  .icono-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;  /* Tamaño exacto para el contenedor */
+    height: 32px;
+    flex-shrink: 0; /* Asegura que no se deforme */
+    /* Aquí forzamos que el color del SVG sea el correcto si hereda */
+    color: #c5a073; 
+  }
+  /* Limpieza forzada de cualquier SVG que entre */
+  .icono-contenedor :global(svg) {
+    width: 24px;   /* Tamaño del icono real dentro */
+    height: 24px;
+    display: block;
+    overflow: visible;
+  }
+</style>

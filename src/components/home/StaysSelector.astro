@@ -1,12 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 
-// 1. Definimos los tipos permitidos para el idioma de forma estricta
 interface Props {
     lang?: 'ca' | 'es' | 'en';
 }
 
-// 2. Asignamos un valor por defecto seguro
 const { lang = 'ca' } = Astro.props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/rooms/*.{jpeg,jpg,png,gif,webp}');
@@ -14,113 +12,196 @@ const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/
 const rooms = [
     {
         title: 'Habitació 3 persones',
-        text: 'Habitació de dos llits individuals amb bressol i lavabo. ',
+        text: 'Habitació de dos llits individuals amb bressol i lavabo.',
         image: '../../assets/pages/rooms/torre-mejanell-3-persones.webp',
     },
     {
         title: 'Habitació doble',
-        text: 'Habitació a la planta baixa amb llit de matrimoni per a dues persones.',
+        text: 'Habitació a la planta baixa amb llit de matrimoni.',
         image: '../../assets/pages/rooms/torre-mejanell-doble2.webp',
     },
     {
         title: 'Habitació 2 persones',
-        text: 'Habitació a la planta baixa amb llit de matrimoni per a dues persones. ',
+        text: 'Llit de matrimoni',
         image: '../../assets/pages/rooms/torre-mejanell-2-persones3.webp',
+    },
+    {
+        title: 'Habitació 2 persones',
+        text: 'Dos llits individuals amb lavabo',
+        image: '../../assets/pages/rooms/torre-mejanell-2-persones4.webp',
+    },
+    {
+        title: 'Habitació doble',
+        text: 'Habitació a la planta baixa per a dues persones.',
+        image: '../../assets/pages/rooms/torre-mejanell-doble1.webp',
+    },
+    {
+        title: 'Habitació 2 persones',
+        text: 'Habitació a la planta baixa amb llit de matrimoni.',
+        image: '../../assets/pages/rooms/torre-mejanell-2-persones.webp',
     },
 ];
 
-// 3. Tipamos el objeto indicando que las claves son fijas ('ca', 'es', 'en')
-const localizedPaths: Record<'ca' | 'es' | 'en', string> = {
-    ca: '/habitacions',
-    es: '/es/habitaciones',
-    en: '/en/rooms'
-};
-
-const buttonLabels: Record<'ca' | 'es' | 'en', string> = {
-    ca: 'Veure més habitacions',
-    es: 'Ver más habitaciones',
-    en: 'View all rooms'
-};
-
-const featuredRooms = rooms.slice(0, 3);
 ---
 
-<section id="estancias" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24 overflow-hidden">
-    <div class="max-w-4xl mx-auto text-center">
-        <p id="room-title" class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d] opacity-0">
-            Elegància, calma, exclusivitat
-        </p>
-        <h2 id="room-heading" class="max-w-[14ch] mx-auto text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem] opacity-0">
-            {lang === 'es' ? 'Habitaciones' : lang === 'en' ? 'Our Rooms' : 'Habitacions'}
-        </h2>
-    </div>
+<section id="habitacions-visor" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24">
 
-    <div class="mt-8 grid gap-4 lg:grid-cols-12">
-        {featuredRooms.map((room) => {
-            if (!images[room.image]) {
-                throw new Error(`"${room.image}" no existeix o la ruta està mal escrita.`);
-            }
+    <div class="flex flex-col-reverse md:flex-row md:grid md:grid-cols-12 gap-8 bg-white border border-[#e5dcd0] rounded-[2rem] shadow-xl overflow-hidden p-4 md:p-6 lg:p-8">
+        
+        <div class="room-nav md:col-span-4 w-full h-full md:border-r border-[#e5dcd0] md:pr-4">
+            <div class="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-3 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 scrollbar-none snap-x snap-mandatory">
+                {rooms.map((room, index) => (
+                    <button 
+                        class:list={[
+                            "room-nav-btn w-full text-left p-4 md:p-5 rounded-xl md:rounded-2xl transition-all duration-300 ease-out flex items-center justify-between group snap-center whitespace-nowrap md:whitespace-normal",
+                            index === 0 
+                                ? "active bg-[#1f1a17] text-[#f4efe9] shadow-md" 
+                                : "text-[#1f1a17] hover:bg-[#f6efe4]"
+                        ]}
+                        data-index={index}
+                    >
+                        <span class="font-medium text-base md:text-lg tracking-tight">{room.title}</span>
+                        <svg 
+                            class:list={[
+                                "w-5 h-5 transition-transform duration-300 ml-3",
+                                index === 0 ? "translate-x-1" : "group-hover:translate-x-1"
+                            ]} 
+                            viewBox="0 0 20 20" 
+                            fill="currentColor"
+                        >
+                            <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                ))}
+            </div>
+        </div>
 
-            return (
-                <article class="room-card opacity-0 relative overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/75 shadow-[0_16px_42px_rgba(39,29,22,0.08)] transition-transform duration-200 hover:-translate-y-2 lg:col-span-4">
-                    <div class="w-full">
+        <div class="room-viewer md:col-span-8 relative h-[450px] md:h-[600px] overflow-hidden rounded-[2rem] border border-[#e5dcd0]">
+            {rooms.map((room, index) => {
+                if (!images[room.image]) return null;
+
+                return (
+                    <div 
+                        id={`room-panel-${index}`}
+                        class:list={[
+                            "absolute inset-0 w-full h-full room-panel transition-opacity duration-700 ease-in-out",
+                            index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"
+                        ]}
+                    >
                         <Image
                             src={images[room.image]()}
                             alt={room.title}
-                            width={800}  
-                            height={600} 
-                            class="w-full h-auto object-contain contrast-125"
+                            width={1200}
+                            height={800}
+                            class="absolute inset-0 w-full h-full object-cover brightness-[0.85] contrast-[1.1]"
+                            loading={index === 0 ? "eager" : "lazy"}
                         />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a17]/90 via-[#1f1a17]/30 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 md:p-12 text-white">
+                            <h3 class="text-4xl md:text-5xl font-serif mb-3 tracking-tight">{room.title}</h3>
+                            <p class="text-[#d1ccc6] max-w-xl text-lg font-light leading-relaxed">{room.text}</p>
+                            <span class="inline-block mt-6 text-xs uppercase tracking-[0.2em] font-bold text-[#c5a073] border-b border-[#c5a073] pb-1">
+                                Veure galeria completa
+                            </span>
+                        </div>
                     </div>
-                    
-                    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.4),transparent_42%)]"></div>
-                    
-                    <div class="p-5">
-                        <h3 class="mt-2 text-3xl leading-none tracking-[-0.03em] text-[#1f1a17]">{room.title}</h3>
-                        <p class="mt-3 text-base leading-7 text-[#6b5f56]">{room.text}</p>
-                    </div>
-                </article>
-            );
-        })}
-    </div>
-
-    <div class="mt-12 text-center">
-        <a 
-            id="room-btn"
-            href={localizedPaths[lang]} 
-            class="inline-flex items-center justify-center rounded-full text-xs px-6 py-3 sm:text-sm font-bold border border-[#1f1a17] bg-[#1f1a17] !text-[#f8f4ec] transition-all duration-200 hover:bg-[#332c28] hover:-translate-y-0.5 shadow-md opacity-0"
-        >
-            {buttonLabels[lang]}
-        </a>
+                );
+            })}
+        </div>
     </div>
 </section>
 
-<script>
-    import { animate, inView, stagger, cubicBezier } from "motion";
+<style>
+    /* Ocultar barra de scroll feas en móvil mientras mantiene el deslizamiento */
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-none {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
 
-    // Un easing rústico, fluido y elegante
-    const transitionEase = cubicBezier(0.25, 1, 0.5, 1);
+<script>
+    import { animate, cubicBezier } from "motion";
+
+    const premiumEase = cubicBezier(0.16, 1, 0.3, 1);
+    const autoplayDelay = 5000;
 
     if (typeof window !== "undefined") {
-        // Animació de la capçalera (títol i subtítol)
-        inView("#estancias", () => {
-            animate("#room-title", { opacity: [0, 1], y: [20, 0] } as any, { duration: 0.6, easing: transitionEase } as any);
-            animate("#room-heading", { opacity: [0, 1], y: [30, 0] } as any, { duration: 0.8, delay: 0.15, easing: transitionEase } as any);
-        }, { margin: "0px 0px -10% 0px" });
+        const visor = document.getElementById("habitacions-visor");
+        const navContainer = visor.querySelector(".room-nav div");
+        const navButtons = visor.querySelectorAll(".room-nav-btn");
+        const panels = visor.querySelectorAll(".room-panel");
+        
+        let currentIndex = 0;
+        let autoplayInterval;
 
-        // Animació seqüencial de les targetes (cards)
-        inView(".room-card", () => {
-            animate(".room-card", { 
-                opacity: [0, 1], 
-                y: [40, 0] // Cambiado 'transform' por 'y' que es más limpio para Motion y con el casting 'as any'
-            } as any, { 
-                delay: stagger(0.15),
-                duration: 0.7, 
-                easing: transitionEase
-            } as any);
+        const updateNavScroll = (index) => {
+            // Solo en móvil (cuando el contenedor hace scroll horizontal)
+            if (window.innerWidth < 768) {
+                const btn = navButtons[index];
+                const btnOffset = btn.offsetLeft;
+                const containerWidth = navContainer.offsetWidth;
+                const btnWidth = btn.offsetWidth;
+                const scrollLeft = btnOffset - (containerWidth / 2) + (btnWidth / 2);
+                
+                // Centrar el botón activo en la vista móvil
+                navContainer.scrollTo({
+                    left: scrollLeft,
+                    behavior: 'smooth'
+                });
+            }
+        };
 
-            // Animació del botó de sota
-            animate("#room-btn", { opacity: [0, 1], y: [20, 0] } as any, { duration: 0.5, delay: 0.5, easing: transitionEase } as any);
-        }, { margin: "0px 0px -15% 0px" });
+        const showRoom = (index) => {
+            const currentPanel = panels[currentIndex];
+            const nextPanel = panels[index];
+            
+            if (currentPanel === nextPanel) return;
+
+            // Actualizar botones
+            navButtons[currentIndex].classList.remove("active", "bg-[#1f1a17]", "text-[#f4efe9]", "shadow-md");
+            navButtons[currentIndex].classList.add("text-[#1f1a17]", "hover:bg-[#f6efe4]");
+            navButtons[currentIndex].querySelector("svg").classList.remove("translate-x-1");
+
+            navButtons[index].classList.add("active", "bg-[#1f1a17]", "text-[#f4efe9]", "shadow-md");
+            navButtons[index].classList.remove("text-[#1f1a17]", "hover:bg-[#f6efe4]");
+            navButtons[index].querySelector("svg").classList.add("translate-x-1");
+
+            // Animar Paneles
+            animate(currentPanel, { opacity: 0 }, { duration: 0.7, easing: premiumEase });
+            currentPanel.style.zIndex = "0";
+
+            animate(nextPanel, { opacity: 1 }, { duration: 0.9, easing: premiumEase });
+            nextPanel.style.zIndex = "10";
+
+            updateNavScroll(index); // Centrar el tab activo en móvil
+            currentIndex = index;
+        };
+
+        const nextRoom = () => {
+            let nextIndex = (currentIndex + 1) % navButtons.length;
+            showRoom(nextIndex);
+        };
+
+        const startAutoplay = () => {
+            autoplayInterval = setInterval(nextRoom, autoplayDelay);
+        };
+
+        const stopAutoplay = () => {
+            clearInterval(autoplayInterval);
+        };
+
+        navButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                stopAutoplay();
+                const index = parseInt(btn.getAttribute("data-index"));
+                showRoom(index);
+                startAutoplay();
+            });
+        });
+
+        startAutoplay();
     }
 </script>

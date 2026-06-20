@@ -1,12 +1,32 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro'; // Importamos el componente genérico
+import StaysSelector from '../components/home/StaysSelector.astro';
+
+// Importa la imagen que quieras usar para esta página
+import habitacionsHero from '../assets/pages/rooms/torre-mejanell-3-persones.webp'; 
+
 export const lang = 'ca';
 export const slug = 'habitacions';
-import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout lang={lang} slug={slug} title="Habitacions | Castell de Mejanell">
-  <main class="mx-auto max-w-5xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Habitacions</h1>
-    <p class="text-base text-[#6b5f56]">Contenido de ejemplo sobre las habitaciones del castillo.</p>
+  <main class=" text-[#1f1a17] overflow-x-hidden">
+    
+    <!-- Llamada al componente Hero reutilizable -->
+    <Hero 
+        tag="Estades"
+        title="Habitacions"
+        subtitle="Espais dissenyats per al descans, la calma i la desconnexió en plena natura."
+        image={habitacionsHero}
+    />
+
+    <!-- Contenido de la página -->
+    <div class="mx-auto max-w-5xl px-4 py-16 lg:px-6">
+        <StaysSelector lang={lang}/>
+        <p class="text-base text-[#6b5f56] mt-8">
+            Per a grups més nombrosos, oferim la possibilitat d'allotjar fins a 18 persones gràcies als sofàs llit disponibles en habitacions seleccionades.
+        </p>
+    </div>
   </main>
 </Layout>

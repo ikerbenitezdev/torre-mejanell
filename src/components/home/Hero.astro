@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    title: string;
+    subtitle: string;
+    tag: string;
+    image: ImageMetadata;
+}
+
+const { title, subtitle, tag, image } = Astro.props;
+---
+
+<section class="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden border-b border-[#2d2a28]">
+    <div class="absolute inset-0">
+        <Image 
+            src={image} 
+            alt={title} 
+            class="w-full h-full object-cover"
+            quality={80}
+            format="webp"
+            loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#1a1715]/60 via-[#1a1715]/40 to-[#1a1715]/70"></div>
+    </div>
+
+    <div class="relative z-10 text-center max-w-2xl px-6 space-y-6">
+        <span class="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#c5a073]">{tag}</span>
+        <h1 class="text-5xl md:text-7xl font-serif text-[#f4efe9] tracking-tight">{title}</h1>
+        <p class="text-[#d1ccc6] font-light text-lg">{subtitle}</p>
+    </div>
+</section>

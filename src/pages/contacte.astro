@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactHero from '../components/home/Hero.astro'; // Importamos el componente
+import heroImage from '../assets/pages/contacte/contacte-torre-mejanell.webp'; 
+
+export const lang = 'ca';
+export const slug = 'contacte';
+---
+
+<Layout lang={lang} slug={slug} title="Contacte | Torre de Mejanell">
+  <main class="bg-[#fcfbf9] text-[#1f1a17] overflow-x-hidden">
+    
+    <!-- Llamada al componente -->
+    <ContactHero 
+        tag="Parlem"
+        title="Contacte"
+        subtitle="Estem a la teva disposició per a qualsevol consulta sobre reserves o visites."
+        image={heroImage}
+    />
+
+      <!-- SECCIÓN FORMULARIO Y MAPA -->
+
+    <section class="max-w-7xl mx-auto py-24 px-6 grid lg:grid-cols-2 gap-16 items-start">
+
+       
+
+        <!-- FORMULARIO -->
+
+        <div class="bg-white p-8 md:p-12 border border-[#e5dcd0] rounded-[2rem] shadow-sm">
+
+            <h2 class="text-3xl font-serif text-[#1f1a17] mb-8">Envia'ns un missatge</h2>
+
+            <form action="/api/send-email" method="POST" class="space-y-6">
+
+                <div>
+
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-[#7a5a3d] mb-2">Nom</label>
+
+                    <input type="text" name="name" required class="w-full bg-[#fcfbf9] border border-[#e5dcd0] p-3 rounded-xl focus:ring-1 focus:ring-[#c5a073] outline-none transition" />
+
+                </div>
+
+                <div>
+
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-[#7a5a3d] mb-2">Correu electrònic</label>
+
+                    <input type="email" name="email" required class="w-full bg-[#fcfbf9] border border-[#e5dcd0] p-3 rounded-xl focus:ring-1 focus:ring-[#c5a073] outline-none transition" />
+
+                </div>
+
+                <div>
+
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-[#7a5a3d] mb-2">Missatge</label>
+
+                    <textarea name="message" rows="5" required class="w-full bg-[#fcfbf9] border border-[#e5dcd0] p-3 rounded-xl focus:ring-1 focus:ring-[#c5a073] outline-none transition"></textarea>
+
+                </div>
+
+                <button type="submit" class="w-full bg-[#1f1a17] text-[#f8f4ec] py-4 rounded-full font-bold hover:bg-[#7a5a3d] transition-all duration-300 uppercase tracking-widest text-xs shadow-md">
+
+                    Enviar missatge
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- MAPA Y UBICACIÓN -->
+
+        <div class="space-y-8">
+
+            <div class="rounded-[2rem] overflow-hidden border border-[#e5dcd0] shadow-md h-[400px]">
+
+                <iframe
+
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2975.3526685805566!2d1.327915576135805!3d41.77708517124976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a47e0034685351%3A0x400fa7d02844520!2s25215%20Estar%C3%A0s%2C%20Lleida!5e0!3m2!1ses!2ses!4v1717000000000!5m2!1ses!2ses"
+
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+
+                </iframe>
+
+            </div>
+
+            <div class="bg-[#f6efe4] p-8 rounded-[2rem] border border-[#e5dcd0] space-y-2">
+
+                <h4 class="font-bold text-[#1f1a17] text-sm uppercase tracking-wider">La nostra casa</h4>
+
+                <p class="text-[#6b5f56] font-serif italic text-lg">25215 Estaràs, Lleida</p>
+
+                <p class="text-[#7a5a3d] text-sm font-medium pt-2">Ens trobaràs al cor de la Segarra, un refugi on el temps s'atura.</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+  </main>
+
+</Layout> 
+

@@ -1,0 +1,82 @@
+---
+import { 
+  BedDouble, Baby, Waves, Tv, Flame, Trees, Armchair, Bike, Dices, 
+  WashingMachine, Utensils, Refrigerator, CookingPot, Microwave, Citrus, Coffee, ChefHat, Sofa
+} from 'lucide-astro';
+
+const iconClass = "w-6 h-6 text-[#7a5a3d]"; // Usamos el color de tu sección de habitaciones
+---
+
+<section id="serveis" class="mx-auto max-w-7xl px-8 py-16 md:px-20 lg:py-12 overflow-hidden">
+    <!-- Títulos con la estética de Habitaciones -->
+    <div class="max-w-4xl mx-auto text-center mb-16">
+        <p id="serveis-title" class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d] opacity-0">
+            Comoditat i benestar
+        </p>
+        <h2 id="serveis-heading" class="mx-auto text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem] opacity-0">
+            Serveis i equipament
+        </h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Columna Serveis -->
+        <div class="serveis-group opacity-0">
+            <h3 class="text-xl font-bold mb-8 text-[#1f1a17] uppercase tracking-wider text-sm border-b border-black/10 pb-4">Serveis de la casa</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                    { icon: BedDouble, text: 'Llits supletoris' },
+                    { icon: Baby, text: 'Bressol i nadons' },
+                    { icon: ChefHat, text: 'Menjar a domicili' },
+                    { icon: Waves, text: 'Piscina' },
+                    { icon: Tv, text: 'TV i DVD' },
+                    { icon: Flame, text: 'Llar de foc' },
+                    { icon: Trees, text: 'Mobles de jardí' },
+                    { icon: Sofa, text: 'Taula i cadires' },
+                    { icon: Bike, text: 'Bicicletes' },
+                    { icon: Dices, text: 'Jocs de taula' },
+                    { icon: Flame, text: 'Barbacoa' }
+                ].map(item => (
+                    <div class="flex items-center gap-4 p-5 bg-white/75 rounded-[1.25rem] border border-black/10 shadow-[0_4px_12px_rgba(39,29,22,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c5a073]/50 hover:shadow-[0_8px_24px_rgba(197,160,115,0.15)] cursor-default">
+                        <item.icon class={iconClass} /> 
+                        <span class="font-medium text-[#1f1a17]">{item.text}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Columna Cuina -->
+        <div class="serveis-group opacity-0">
+            <h3 class="text-xl font-bold mb-8 text-[#1f1a17] uppercase tracking-wider text-sm border-b border-black/10 pb-4">Cuina equipada</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                    { icon: WashingMachine, text: 'Rentadora' },
+                    { icon: Utensils, text: 'Rentaplats' },
+                    { icon: Refrigerator, text: '2 Neveres' },
+                    { icon: CookingPot, text: 'Forn' },
+                    { icon: Microwave, text: 'Microones' },
+                    { icon: Flame, text: 'Vitroceràmica' },
+                    { icon: Citrus, text: 'Espremedora' },
+                    { icon: Utensils, text: 'Batedora' },
+                    { icon: Coffee, text: 'Cafetera' }
+                ].map(item => (
+                    <div class="flex items-center gap-4 p-5 bg-white/75 rounded-[1.25rem] border border-black/10 shadow-[0_4px_12px_rgba(39,29,22,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c5a073]/50 hover:shadow-[0_8px_24px_rgba(197,160,115,0.15)] cursor-default">
+                        <item.icon class={iconClass} /> 
+                        <span class="font-medium text-[#1f1a17]">{item.text}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { animate, inView, stagger, cubicBezier } from "motion";
+
+    const transitionEase = cubicBezier(0.25, 1, 0.5, 1);
+
+    inView("#serveis", () => {
+        animate("#serveis-title", { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, easing: transitionEase });
+        animate("#serveis-heading", { opacity: [0, 1], y: [30, 0] }, { duration: 0.8, delay: 0.15, easing: transitionEase });
+        animate(".serveis-group", { opacity: [0, 1], y: [40, 0] }, { delay: stagger(0.2), duration: 0.8, easing: transitionEase });
+    }, { margin: "-10% 0px -10% 0px" });
+</script>
