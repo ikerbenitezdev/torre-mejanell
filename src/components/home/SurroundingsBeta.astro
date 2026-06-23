@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+
+import bttImg from '../../assets/pages/entorn/btt-segarra.webp';
+import vinyaImg from '../../assets/pages/entorn/vinya-torre-mejanell.webp';
+import cisterImg from '../../assets/pages/entorn/cister.webp';
+---
+
+<section id="entorn-preview" class="relative py-32 bg-[#e5e1dc] overflow-hidden">
+  <!-- Fondo de textura sutil -->
+  <div class="absolute inset-0 opacity-[0.08] pointer-events-none" 
+       style="background-image: radial-gradient(#7a5a3d 1px, transparent 1px); background-size: 40px 40px;">
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 relative z-10">
+    <!-- El título también entra animado -->
+    <h2 id="entorn-title" class="text-[clamp(3rem,8vw,6rem)] leading-[0.9] font-serif text-[#1f1a17] mb-24 text-center opacity-0">
+      L'entorn <i class="font-light italic">de Mejanell</i>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      
+      <!-- Tarjeta 1: Turisme Actiu -->
+      <a href="/entorn#turisme" class="entorn-card md:col-span-7 h-[550px] rounded-[2.5rem] relative overflow-hidden group block opacity-0">
+        <div class="absolute inset-0 overflow-hidden rounded-[2.5rem]">
+          <Image 
+            src={bttImg} 
+            alt="Rutes de BTT i senderisme a la Segarra" 
+            class="w-full h-full object-cover transition-transform duration-[1.2s] cubic-bezier-[0.25,1,0.5,1] group-hover:scale-105"
+          />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
+        <div class="absolute bottom-12 left-12 right-12 text-white transform transition-transform duration-700 cubic-bezier-[0.25,1,0.5,1] group-hover:-translate-y-2">
+          <span class="text-xs tracking-[0.2em] uppercase font-bold opacity-70 block mb-2">Turisme Actiu</span>
+          <h3 class="text-4xl font-serif">Senderisme i BTT</h3>
+          <p class="text-white/0 text-sm mt-3 font-sans opacity-0 transition-all duration-500 delay-75 group-hover:text-white/80 group-hover:opacity-100 max-w-sm">
+            Descobreix rutes úniques, senders mil·lenaris i paisatges espectaculars sobre dues rodes.
+          </p>
+        </div>
+      </a>
+
+      <!-- Tarjeta 2: Gastronomia -->
+      <a href="/entorn#gastronomia" class="entorn-card md:col-span-5 md:mt-28 h-[450px] rounded-[2.5rem] relative overflow-hidden group block opacity-0">
+        <div class="absolute inset-0 overflow-hidden rounded-[2.5rem]">
+          <Image 
+            src={vinyaImg} 
+            alt="Vinyes i enoturisme a Torre Mejanell" 
+            class="w-full h-full object-cover transition-transform duration-[1.2s] cubic-bezier-[0.25,1,0.5,1] group-hover:scale-105"
+          />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90"></div>
+        <div class="absolute bottom-12 left-12 right-12 text-white transform transition-transform duration-700 cubic-bezier-[0.25,1,0.5,1] group-hover:-translate-y-2">
+          <span class="text-xs tracking-[0.2em] uppercase font-bold opacity-70 block mb-2">Gastronomia</span>
+          <h3 class="text-3xl font-serif">Vins i Sabors</h3>
+          <p class="text-white/0 text-sm mt-3 font-sans opacity-0 transition-all duration-500 delay-75 group-hover:text-white/80 group-hover:opacity-100">
+            Tasts de vins de proximitat i cuina tradicional de la nostra terra.
+          </p>
+        </div>
+      </a>
+      
+      <!-- Tarjeta 3: Patrimoni Històric -->
+      <a href="/entorn#patrimoni" class="entorn-card md:col-span-12 h-[380px] rounded-[2.5rem] relative overflow-hidden group block opacity-0 mt-8">
+        <div class="absolute inset-0 overflow-hidden rounded-[2.5rem]">
+          <Image 
+            src={cisterImg} 
+            alt="Patrimoni històric i Ruta del Cister" 
+            class="w-full h-full object-cover transition-transform duration-[1.5s] cubic-bezier-[0.25,1,0.5,1] group-hover:scale-103"
+          />
+        </div>
+        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-500"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 transform transition-transform duration-700 cubic-bezier-[0.25,1,0.5,1] group-hover:scale-[1.02]">
+          <span class="text-xs tracking-[0.3em] uppercase font-bold text-white/80 mb-3">Cultura</span>
+          <h3 class="text-5xl font-serif text-white italic drop-shadow-md">Patrimoni Històric</h3>
+          <span class="text-white/0 text-sm font-sans mt-4 border-b border-white/40 pb-1 opacity-0 transition-all duration-500 group-hover:text-white group-hover:opacity-100">
+            Explora la Ruta del Cister i els castells de la Segarra
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Base del contenedor para suavizar las sombras de alta gama */
+  .entorn-card {
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 10px 30px -10px rgba(31, 26, 23, 0.08);
+  }
+  
+  /* Al hacer hover, la tarjeta se eleva ligeramente y proyecta una sombra profunda ambiental */
+  .entorn-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px -15px rgba(31, 26, 23, 0.25);
+  }
+
+  /* Curvas de aceleración personalizadas para los elementos internos */
+  .cubic-bezier-\[0\.25\,1\,0\.5\,1\] {
+    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+</style>
+
+<script>
+  import { animate, inView, stagger } from "motion";
+
+  // Animación cinematográfica de entrada al hacer scroll
+  inView("#entorn-preview", () => {
+    // 1. Animamos el título principal primero
+    animate("#entorn-title", 
+      { opacity: [0, 1], y: [30, 0] }, 
+      { duration: 0.8, easing: "ease-out" }
+    );
+
+    // 2. Animamos las tarjetas de forma escalonada (stagger) con un deslizamiento elegante
+    animate(".entorn-card", 
+      { opacity: [0, 1], y: [60, 0] }, 
+      { 
+        duration: 1, 
+        delay: stagger(0.18, { start: 0.2 }), 
+        easing: [0.25, 1, 0.5, 1] // Curva Quintic Out para una frenada ultrasuave
+      }
+    );
+  }, { margin: "-10%" }); // Se dispara cuando la sección asoma un 10% en pantalla
+</script>

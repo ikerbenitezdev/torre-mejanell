@@ -1,12 +1,46 @@
 ---
-export const lang = 'ca';
-export const slug = 'zones-comuns';
 import Layout from '../layouts/Layout.astro';
+import ZonesGrid from '../components/home/ZonesGrid.astro';
+import Hero from '../components/home/Hero.astro';
+
+// IMPORTACIÓN EXACTA DE TUS IMÁGENES
+import imgHero from '../assets/pages/la-casa/zona-comu1.webp'; // Usamos zona-comu1 para el banner principal
+import cuina from '../assets/pages/la-casa/cuina-torre-mejanell.webp';
+import dutxa from '../assets/pages/la-casa/dutxa-minusvalids.webp';
+import lavabo from '../assets/pages/la-casa/lavabo-pica.webp';
+import menjador from '../assets/pages/la-casa/menajdor-torre-mejanell.webp';
+import patiExterior from '../assets/pages/la-casa/pati-exterior.webp';
+import patiInterior from '../assets/pages/la-casa/pati-interior.webp';
+import patiInterior2 from '../assets/pages/la-casa/pati-interior2.webp';
+import taulaExteiror from '../assets/pages/la-casa/taula-exteiror.webp'; // Respetando la errata del nombre original
+import zonaComu2 from '../assets/pages/la-casa/zona-comu2.webp';
+
+const zones = [
+    { title: "Cuina", description: "Espai totalment equipat conservant l'encant rústic original.", image: cuina },
+    { title: "Menjador", description: "Zona àmplia ideal per a àpats i trobades en grup.", image: menjador },
+    { title: "Pati Interior", description: "Clàssic pati interior que connecta la història del castell.", image: patiInterior },
+    { title: "Segon Pati Interior", description: "Un racó addicional de calma i arquitectura medieval.", image: patiInterior2 },
+    { title: "Pati Exterior", description: "Zona a l'aire lliure rodejada de natura i tranquil·litat.", image: patiExterior },
+    { title: "Taula Exterior", description: "Espai ideal per a esmorzars o sopars a la fresca.", image: taulaExteiror },
+    { title: "Zona Comuna", description: "Espais amplis de descans dissenyats per a la desconnexió.", image: zonaComu2 },
+    { title: "Lavabo Adaptat", description: "Instal·lacions modernes i totalment accessibles.", image: dutxa },
+    { title: "Lavabo amb Pica", description: "Detalls cuidats en els serveis i zones de neteja.", image: lavabo }
+];
 ---
 
-<Layout lang={lang} slug={slug} title="Zones Comunes | Castell de Mejanell">
-  <main class="mx-auto max-w-5xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Zones Comunes</h1>
-    <p class="text-base text-[#6b5f56]">Contenido de ejemplo sobre las zonas comunes del castillo.</p>
+<Layout lang="ca" slug="zones-comuns" title="Zones Comunes | Castell de Mejanell">
+  <main class="bg-[#fcfbf9]">
+    
+    <Hero 
+        tag="Instal·lacions"
+        title="Zones Comunes"
+        subtitle="Descobreix els racons que fan del nostre castell un lloc únic."
+        image={imgHero} 
+    />
+
+    <section class="max-w-7xl mx-auto py-24 px-6">
+        <ZonesGrid zones={zones} />
+    </section>
+
   </main>
 </Layout>

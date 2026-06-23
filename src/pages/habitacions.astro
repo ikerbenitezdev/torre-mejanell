@@ -1,9 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/home/Hero.astro'; // Importamos el componente genérico
+import Hero from '../components/home/Hero.astro';
 import StaysSelector from '../components/home/StaysSelector.astro';
 
-// Importa la imagen que quieras usar para esta página
 import habitacionsHero from '../assets/pages/rooms/torre-mejanell-3-persones.webp'; 
 
 export const lang = 'ca';
@@ -11,9 +10,8 @@ export const slug = 'habitacions';
 ---
 
 <Layout lang={lang} slug={slug} title="Habitacions | Castell de Mejanell">
-  <main class=" text-[#1f1a17] overflow-x-hidden">
+  <main class="text-[#1f1a17] overflow-x-hidden relative">
     
-    <!-- Llamada al componente Hero reutilizable -->
     <Hero 
         tag="Estades"
         title="Habitacions"
@@ -21,12 +19,123 @@ export const slug = 'habitacions';
         image={habitacionsHero}
     />
 
-    <!-- Contenido de la página -->
     <div class="mx-auto max-w-5xl px-4 py-16 lg:px-6">
+        <div class="text-center max-w-3xl mx-auto mb-8 space-y-4">
+            <h2 class="text-2xl md:text-3xl font-serif text-[#7a5a3d]">Un refugi històric fet a la teva mida</h2>
+            <p class="text-base text-[#6b5f56] leading-relaxed">
+                Cada estança del castell combina l'arquitectura medieval original amb les comoditats contemporànies. Descobreix os nostres espais independents, pensats tant per a escapades íntimes com per a retrobaments familiars singulars.
+            </p>
+        </div>
+
         <StaysSelector lang={lang}/>
-        <p class="text-base text-[#6b5f56] mt-8">
-            Per a grups més nombrosos, oferim la possibilitat d'allotjar fins a 18 persones gràcies als sofàs llit disponibles en habitacions seleccionades.
-        </p>
+        
+        <div class="mt-12 max-w-3xl mx-auto px-5">
+            <p class="text-base text-[#6b5f56] flex items-start text-left gap-2">
+                <span class="h-1 w-1 rotate-45 transform shrink-0 bg-[#7a5a3d] mt-2.5"></span>
+                <span>Per a grups més nombrosos, oferim la possibilitat d'allotjar fins a 18 persones gràcies als sofàs llit disponibles en habitacions seleccionades.</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- MODAL DE GALERÍA -->
+    <div id="gallery-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#1f1a17]/95 opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm hidden">
+      <button id="close-modal" class="absolute top-6 right-6 text-white/70 hover:text-white text-4xl font-sans transition-colors z-50 p-2 cursor-pointer">&times;</button>
+      
+      <div class="relative max-w-4xl w-full h-full max-h-[80vh] flex flex-col items-center justify-center px-4">
+        <button id="prev-photo" class="absolute left-4 md:-left-16 text-white/60 hover:text-white text-5xl p-4 transition-colors z-50 cursor-pointer select-none">‹</button>
+        
+        <div class="w-full h-full flex items-center justify-center overflow-hidden rounded-2xl bg-[#2a2420]/30">
+          <img id="modal-img" src="" alt="Galeria de l'habitació" class="max-w-full max-h-full object-contain select-none transition-all duration-200" />
+        </div>
+        
+        <button id="next-photo" class="absolute right-4 md:-right-16 text-white/60 hover:text-white text-5xl p-4 transition-colors z-50 cursor-pointer select-none">›</button>
+        <div id="modal-counter" class="text-[#b5a99e] text-xs font-sans tracking-widest mt-4 uppercase font-semibold">0 / 0</div>
+      </div>
     </div>
   </main>
 </Layout>
+
+<script>
+  const modal = document.getElementById('gallery-modal');
+  const modalImg = document.getElementById('modal-img') as HTMLImageElement;
+  const closeModalBtn = document.getElementById('close-modal');
+  const prevBtn = document.getElementById('prev-photo');
+  const nextBtn = document.getElementById('next-photo');
+  const counter = document.getElementById('modal-counter');
+
+  let currentGallery: string[] = [];
+  let currentIndex = 0;
+
+  function updateModalImage() {
+    if (currentGallery.length === 0 || !modalImg || !counter) return;
+    
+    const resolvedSrc = currentGallery[currentIndex];
+
+    modalImg.style.opacity = '0';
+    setTimeout(() => {
+      modalImg.src = resolvedSrc;
+      counter.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
+      modalImg.style.opacity = '1';
+    }, 150);
+  }
+
+  function openModal(galleryArray: string[]) {
+    if (!galleryArray || !modal) return;
+    currentGallery = galleryArray;
+    currentIndex = 0;
+
+    if (currentGallery.length > 0) {
+      modal.classList.remove('hidden');
+      void modal.offsetWidth; 
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden'; 
+      updateModalImage();
+    }
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = ''; 
+    setTimeout(() => { modal.classList.add('hidden'); }, 300);
+  }
+
+  // Captura el JSON de URLs ya procesadas directamente
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const galleryBtn = target.closest('.open-gallery-btn');
+    
+    if (galleryBtn) {
+      try {
+        const rawData = galleryBtn.getAttribute('data-gallery');
+        if (rawData) {
+          const parsedGallery = JSON.parse(rawData);
+          if (Array.isArray(parsedGallery)) openModal(parsedGallery);
+        }
+      } catch (err) {
+        console.error("Error al abrir la galería:", err);
+      }
+    }
+  });
+
+  closeModalBtn?.addEventListener('click', closeModal);
+  
+  prevBtn?.addEventListener('click', () => {
+    currentIndex = (currentIndex === 0) ? currentGallery.length - 1 : currentIndex - 1;
+    updateModalImage();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    currentIndex = (currentIndex === currentGallery.length - 1) ? 0 : currentIndex + 1;
+    updateModalImage();
+  });
+
+  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal || modal.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') prevBtn?.click();
+    if (e.key === 'ArrowRight') nextBtn?.click();
+  });
+</script>

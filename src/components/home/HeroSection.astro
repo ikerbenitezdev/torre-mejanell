@@ -1,19 +1,38 @@
 ---
-import heroImage from '../../assets/pages/home/torre-de-mejanell.webp';
+import { Image } from 'astro:assets';
 
-const heroPills = ['Cases rurals amb encant', 'Escapa’t a prop del mar o de la muntanya'];
+// Cargamos todas las imágenes de la carpeta hero
+const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/hero/*.{jpeg,jpg,png,webp}');
+const imageEntries = Object.entries(images);
 ---
 
 <section id="top" class="relative min-h-screen overflow-hidden text-white">
-    <div class="absolute inset-0">
-        <img src={heroImage.src} alt="Castell de Mejanell" class="h-full w-full object-cover" fetchpriority="high" loading="eager" decoding="async" />
-        <div class="absolute inset-0 bg-black/15"></div>
-        <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.20)_0%,rgba(0,0,0,0.42)_100%)]"></div>
+    <!-- Contenedor de imágenes (Slider) -->
+    <div class="absolute inset-0 z-0">
+        {imageEntries.map(([path, imageLoader], index) => (
+            <div 
+                class={`hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+                data-index={index}
+            >
+                <Image 
+                    src={imageLoader()} 
+                    alt="Castell de Mejanell" 
+                    class="h-full w-full object-cover" 
+                    widths={[640, 1024, 1920]}
+                    sizes="100vw"
+                    quality={75}
+                    fetchpriority={index === 0 ? "high" : "low"}
+                    loading={index === 0 ? "eager" : "lazy"}
+                />
+                <div class="absolute inset-0 bg-black/20"></div>
+                <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.20)_0%,rgba(0,0,0,0.42)_100%)]"></div>
+            </div>
+        ))}
     </div>
 
-    <div class="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-10 pt-24 lg:px-6 lg:pt-28">
-        
-        <div class="mx-auto mt-40 w-full max-w-5xl text-center">
+    <!-- Contenido -->
+    <div class="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-10 pt-24 lg:px-6 lg:pt-28">
+        <div class="mx-auto mt-30 w-full max-w-5xl text-center">
             <p id="hero-subtitle" class="mb-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-white/80 opacity-0">
                 Castell de Mejanell
             </p>
@@ -29,37 +48,36 @@ const heroPills = ['Cases rurals amb encant', 'Escapa’t a prop del mar o de la
             <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="#estancias">Explorar habitacions</a>
             <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="/preus-i-ocupacio">Preus i ocupació</a>
         </div>
-        
     </div>
 </section>
+
 <script>
-  import { animate } from "motion";
+    async function initHero() {
+        // Carga dinámica de motion para no bloquear el inicio
+        const { animate } = await import("motion");
+        
+        // Animaciones de entrada
+        const targets = ["#hero-subtitle", "#hero-title", "#hero-description", "#hero-buttons"];
+        targets.forEach((selector, i) => {
+            animate(selector, { opacity: [0, 1], y: [20, 0] }, { duration: 0.8, delay: i * 0.15, easing: "ease-out" });
+        });
 
-  if (typeof window !== "undefined") {
-    // Definimos una configuración base forzando el tipo para evitar los errores ts(2769)
-    const opcionesConfig = { 
-      duration: 0.8, 
-      easing: "ease-out"
-    } as const;
+        // Slider logic
+        const slides = document.querySelectorAll('.hero-slide');
+        if (slides.length > 1) {
+            let currentIndex = 0;
+            setInterval(() => {
+                slides[currentIndex].classList.replace('opacity-100', 'opacity-0');
+                currentIndex = (currentIndex + 1) % slides.length;
+                slides[currentIndex].classList.replace('opacity-0', 'opacity-100');
+            }, 5000);
+        }
+    }
 
-    // Pasamos los keyframes como un objeto limpio y casteamos la llamada
-    animate("#hero-subtitle", { opacity: [0, 1], y: [24, 0] } as any, opcionesConfig);
-    
-    animate("#hero-title", { opacity: [0, 1], y: [24, 0] } as any, { 
-      ...opcionesConfig, 
-      duration: 0.9, 
-      delay: 0.15 
-    });
-    
-    animate("#hero-description", { opacity: [0, 1], y: [24, 0] } as any, { 
-      ...opcionesConfig, 
-      duration: 0.9, 
-      delay: 0.3 
-    });
-    
-    animate("#hero-buttons", { opacity: [0, 1], y: [16, 0] } as any, { 
-      ...opcionesConfig, 
-      delay: 0.45 
-    });
-  }
+    // Ejecución optimizada al quedar libre el navegador
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(initHero);
+    } else {
+        setTimeout(initHero, 1);
+    }
 </script>

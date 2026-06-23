@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+
+interface Zone {
+    title: string;
+    description: string;
+    image: ImageMetadata;
+}
+
+interface Props {
+    zones: Zone[];
+}
+
+const { zones } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px]">
+    {zones.map((zone, i) => (
+        <div class:list={[
+            "group relative overflow-hidden rounded-[2rem] shadow-sm transition-all duration-500 hover:shadow-xl",
+            i % 5 === 0 ? "md:col-span-2" : "md:col-span-1" // Hace que algunas sean más grandes que otras
+        ]}>
+            <Image 
+                src={zone.image} 
+                alt={zone.title} 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a17]/80 to-transparent p-8 flex flex-col justify-end opacity-90 transition-opacity group-hover:opacity-100">
+                <h3 class="text-white font-serif text-2xl mb-2">{zone.title}</h3>
+                <p class="text-[#d1ccc6] text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">{zone.description}</p>
+            </div>
+        </div>
+    ))}
+</div>

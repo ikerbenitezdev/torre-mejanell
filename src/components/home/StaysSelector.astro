@@ -7,45 +7,69 @@ interface Props {
 
 const { lang = 'ca' } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/rooms/*.{jpeg,jpg,png,gif,webp}');
+// Cambiamos el glob a 'eager: true' para resolver las imágenes en el servidor inmediatamente
+const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/rooms/*.{jpeg,jpg,png,gif,webp}', { eager: true });
 
-const rooms = [
+const rawRooms = [
     {
         title: 'Habitació 3 persones',
         text: 'Habitació de dos llits individuals amb bressol i lavabo.',
         image: '../../assets/pages/rooms/torre-mejanell-3-persones.webp',
+        gallery: [
+            '../../assets/pages/rooms/torre-mejanell-3-persones.webp',
+            '../../assets/pages/rooms/torre-mejanell-doble2.webp',
+            '../../assets/pages/rooms/torre-mejanell-2-persones3.webp'
+        ]
     },
     {
         title: 'Habitació doble',
         text: 'Habitació a la planta baixa amb llit de matrimoni.',
         image: '../../assets/pages/rooms/torre-mejanell-doble2.webp',
+        gallery: [
+            '../../assets/pages/rooms/torre-mejanell-doble2.webp',
+            '../../assets/pages/rooms/torre-mejanell-doble1.webp'
+        ]
     },
     {
         title: 'Habitació 2 persones',
         text: 'Llit de matrimoni',
         image: '../../assets/pages/rooms/torre-mejanell-2-persones3.webp',
+        gallery: ['../../assets/pages/rooms/torre-mejanell-2-persones3.webp']
     },
     {
         title: 'Habitació 2 persones',
         text: 'Dos llits individuals amb lavabo',
         image: '../../assets/pages/rooms/torre-mejanell-2-persones4.webp',
+        gallery: ['../../assets/pages/rooms/torre-mejanell-2-persones4.webp']
     },
     {
         title: 'Habitació doble',
         text: 'Habitació a la planta baixa per a dues persones.',
         image: '../../assets/pages/rooms/torre-mejanell-doble1.webp',
+        gallery: ['../../assets/pages/rooms/torre-mejanell-doble1.webp']
     },
     {
         title: 'Habitació 2 persones',
-        text: 'Habitació a la planta baixa amb llit de matrimoni.',
+        text: 'Dos llits individuals',
         image: '../../assets/pages/rooms/torre-mejanell-2-persones.webp',
+        gallery: ['../../assets/pages/rooms/torre-mejanell-2-persones.webp']
     },
 ];
 
+// Procesamos las habitaciones en el servidor para convertir los strings de ruta en URLs web finales (.src)
+const rooms = rawRooms.map(room => {
+    const resolvedGalleryUrls = room.gallery
+        .map(path => images[path]?.default?.src) // Extrae la URL final procesada por Astro/Vite
+        .filter(Boolean); // Elimina rutas que no existan o estén mal escritas
+
+    return {
+        ...room,
+        resolvedGallery: resolvedGalleryUrls
+    };
+});
 ---
 
 <section id="habitacions-visor" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24">
-
     <div class="flex flex-col-reverse md:flex-row md:grid md:grid-cols-12 gap-8 bg-white border border-[#e5dcd0] rounded-[2rem] shadow-xl overflow-hidden p-4 md:p-6 lg:p-8">
         
         <div class="room-nav md:col-span-4 w-full h-full md:border-r border-[#e5dcd0] md:pr-4">
@@ -54,21 +78,12 @@ const rooms = [
                     <button 
                         class:list={[
                             "room-nav-btn w-full text-left p-4 md:p-5 rounded-xl md:rounded-2xl transition-all duration-300 ease-out flex items-center justify-between group snap-center whitespace-nowrap md:whitespace-normal",
-                            index === 0 
-                                ? "active bg-[#1f1a17] text-[#f4efe9] shadow-md" 
-                                : "text-[#1f1a17] hover:bg-[#f6efe4]"
+                            index === 0 ? "active bg-[#1f1a17] text-[#f4efe9] shadow-md" : "text-[#1f1a17] hover:bg-[#f6efe4]"
                         ]}
                         data-index={index}
                     >
                         <span class="font-medium text-base md:text-lg tracking-tight">{room.title}</span>
-                        <svg 
-                            class:list={[
-                                "w-5 h-5 transition-transform duration-300 ml-3",
-                                index === 0 ? "translate-x-1" : "group-hover:translate-x-1"
-                            ]} 
-                            viewBox="0 0 20 20" 
-                            fill="currentColor"
-                        >
+                        <svg class:list={["w-5 h-5 transition-transform duration-300 ml-3", index === 0 ? "translate-x-1" : "group-hover:translate-x-1"]} viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
                         </svg>
                     </button>
@@ -81,28 +96,27 @@ const rooms = [
                 if (!images[room.image]) return null;
 
                 return (
-                    <div 
-                        id={`room-panel-${index}`}
-                        class:list={[
-                            "absolute inset-0 w-full h-full room-panel transition-opacity duration-700 ease-in-out",
-                            index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"
-                        ]}
-                    >
+                    <div id={`room-panel-${index}`} class:list={["absolute inset-0 w-full h-full room-panel transition-opacity duration-700 ease-in-out", index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"]}>
                         <Image
-                            src={images[room.image]()}
-                            alt={room.title}
-                            width={1200}
-                            height={800}
-                            class="absolute inset-0 w-full h-full object-cover brightness-[0.85] contrast-[1.1]"
-                            loading={index === 0 ? "eager" : "lazy"}
-                        />
+                                src={images[room.image].default}
+                                alt={room.title}
+                                width={1200}
+                                height={800}
+                                class="absolute inset-0 w-full h-full object-cover brightness-[0.85] contrast-[1.1]"
+                                loading={index === 0 ? "eager" : "lazy"}
+                            />
                         <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a17]/90 via-[#1f1a17]/30 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-8 md:p-12 text-white">
+                        <div class="absolute bottom-0 left-0 p-8 md:p-12 text-white z-20 w-full">
                             <h3 class="text-4xl md:text-5xl font-serif mb-3 tracking-tight">{room.title}</h3>
                             <p class="text-[#d1ccc6] max-w-xl text-lg font-light leading-relaxed">{room.text}</p>
-                            <span class="inline-block mt-6 text-xs uppercase tracking-[0.2em] font-bold text-[#c5a073] border-b border-[#c5a073] pb-1">
+                            
+                            {/* Pasamos el array ya resuelto con las URLs web listas para usar */}
+                            <button 
+                                class="open-gallery-btn inline-block mt-6 text-xs uppercase tracking-[0.2em] font-bold text-[#c5a073] border-b border-[#c5a073] pb-1 hover:text-white hover:border-white transition-colors duration-300 cursor-pointer"
+                                data-gallery={JSON.stringify(room.resolvedGallery)}
+                            >
                                 Veure galeria completa
-                            </span>
+                            </button>
                         </div>
                     </div>
                 );
@@ -112,14 +126,8 @@ const rooms = [
 </section>
 
 <style>
-    /* Ocultar barra de scroll feas en móvil mientras mantiene el deslizamiento */
-    .scrollbar-none::-webkit-scrollbar {
-        display: none;
-    }
-    .scrollbar-none {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
 
 <script>
@@ -130,76 +138,97 @@ const rooms = [
 
     if (typeof window !== "undefined") {
         const visor = document.getElementById("habitacions-visor");
-        const navContainer = visor.querySelector(".room-nav div");
-        const navButtons = visor.querySelectorAll(".room-nav-btn");
-        const panels = visor.querySelectorAll(".room-panel");
+        
+        if (!visor) {
+            throw new Error("No se ha encontrado el elemento #habitacions-visor");
+        }
+
+        const navContainer = visor.querySelector(".room-nav div") as HTMLElement | null;
+        const navButtons = visor.querySelectorAll(".room-nav-btn") as NodeListOf<HTMLButtonElement>;
+        const panels = visor.querySelectorAll(".room-panel") as NodeListOf<HTMLElement>;
         
         let currentIndex = 0;
-        let autoplayInterval;
+        let autoplayInterval: ReturnType<typeof setInterval> | undefined;
 
-        const updateNavScroll = (index) => {
-            // Solo en móvil (cuando el contenedor hace scroll horizontal)
-            if (window.innerWidth < 768) {
+        const updateNavScroll = (index: number) => {
+            if (window.innerWidth < 768 && navContainer) {
                 const btn = navButtons[index];
+                if (!btn) return;
+
                 const btnOffset = btn.offsetLeft;
                 const containerWidth = navContainer.offsetWidth;
                 const btnWidth = btn.offsetWidth;
                 const scrollLeft = btnOffset - (containerWidth / 2) + (btnWidth / 2);
                 
-                // Centrar el botón activo en la vista móvil
-                navContainer.scrollTo({
-                    left: scrollLeft,
-                    behavior: 'smooth'
-                });
+                navContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
             }
         };
 
-        const showRoom = (index) => {
+        const showRoom = (index: number) => {
             const currentPanel = panels[currentIndex];
             const nextPanel = panels[index];
+            const currentBtn = navButtons[currentIndex];
+            const nextBtn = navButtons[index];
             
-            if (currentPanel === nextPanel) return;
+            if (!currentPanel || !nextPanel || !currentBtn || !nextBtn || currentPanel === nextPanel) return;
 
-            // Actualizar botones
-            navButtons[currentIndex].classList.remove("active", "bg-[#1f1a17]", "text-[#f4efe9]", "shadow-md");
-            navButtons[currentIndex].classList.add("text-[#1f1a17]", "hover:bg-[#f6efe4]");
-            navButtons[currentIndex].querySelector("svg").classList.remove("translate-x-1");
+            // Clases del botón previo
+            currentBtn.classList.remove("active", "bg-[#1f1a17]", "text-[#f4efe9]", "shadow-md");
+            currentBtn.classList.add("text-[#1f1a17]", "hover:bg-[#f6efe4]");
+            currentBtn.querySelector("svg")?.classList.remove("translate-x-1");
 
-            navButtons[index].classList.add("active", "bg-[#1f1a17]", "text-[#f4efe9]", "shadow-md");
-            navButtons[index].classList.remove("text-[#1f1a17]", "hover:bg-[#f6efe4]");
-            navButtons[index].querySelector("svg").classList.add("translate-x-1");
+            // Clases del nuevo botón
+            nextBtn.classList.add("active", "bg-[#1f1a17]", "text-[#f4efe9]", "shadow-md");
+            nextBtn.classList.remove("text-[#1f1a17]", "hover:bg-[#f6efe4]");
+            nextBtn.querySelector("svg")?.classList.add("translate-x-1");
 
-            // Animar Paneles
-            animate(currentPanel, { opacity: 0 }, { duration: 0.7, easing: premiumEase });
+            // Animaciones forzando 'as any' tanto en las propiedades como en las opciones (duration/easing)
+            animate(
+                currentPanel, 
+                { opacity: 0 } as any, 
+                { duration: 0.7, easing: premiumEase } as any
+            );
             currentPanel.style.zIndex = "0";
 
-            animate(nextPanel, { opacity: 1 }, { duration: 0.9, easing: premiumEase });
+            animate(
+                nextPanel, 
+                { opacity: 1 } as any, 
+                { duration: 0.9, easing: premiumEase } as any
+            );
             nextPanel.style.zIndex = "10";
 
-            updateNavScroll(index); // Centrar el tab activo en móvil
+            updateNavScroll(index);
             currentIndex = index;
         };
 
         const nextRoom = () => {
+            if (navButtons.length === 0) return;
             let nextIndex = (currentIndex + 1) % navButtons.length;
             showRoom(nextIndex);
         };
 
-        const startAutoplay = () => {
-            autoplayInterval = setInterval(nextRoom, autoplayDelay);
+        const startAutoplay = () => { 
+            autoplayInterval = setInterval(nextRoom, autoplayDelay); 
         };
-
-        const stopAutoplay = () => {
-            clearInterval(autoplayInterval);
+        
+        const stopAutoplay = () => { 
+            if (autoplayInterval) clearInterval(autoplayInterval); 
         };
 
         navButtons.forEach((btn) => {
             btn.addEventListener("click", () => {
                 stopAutoplay();
-                const index = parseInt(btn.getAttribute("data-index"));
-                showRoom(index);
+                const dataIndex = btn.getAttribute("data-index");
+                if (dataIndex) {
+                    const index = parseInt(dataIndex, 10);
+                    showRoom(index);
+                }
                 startAutoplay();
             });
+        });
+
+        visor.querySelectorAll('.open-gallery-btn').forEach((btn) => {
+            btn.addEventListener('click', stopAutoplay);
         });
 
         startAutoplay();
