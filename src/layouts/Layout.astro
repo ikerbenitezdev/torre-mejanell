@@ -4,7 +4,7 @@ type RouteGroup = Record<Lang, string>;
 
 const {
 	title = 'Torre Mejanell',
-	description = 'Sitio estatica con una direccion visual amplia, atmosfera suave y animaciones editoriales.',
+	description = 'Descobreix la Torre de Mejanell, una casa rural exclusiva a la Segarra on la història, el silenci i la calma s\'uneixen. Gaudeix d\'espais amplis, confort absolut i una atmosfera pensada per desconnectar en plena natura.',
 	lang = 'ca',
 	slug = '',
 	translations = {},
@@ -69,6 +69,10 @@ const makeUrl = (langKey: Lang) => {
 		<meta name="description" content={description} />
 		<meta name="theme-color" content="#f6efe4" />
 		<meta name="generator" content={Astro.generator} />
+		<meta property="og:image" content="/torre-de-mejanell.webp" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
 		<title>{title}</title>
 
 		<!-- canonical for current language/page -->
