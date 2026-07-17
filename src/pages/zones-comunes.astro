@@ -14,17 +14,18 @@ import patiInterior from '../assets/pages/la-casa/pati-interior.webp';
 import patiInterior2 from '../assets/pages/la-casa/pati-interior2.webp';
 import taulaExteiror from '../assets/pages/la-casa/taula-exteiror.webp'; // Respetando la errata del nombre original
 import zonaComu2 from '../assets/pages/la-casa/zona-comu2.webp';
+import barbacoa from '../assets/pages/la-casa/barbacoa.webp'; // Asegúrate de tener la imagen 'barbacoa' en la ruta correcta
 
 const zones = [
-    { title: "Cuina", description: "Espai totalment equipat conservant l'encant rústic original.", image: cuina },
-    { title: "Menjador", description: "Zona àmplia ideal per a àpats i trobades en grup.", image: menjador },
-    { title: "Pati Interior", description: "Clàssic pati interior que connecta la història del castell.", image: patiInterior },
-    { title: "Segon Pati Interior", description: "Un racó addicional de calma i arquitectura medieval.", image: patiInterior2 },
-    { title: "Pati Exterior", description: "Zona a l'aire lliure rodejada de natura i tranquil·litat.", image: patiExterior },
-    { title: "Taula Exterior", description: "Espai ideal per a esmorzars o sopars a la fresca.", image: taulaExteiror },
-    { title: "Zona Comuna", description: "Espais amplis de descans dissenyats per a la desconnexió.", image: zonaComu2 },
-    { title: "Lavabo Adaptat", description: "Instal·lacions modernes i totalment accessibles.", image: dutxa },
-    { title: "Lavabo amb Pica", description: "Detalls cuidats en els serveis i zones de neteja.", image: lavabo }
+    { title: "Cuina", image: cuina },
+    { title: "Menjador", image: menjador },
+    { title: "Pati Interior", image: patiInterior2 },
+    { title: "Pati Exterior", image: patiExterior },
+    { title: "Taula Exterior", image: taulaExteiror },
+    { title: "Zona Comuna", image: zonaComu2 },
+    { title: "Lavabo Adaptat", image: dutxa },
+    { title: "Lavabo amb Pica", image: lavabo },
+    { title: "Barbacoa", image: barbacoa } // Asegúrate de tener la imagen 'barbacoa' importada correctamente si decides incluirla
 ];
 ---
 
@@ -32,7 +33,7 @@ const zones = [
   <main class="bg-[#fcfbf9]">
     
     <Hero 
-        tag="Instal·lacions"
+        tag="La Casa"
         title="Zones Comunes"
         subtitle="Descobreix els racons que fan del nostre castell un lloc únic."
         image={imgHero} 

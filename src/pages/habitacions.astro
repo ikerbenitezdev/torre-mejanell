@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/home/Hero.astro';
 import StaysSelector from '../components/home/StaysSelector.astro';
-
+import { BedDouble, Trees, ChefHat, Citrus, Coffee } from 'lucide-astro';
 import habitacionsHero from '../assets/pages/rooms/torre-mejanell-3-persones.webp'; 
 
 export const lang = 'ca';
@@ -12,24 +12,55 @@ export const slug = 'habitacions';
 <Layout lang={lang} slug={slug} title="Habitacions | Castell de Mejanell">
   <main class="text-[#1f1a17] overflow-x-hidden relative">
     
-    <Hero 
-        tag="Estades"
+    <!-- <Hero 
+        tag="La Casa"
         title="Habitacions"
-        subtitle="Espais dissenyats per al descans, la calma i la desconnexió en plena natura."
+        subtitle="Espais dissenyats per descansar i gaudir en família "
         image={habitacionsHero}
-    />
-
-    <div class="mx-auto max-w-5xl px-4 py-16 lg:px-6">
-        <div class="text-center max-w-3xl mx-auto mb-8 space-y-4">
-            <h2 class="text-2xl md:text-3xl font-serif text-[#7a5a3d]">Un refugi històric fet a la teva mida</h2>
-            <p class="text-base text-[#6b5f56] leading-relaxed">
-                Cada estança del castell combina l'arquitectura medieval original amb les comoditats contemporànies. Descobreix os nostres espais independents, pensats tant per a escapades íntimes com per a retrobaments familiars singulars.
-            </p>
+    /> -->
+    <StaysSelector lang={lang}/>
+    <section class="py-20 bg-[#fcfbf9]">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-16 text-center">
+            <h2 class="text-3xl font-serif text-[#1f1a17]">Més que una estada</h2>
+            <div class="w-12 h-[1px] bg-[#7a5a3d]/40 mx-auto mt-6"></div>
         </div>
 
-        <StaysSelector lang={lang}/>
+        <div class="grid md:grid-cols-3 gap-12">
+            <!-- Confort -->
+            <div class="flex flex-col items-center text-center group">
+                <div class="p-4 rounded-full bg-[#f6efe4] text-[#7a5a3d] mb-6 group-hover:scale-110 transition-transform">
+                    <BedDouble size={32} />
+                </div>
+                <h3 class="font-serif text-xl mb-3">Confort de somni</h3>
+                <p class="text-sm text-[#6b5f56] leading-relaxed">Gaudeix d'un descans reparador en els nostres llits ben equipats, enmig de la pau total de la Segarra.</p>
+            </div>
+
+            <!-- Entorno -->
+            <div class="flex flex-col items-center text-center group">
+                <div class="p-4 rounded-full bg-[#f6efe4] text-[#7a5a3d] mb-6 group-hover:scale-110 transition-transform">
+                    <Trees size={32} />
+                </div>
+                <h3 class="font-serif text-xl mb-3">Entorn privilegiat</h3>
+                <p class="text-sm text-[#6b5f56] leading-relaxed">Desperta envoltat de natura, vinyes i camps amb vistes úniques, ideal per desconnectar del ritme de la ciutat.</p>
+            </div>
+
+            <!-- Experiencia Gastronómica -->
+            <div class="flex flex-col items-center text-center group">
+                <div class="p-4 rounded-full bg-[#f6efe4] text-[#7a5a3d] mb-6 group-hover:scale-110 transition-transform">
+                    <ChefHat size={32} />
+                </div>
+                <h3 class="font-serif text-xl mb-3">Gastronomia local</h3>
+                <p class="text-sm text-[#6b5f56] leading-relaxed">Tasta els productes de la finca i els esmorzars artesans amb sabors autèntics de proximitat.</p>
+            </div>
+            </div>
+        </div>
+    </section>
         
-        <div class="mt-12 max-w-3xl mx-auto px-5">
+
+        
+        
+        <div class="my-12 max-w-3xl mx-auto px-5">
             <p class="text-base text-[#6b5f56] flex items-start text-left gap-2">
                 <span class="h-1 w-1 rotate-45 transform shrink-0 bg-[#7a5a3d] mt-2.5"></span>
                 <span>Per a grups més nombrosos, oferim la possibilitat d'allotjar fins a 18 persones gràcies als sofàs llit disponibles en habitacions seleccionades.</span>
