@@ -19,6 +19,7 @@ const {
 import '../styles/global.css';
 import Header from '../components/site/Header.astro';
 import Footer from '../components/site/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 // Base site; prefer Astro.site if configured, fallback to production hostname
 const SITE = Astro.site ?? 'https://castelldemejanell.com';
 
@@ -37,6 +38,9 @@ const routeGroups: RouteGroup[] = [
 	{ ca: 'turisme', es: 'turismo', en: 'tourism' },
 	{ ca: 'opinions', es: 'opiniones', en: 'reviews' },
 	{ ca: 'preus-i-ocupacio', es: 'precios-y-ocupacion', en: 'prices-and-occupancy' },
+	{ ca: 'la-vinya', es: 'la-viña', en: 'the-vineyard'},
+	{ ca: 'els-origens', es: 'los-origenes', en: 'the-origins'},
+
 ];
 
 const normSlug = slug ? (slug.startsWith('/') ? slug.slice(1) : slug) : '';
@@ -88,6 +92,7 @@ const makeUrl = (langKey: Lang) => {
 		<Header lang={lang} slug={slug} />
 		<slot />
 		<Footer lang={lang} slug={slug} />
+		<CookieConsent />
 	</body>
 </html>
 

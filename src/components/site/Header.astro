@@ -4,14 +4,20 @@ const { lang = 'ca', slug = '' } = Astro.props as {
     slug?: string;
 };
 
-import logo from '../../assets/logo-torre-mejanell-blanc.svg';
-import logoNegre from '../../assets/logo-torre-mejanell-negre.svg';
+import logo from '../../../public/logo-blanc-torre-mejanell.svg';
+import logoNegre from '../../../public/logo-negre-torre-mejanell.svg';
 
 const basePaths = { ca: '/', es: '/es/', en: '/en/' } as const;
 
 // Estructura de páginas incluyendo los submenús de "La Casa"
 const pages = [
-    { labels: { ca: 'Història', es: 'Historia', en: 'History' }, slugs: { ca: 'historia', es: 'historia', en: 'history' } },
+    {   labels: { ca: 'Història', es: 'Historia', en: 'History' }, 
+        slugs: { ca: 'historia', es: 'historia', en: 'history' },
+        children: [
+            { labels: { ca: 'Els Orígens', es: 'Los Orígenes', en: 'The Origins' }, slugs: { ca: 'els-origens', es: 'los-origenes', en: 'the-origins' } },
+            { labels: { ca: 'La Vinya', es: 'La Viña', en: 'The Vineyard' }, slugs: { ca: 'la-vinya', es: 'la-viña', en: 'the-vineyard' } },
+        ]
+    },
     { 
         labels: { ca: 'La Casa', es: 'La Casa', en: 'The House' }, 
         slugs: { ca: 'la-casa', es: 'la-casa', en: 'the-house' },

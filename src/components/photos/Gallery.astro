@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+
+import barbacoaImg from '../../assets/pages/la-casa/barbacoa.webp';
+import cuinaImg from '../../assets/pages/la-casa/cuina-torre-mejanell.webp';
+import dutxaImg from '../../assets/pages/la-casa/dutxa-minusvalids.webp';
+import lavaboImg from '../../assets/pages/la-casa/lavabo-pica.webp';
+import menjadorImg from '../../assets/pages/la-casa/menajdor-torre-mejanell.webp';
+import patiExteriorImg from '../../assets/pages/la-casa/pati-exterior.webp';
+import patiInteriorImg from '../../assets/pages/la-casa/pati-interior.webp';
+import patiInterior2Img from '../../assets/pages/la-casa/pati-interior2.webp';
+import taulaExteriorImg from '../../assets/pages/la-casa/taula-exteiror.webp';
+import zonaComu1Img from '../../assets/pages/la-casa/zona-comu1.webp';
+import zonaComu2Img from '../../assets/pages/la-casa/zona-comu2.webp';
+
+import historiaTorreImg from '../../assets/pages/historia/historia-torre.webp';
+import torreAntigaImg from '../../assets/pages/historia/torre-mejanell-antiga.webp';
+import vinyaElaboracioImg from '../../assets/pages/historia/vinya/vinya-mejanell-elaboracio.webp';
+import vinyaRecollidaImg from '../../assets/pages/historia/vinya/vinya-mejanell-recollida.webp';
+import vinyaViImg from '../../assets/pages/historia/vinya/vinya-mejanell-vi.webp';
+
+const housePhotos = [
+	{ src: patiExteriorImg, alt: 'Pati exterior de la casa', span: 'md:col-span-5 md:row-span-2' },
+	{ src: menjadorImg, alt: 'Menjador de Torre de Mejanell', span: 'md:col-span-7' },
+	{ src: cuinaImg, alt: 'Cuina de la casa', span: 'md:col-span-4' },
+	{ src: zonaComu1Img, alt: 'Zona comuna 1', span: 'md:col-span-4' },
+	{ src: zonaComu2Img, alt: 'Zona comuna 2', span: 'md:col-span-4' },
+	{ src: patiInteriorImg, alt: 'Pati interior', span: 'md:col-span-6' },
+	{ src: patiInterior2Img, alt: 'Segon pati interior', span: 'md:col-span-6' },
+	{ src: taulaExteriorImg, alt: 'Taula exterior', span: 'md:col-span-5' },
+	{ src: barbacoaImg, alt: 'Zona de barbacoa', span: 'md:col-span-7 md:row-span-2' },
+	{ src: dutxaImg, alt: 'Dutxa adaptada', span: 'md:col-span-4' },
+	{ src: lavaboImg, alt: 'Lavabo i pica', span: 'md:col-span-4' },
+];
+
+const historyPhotos = [
+	{ src: historiaTorreImg, alt: 'Història de la torre', span: 'md:col-span-7 md:row-span-2' },
+	{ src: torreAntigaImg, alt: 'Imatge antiga de la torre', span: 'md:col-span-5' },
+	{ src: vinyaViImg, alt: 'Vinyes i vi de Mejanell', span: 'md:col-span-4' },
+	{ src: vinyaRecollidaImg, alt: 'Collita de la vinya', span: 'md:col-span-6' },
+	{ src: vinyaElaboracioImg, alt: 'Elaboració del vi', span: 'md:col-span-6' },
+];
+---
+
+<section class="bg-[#fcfbfa] px-6 py-16 md:py-24">
+	<div class="mx-auto max-w-7xl space-y-16 md:space-y-24">
+		<header class="mx-auto max-w-3xl text-center">
+			<p class="text-xs font-extrabold uppercase tracking-[0.28em] text-[#7a5a3d]">Fotos</p>
+			<h1 class="mt-4 text-4xl font-serif tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-6xl">
+				Galeria de la casa i la seva història
+			</h1>
+			<p class="mt-5 text-base leading-7 text-[#6b5f56]">
+				Una selecció d'imatges de la casa, els espais comuns i la història de Torre de Mejanell.
+			</p>
+		</header>
+
+		<section class="space-y-8">
+			
+
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:auto-rows-[220px]">
+				{housePhotos.map((photo) => (
+					<figure class={`group overflow-hidden rounded-[1.75rem] bg-[#e5e1dc] shadow-sm ${photo.span}`}>
+						<Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+					</figure>
+				))}
+			</div>
+		</section>
+
+		<section class="space-y-8">
+			
+
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:auto-rows-[220px]">
+				{historyPhotos.map((photo) => (
+					<figure class={`group overflow-hidden rounded-[1.75rem] bg-[#e5e1dc] shadow-sm ${photo.span}`}>
+						<Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+					</figure>
+				))}
+			</div>
+		</section>
+	</div>
+</section>

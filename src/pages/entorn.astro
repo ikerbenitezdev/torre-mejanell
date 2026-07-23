@@ -3,285 +3,306 @@ export const lang = 'ca';
 export const slug = 'entorn';
 
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/home/Hero.astro'; // Componente genérico reutilizable
+import Hero from '../components/home/Hero.astro';
 import { Image } from 'astro:assets';
 
-// Importación de las imágenes
 import cisterImg from '../assets/pages/entorn/cister.webp';
+import botigues from '../assets/pages/entorn/botigues.webp';  
 import bttImg from '../assets/pages/entorn/btt-segarra.webp';
 import vinyaImg from '../assets/pages/entorn/vinya-torre-mejanell.webp';
+import correfocImg from '../assets/pages/entorn/correfoc.webp';
+import gastronomia1 from '../assets/pages/entorn/gastronomia1.webp';
+import gastronomia2 from '../assets/pages/entorn/gastronomia2.webp';
 ---
 
 <Layout lang={lang} slug={slug} title="Guia de l'Entorn | Castell de Mejanell">
-  
-  <!-- Llamada al componente Hero reutilizable -->
-  <Hero 
-      tag="Descobreix la Segarra"
-      title="L'Entorn de Mejanell"
-      subtitle="Hem seleccionat el millor del nostre territori: activitats, gastronomia, comerç local i racons culturals històrics per a la teva estada."
-      image={cisterImg}
+  <Hero
+    tag="Descobreix la Segarra"
+    title="L'Entorn de Mejanell"
+    subtitle="Hem ordenat tota la informació de dalt a baix perquè puguis llegir-la de manera clara: activitats, gastronomia, comerç i visites de proximitat."
+    image={cisterImg}
   />
 
-  <!-- CONTINGUT PRINCIPAL ESPACIAT I INTERACTIU -->
-  <main class="bg-[#fcfbfa] text-[#1f1a17] py-16 md:py-28 relative z-10">
-    <div class="max-w-7xl mx-auto px-6">
-      
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        
-        <!-- COLUMNA ESQUERRA: MENÚ SELECCIONADOR -->
-        <div class="lg:col-span-3 relative lg:sticky lg:top-28 space-y-4 order-1 z-20">
-          <p id="menu-label" class="text-xs tracking-widest uppercase font-bold text-[#7a5a3d] mb-6 hidden lg:block">Categories</p>
-          
-          <button data-target="tab-turisme" class="tab-btn w-full text-left p-6 rounded-2xl border border-[#d8d3cb]/60 transition-all duration-300 flex items-center justify-between bg-[#f4f1ed] border-[#7a5a3d] shadow-sm font-serif text-lg">
-            <span>Turisme Actiu</span>
-            <span class="text-xs font-sans tracking-widest text-[#7a5a3d] font-bold hidden lg:inline">01</span>
-          </button>
+  <main class="bg-[#fcfbfa] text-[#1f1a17] py-20 md:py-32 relative z-10">
+    <div class="max-w-7xl mx-auto px-8 md:px-12 space-y-28 md:space-y-36">
+      <section id="turisme-actiu" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Turisme actiu</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Natura i esport</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              Viu el territori d'una manera diferent amb activitats a l'aire lliure, opcions d'aventura i instal·lacions esportives properes per a totes les edats.
+            </p>
+          </div>
 
-          <button data-target="tab-gastronomia" class="tab-btn w-full text-left p-6 rounded-2xl border border-[#d8d3cb]/40 transition-all duration-300 flex items-center justify-between hover:bg-[#f4f1ed]/60 font-serif text-lg">
-            <span>Gastronomia</span>
-            <span class="text-xs font-sans tracking-widest text-[#7a5a3d] font-bold hidden lg:inline">02</span>
-          </button>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Aventura i aigua</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Rutes de senderisme</li>
+                <li>Rutes de BTT</li>
+                <li>Vols amb globus</li>
+                <li>Passeigs a cavall</li>
+                <li>Cervera Aventura amb paintball i altres activitats</li>
+                <li>Caiac al Club Nàutic Segre-Rialb i La Pica Trips al riu Segre</li>
+              </ul>
+            </article>
 
-          <button data-target="tab-comerc" class="tab-btn w-full text-left p-6 rounded-2xl border border-[#d8d3cb]/40 transition-all duration-300 flex items-center justify-between hover:bg-[#f4f1ed]/60 font-serif text-lg">
-            <span>Comerç Local</span>
-            <span class="text-xs font-sans tracking-widest text-[#7a5a3d] font-bold hidden lg:inline">03</span>
-          </button>
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Instal·lacions properes</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Golf / Pitch &amp; Putt a l'Àrea de Guissona</li>
+                <li>Esquí al Port del Comte, a 1 hora</li>
+                <li>Piscines cobertes a Cervera</li>
+                <li>Piscines públiques a Sant Ramon</li>
+                <li>Pistes de pàdel a BonÀrea i Sant Ramon</li>
+              </ul>
+            </article>
+          </div>
 
-          <button data-target="tab-patrimoni" class="tab-btn w-full text-left p-6 rounded-2xl border border-[#d8d3cb]/40 transition-all duration-300 flex items-center justify-between hover:bg-[#f4f1ed]/60 font-serif text-lg">
-            <span>Patrimoni i Festes</span>
-            <span class="text-xs font-sans tracking-widest text-[#7a5a3d] font-bold hidden lg:inline">04</span>
-          </button>
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Bicicletes disponibles a la casa</p>
+            <p class="mt-3 text-sm text-[#6b5f56] leading-relaxed">
+              Teniu a disposició 4 bicicletes de muntanya per a adults i 3 bicicletes infantils, en talla petita i mitjana.
+            </p>
+          </div>
         </div>
 
-        <!-- COLUMNA DRETA: CONTINGUTS SPACIATS -->
-        <div class="lg:col-span-9 order-2 relative min-h-[600px] z-10">
-          
-          <!-- SECCIÓ 1: TURISME ACTIU -->
-          <div id="tab-turisme" class="tab-content transition-all duration-500 opacity-100 block">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-              <!-- Información -->
-              <div class="md:col-span-7 space-y-8 py-2">
-                <div class="space-y-4">
-                  <h3 class="text-3xl font-serif text-[#7a5a3d] mb-2">Turisme Actiu i Esport</h3>
-                  <p class="text-base text-[#6b5f56] leading-relaxed">
-                    Rutes de senderisme i BTT des de la mateixa porta, vols amb globus i passeigs a cavall per gaudir de la Segarra rural d'una forma completament diferent.
-                  </p>
-                </div>
-                
-                <div class="space-y-6 border-t border-[#d8d3cb]/50 pt-6">
-                  <div class="space-y-2">
-                    <h4 class="font-bold text-sm tracking-wider uppercase text-[#1f1a17]">Aventura i Aigua</h4>
-                    <p class="text-sm text-[#6b5f56] leading-relaxed">
-                      Descobreix <strong>Cervera Aventura</strong> (Paintball, barranquisme) o gaudeix d'activitats aquàtiques com Caiac al Club Nàutic Segre-Rialb i rutes fluvials amb La Pica Trips al riu Segre (a 1h 30m).
-                    </p>
-                  </div>
-
-                  <div class="space-y-2">
-                    <h4 class="font-bold text-sm tracking-wider uppercase text-[#1f1a17]">Instal·lacions properes</h4>
-                    <p class="text-sm text-[#6b5f56] leading-relaxed">
-                      Golf Pitch & Putt a Guissona, esquí a l'estació del Port del Comte (1h) i pistes de pàdel a Sant Ramon o BonÀrea (a només 15 minuts de la casa).
-                    </p>
-                  </div>
-                </div>
-
-                <div class="bg-[#f4f1ed] p-6 rounded-2xl border border-[#d8d3cb]/40 space-y-2">
-                  <span class="font-bold text-xs tracking-wider uppercase text-[#7a5a3d] block">Exclusiu per a hostes:</span>
-                  <p class="text-sm text-[#6b5f56] font-medium">Bicicletes gratuïtes a la casa: 4 de muntanya per a adults i 3 d'infantils (mides petita/mitjana).</p>
-                </div>
-              </div>
-              <!-- Imagen lateral -->
-              <div class="md:col-span-5 aspect-[4/5] rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm relative">
-                <Image src={bttImg} alt="Turisme actiu" class="absolute inset-0 w-full h-full object-cover error-fallback" />
-              </div>
-            </div>
+        <div class="lg:col-span-5">
+          <div class="grid grid-cols-2 gap-4">
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+              <Image src={bttImg} alt="Rutes de BTT per la Segarra" class="w-full h-full object-cover" />
+            </figure>
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5] mt-10">
+              <Image src={vinyaImg} alt="Passeig per vinyes a l'entorn de Mejanell" class="w-full h-full object-cover" />
+            </figure>
           </div>
-
-          <!-- SECCIÓ 2: GASTRONOMIA -->
-          <div id="tab-gastronomia" class="tab-content transition-all duration-500 opacity-0 hidden lg:absolute lg:inset-x-0 lg:top-0">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-              <!-- Información -->
-              <div class="md:col-span-7 space-y-8 py-2">
-                <div class="space-y-4">
-                  <h3 class="text-3xl font-serif text-[#7a5a3d] mb-2">Sabors de la Terra</h3>
-                  <p class="text-base text-[#6b5f56] leading-relaxed">
-                    La cuina de la Segarra destaca pels seus productes autòctons, guisats tradicionals i una cultura de vi i oli molt lligada a la història del territori.
-                  </p>
-                </div>
-                
-                <div class="space-y-4 border-t border-[#d8d3cb]/50 pt-6">
-                  <h4 class="font-bold text-sm tracking-wider uppercase text-[#1f1a17]">Restaurants Recomanats</h4>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-[#6b5f56] leading-relaxed">
-                    <div>
-                      <p class="font-semibold text-[#7a5a3d]">Sant Ramon & Torà</p>
-                      <p>Bar Les Planes · Bar Centre · Can Jaumet · El Gòtic</p>
-                    </div>
-                    <div>
-                      <p class="font-semibold text-[#7a5a3d]">Cervera i Voltants</p>
-                      <p>El Gran Cafè · Els Comdals · Romina (per emportar) · Torrecombelles · La Bassa</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="space-y-2 border-t border-[#d8d3cb]/50 pt-6">
-                  <h4 class="font-bold text-sm tracking-wider uppercase text-[#1f1a17]">Enoturisme (A 25-30 min)</h4>
-                  <p class="text-sm text-[#6b5f56] leading-relaxed">
-                    Visita les vinyes i cellers d'Artés (Bages) destacant la botiga especialitzada <span class="text-[#7a5a3d] font-medium">ARTIUM</span>, fes un tast guiat a les històriques caves de <span class="text-[#7a5a3d] font-medium">Codorníu</span> o passeja pel preciós entorn del <span class="text-[#7a5a3d] font-medium">Castell del Remei</span>.
-                  </p>
-                </div>
-              </div>
-              <!-- Imagen lateral -->
-              <div class="md:col-span-5 aspect-[4/5] rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm relative">
-                <Image src={vinyaImg} alt="Gastronomia" class="absolute inset-0 w-full h-full object-cover error-fallback" />
-              </div>
-            </div>
-          </div>
-
-          <!-- SECCIÓ 3: COMERÇ -->
-          <div id="tab-comerc" class="tab-content transition-all duration-500 opacity-0 hidden lg:absolute lg:inset-x-0 lg:top-0">
-            <div class="space-y-10 max-w-4xl py-2">
-              <div class="space-y-4">
-                <h3 class="text-3xl font-serif text-[#7a5a3d]">Comerç de Proximitat i Artesans</h3>
-                <p class="text-base text-[#6b5f56] leading-relaxed">
-                  Aposta pels petits elaboradors locals que mantenen vives les receptes artesanes de pans, coques, embotits i cerveses de la comarca.
-                </p>
-              </div>
-              
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-[#d8d3cb]/50 pt-8 text-sm text-[#6b5f56] leading-relaxed">
-                <div class="space-y-2">
-                  <span class="font-bold text-[#1f1a17] text-xs tracking-wider uppercase block">Forns de Pa i Dolços</span>
-                  <p>Forn de pa de Sant Ramon · Chocolate Box – Cal Colom (Cervera) · Pa d’Abans (Cervera) · La Garbiana (Tarroja - farines ecològiques i artesanes).</p>
-                </div>
-                <div class="space-y-2">
-                  <span class="font-bold text-[#1f1a17] text-xs tracking-wider uppercase block">Carnisseries i Artesania</span>
-                  <p>Can Magí (Torà) · Can Vilà (Cervera) · Àrea de Guissona · Can Dalmases (elaboració de cervesa artesana de km 0).</p>
-                </div>
-              </div>
-
-              <!-- ARREGLADO: grid-cols-1 para móvil (ancho completo) y sm:grid-cols-3 para pantallas grandes -->
-              <div class="p-6 md:p-8 bg-[#f4f1ed]/60 rounded-[2rem] border border-[#d8d3cb]/40 space-y-4">
-                <span class="font-bold text-sm tracking-wider uppercase text-[#1f1a17] block text-center">Mercats Setmanals de Matí</span>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-sm">
-                  <div class="p-4 bg-white rounded-xl shadow-sm border border-[#d8d3cb]/20"><strong>Dilluns</strong><br><span class="text-[#7a5a3d] font-medium">Tàrrega</span></div>
-                  <div class="p-4 bg-white rounded-xl shadow-sm border border-[#d8d3cb]/20"><strong>Divendres</strong><br><span class="text-[#7a5a3d] font-medium">Cervera</span></div>
-                  <div class="p-4 bg-white rounded-xl shadow-sm border border-[#d8d3cb]/20"><strong>Dissabte</strong><br><span class="text-[#7a5a3d] font-medium">Calaf</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- SECCIÓ 4: PATRIMONI -->
-          <div id="tab-patrimoni" class="tab-content transition-all duration-500 opacity-0 hidden lg:absolute lg:inset-x-0 lg:top-0">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-              <!-- Información -->
-              <div class="md:col-span-8 space-y-8 py-2">
-                <div class="space-y-4">
-                  <h3 class="text-3xl font-serif text-[#7a5a3d] mb-2">Patrimoni i Tradicions</h3>
-                  <p class="text-base text-[#6b5f56] leading-relaxed">
-                    Un viatge en el temps a través de castells feudals, viles closes medievals i esdeveniments culturals únics a Catalunya.
-                  </p>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 border-t border-[#d8d3cb]/50 pt-8 text-xs text-[#6b5f56] leading-relaxed">
-                  <div class="space-y-3">
-                    <span class="font-bold text-[#1f1a17] text-sm font-serif block">Rutes Històriques</span>
-                    <p>Monestir de Sant Ramon · Vila de Montfalcó Murallat · Carreró de les Bruixes (Cervera) · Castells de la Segarra (Concabella, Les Pallargues, Florejacs) · Ciutat Romana de Guissona · Mines de Cardona.</p>
-                  </div>
-                  <div class="space-y-3">
-                    <span class="font-bold text-[#1f1a17] text-sm font-serif block">Viles i Museus</span>
-                    <p>Verdú, Pujalt, Guimerà, Penelles (art urbà). Museus com el de la Pagesia, Comarcal de Cervera, Marc Márquez o el Museu del Torró a Agramunt.</p>
-                  </div>
-                </div>
-
-                <div class="bg-[#f4f1ed]/50 p-6 rounded-2xl border border-[#d8d3cb]/30 space-y-2 text-xs text-[#6b5f56] leading-relaxed">
-                  <span class="font-bold text-[#1f1a17] tracking-wider uppercase block">Festes de l'any imprescindibles:</span>
-                  <p>Akelarre de Cervera (Agost) · Fira del Teatre de Tàrrega (Setembre) · La Passió de Cervera · Festa Major de Sant Ramon i els Tres Tombs (31 d'Agost) · Pessebres Vivents a l'hivern.</p>
-                </div>
-              </div>
-              <!-- Imagen lateral -->
-              <div class="md:col-span-4 aspect-[3/5] rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm relative">
-                <Image src={cisterImg} alt="Patrimoni" class="absolute inset-0 w-full h-full object-cover error-fallback" />
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
+      </section>
 
+      <section id="gastronomia" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Gastronomia</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Bars i restaurants recomanats</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              La cuina de la Segarra destaca pels productes de proximitat, els restaurants de poble i una oferta de vins i caves molt vinculada al territori.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Sant Ramon</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Bar Les Planes</li>
+                <li>Bar Centre, davant del Monestir</li>
+              </ul>
+              <h3 class="text-lg font-serif text-[#1f1a17] pt-2">Cervera</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>El Gran Cafè</li>
+                <li>Els Comdals</li>
+                <li>Rostisseria Romina, per emportar</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Torà i altres opcions</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Can Jaumet</li>
+                <li>El Gòtic</li>
+                <li>Torrecombelles</li>
+                <li>Àrea de Guissona, amb buffet lliure</li>
+                <li>La Bassa a Guissona</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm space-y-4">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Enoturisme</p>
+            <p class="text-sm text-[#6b5f56] leading-relaxed">
+              A 25-30 minuts de la casa tens cellers del Bages, la botiga especialitzada <span class="font-medium text-[#7a5a3d]">ARTIUM</span> a Artés, visites a Sant Sadurní d'Anoia amb Codorníu i el Castell del Remei, amb vins de gran qualitat.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="grid grid-cols-2 gap-4">
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+              <Image src={gastronomia1} alt="Gastronomia local" class="w-full h-full object-cover" />
+            </figure>
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5] mt-10">
+              <Image src={gastronomia2} alt="Gastronomia local" class="w-full h-full object-cover" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="festes-cultural" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Festes i actes culturals</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Festes, cultura i tradicions</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              Una agenda molt viva amb celebracions populars, teatre, Setmana Santa, tradicions nadalenques i fires gastronòmiques durant tot l'any.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Festes populars</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Akelarre de Cervera, a l'agost</li>
+                <li>Festa Major de Sant Ramon amb els Tres Tombs, el 31 d'agost</li>
+                <li>Fira de l'Ou de Sant Guim de Freixenet, al juny</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Cultura i espectacles</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Fira del Teatre de Tàrrega, al setembre</li>
+                <li>La Passió de Cervera, durant Setmana Santa</li>
+                <li>Fira del Torró i la Xocolata d'Agramunt</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm space-y-4">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Tradicions nadalenques</p>
+            <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+              <li>Pessebre Vivent de Sant Guim de la Plana</li>
+              <li>Pessebres vivents de Torres de Fals i altres poblacions</li>
+              <li>Pastorets de Calaf</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+            <Image src={correfocImg} alt="Festes i tradicions de la Segarra" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section id="comerc-proximitat" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Comerç de proximitat</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Productes locals i mercats</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+               Comerç de proximitat i productes artesans
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Forns de pa</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Chocolate Box - Cal Colom, a Cervera</li>
+                <li>Pa d'Abans, a Cervera</li>
+                <li>La Garbiana, a Tarroja</li>
+                <li>Forn de pa de Sant Ramon</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Carnisseries</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Can Magí, a Torà</li>
+                <li>Can Vilà, a Cervera</li>
+                <li>Àrea de Guissona</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Mercats setmanals</p>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-sm">
+              <div class="rounded-xl border border-[#d8d3cb]/30 bg-white p-4 shadow-sm">
+                <strong>Dilluns</strong>
+                <br />
+                <span class="text-[#7a5a3d] font-medium">Tàrrega</span>
+              </div>
+              <div class="rounded-xl border border-[#d8d3cb]/30 bg-white p-4 shadow-sm">
+                <strong>Divendres</strong>
+                <br />
+                <span class="text-[#7a5a3d] font-medium">Cervera</span>
+              </div>
+              <div class="rounded-xl border border-[#d8d3cb]/30 bg-white p-4 shadow-sm">
+                <strong>Dissabte</strong>
+                <br />
+                <span class="text-[#7a5a3d] font-medium">Calaf</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+            <Image src={botigues} alt="Mercats i patrimoni proper" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section id="visites-proximitat" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Visites de proximitat</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Patrimoni històric i cultural</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              Descobreix castells i pobles medievals que fan de la Segarra un territori amb una història i una identitat úniques
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Patrimoni històric</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Monestir de Sant Ramon</li>
+                <li>Montfalcó Murallat</li>
+                <li>Casc antic de Cervera</li>
+                <li>Carreró de les Bruixes</li>
+                <li>Ruta dels Castells de la Segarra</li>
+                <li>Centre d'Interpretació dels Castells del Sió a Concabella</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Més per visitar</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Torre de Vallferosa</li>
+                <li>Ciutat Romana de Guissona</li>
+                <li>Memorial de la Guerra Civil de Pujalt</li>
+                <li>Mines de sal de Cardona</li>
+                <li>Museu del Monestir de Sant Ramon</li>
+                <li>Museu de la Pagesia, Museu Comarcal i Museu Marc Márquez</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm space-y-4">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Pobles i rutes culturals</p>
+            <p class="text-sm text-[#6b5f56] leading-relaxed">
+              També val la pena fer una parada a Verdú, Pujalt, Guimerà, Penelles, Món Sant Benet i el Monestir de Montserrat, a més dels castells de les Pallargues, Florejacs i Cardona.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/27/Monestir_de_Santa_Maria_de_Vallbona_%28Vallbona_de_les_Monges%29_-_2.jpg"
+              alt="Monestir de Santa Maria de Vallbona (Vallbona de les Monges)"
+              class="w-full aspect-[4/5] object-cover"
+            />
+          </figure>
+          <figcaption class="text-xs text-[#6b5f56] mt-2 px-1">
+            Foto: Maria Rosa Ferré,
+            <a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="license noopener">CC BY-SA 2.0</a>,
+            via <a href="https://commons.wikimedia.org/wiki/File:Monestir_de_Santa_Maria_de_Vallbona_(Vallbona_de_les_Monges)_-_2.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>
+          </figcaption>
+        </div>
+      </section>
     </div>
   </main>
 </Layout>
-
-<script>
-  const buttons = document.querySelectorAll('.tab-btn');
-  const contents = document.querySelectorAll('.tab-content');
-  const menuLabel = document.getElementById('menu-label');
-
-  function initTabs() {
-    if (window.innerWidth >= 1024) {
-      buttons.forEach(b => (b as HTMLElement).style.display = 'flex');
-      if (menuLabel) menuLabel.style.display = 'block';
-
-      contents.forEach((content, idx) => {
-        if (idx === 0) {
-          content.classList.remove('hidden', 'opacity-0');
-          content.classList.add('block', 'opacity-100');
-        } else {
-          content.classList.remove('block', 'opacity-100');
-          content.classList.add('hidden', 'opacity-0', 'lg:absolute', 'lg:inset-x-0', 'lg:top-0');
-        }
-      });
-
-      buttons.forEach(btn => {
-        const newBtn = btn.cloneNode(true);
-        btn.parentNode?.replaceChild(newBtn, btn);
-      });
-
-      const activeButtons = document.querySelectorAll('.tab-btn');
-      activeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const targetId = btn.getAttribute('data-target');
-
-          activeButtons.forEach(b => b.classList.remove('bg-[#f4f1ed]', 'border-[#7a5a3d]', 'shadow-sm'));
-          btn.classList.add('bg-[#f4f1ed]', 'border-[#7a5a3d]', 'shadow-sm');
-
-          contents.forEach(content => {
-            if (content.id === targetId) {
-              content.classList.remove('hidden');
-              setTimeout(() => {
-                content.classList.remove('opacity-0');
-                content.classList.add('opacity-100');
-              }, 50);
-            } else {
-              content.classList.add('opacity-0');
-              content.classList.remove('opacity-100');
-              setTimeout(() => {
-                content.classList.add('hidden');
-              }, 300);
-            }
-          });
-        });
-      });
-    } else {
-      contents.forEach(content => {
-        content.classList.remove('hidden', 'opacity-0', 'lg:absolute', 'lg:inset-x-0', 'lg:top-0');
-        content.classList.add('block', 'opacity-100', 'mb-20');
-      });
-      buttons.forEach(b => (b as HTMLElement).style.display = 'none');
-      if (menuLabel) menuLabel.style.display = 'none';
-    }
-  }
-
-  initTabs();
-  let resizeTimeout: any;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(initTabs, 150);
-  });
-
-  document.querySelectorAll('.error-fallback').forEach((img) => {
-  img.addEventListener('error', function(e) {
-    const target = e.target as HTMLElement;
-    target.style.display = 'none';
-  });
-});
-</script>

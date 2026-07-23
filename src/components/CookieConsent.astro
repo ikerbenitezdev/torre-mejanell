@@ -1,0 +1,93 @@
+---
+// Simple cookie-consent component with client-side language detection
+---
+
+<div id="cookie-consent" role="dialog" aria-live="polite" class="fixed inset-x-6 md:inset-x-auto md:right-6 md:left-auto bottom-6 md:bottom-8 z-50 hidden">
+  <div class="max-w-3xl mx-auto md:mx-0 bg-[#7a5a3d] text-white rounded-xl shadow-xl p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center gap-4 border border-black/5">
+    <div class="flex-1">
+      <p id="cc-title" class="font-semibold text-sm text-white"></p>
+      <p id="cc-text" class="text-sm text-white/90 mt-2"></p>
+    </div>
+    <div class="flex items-center gap-3 md:gap-4">
+      <button id="cc-reject" class="rounded-full px-4 py-2 text-sm font-semibold bg-transparent border border-white/30 text-white hover:bg-white/10 cursor-pointer">No, gràcies</button>
+      <button id="cc-accept" class="rounded-full px-4 py-2 text-sm font-semibold bg-white text-[#7a5a3d] hover:opacity-95 cursor-pointer">Acceptar</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  const CONSENT_KEY = 'tm_cookie_consent_v1';
+
+  const translations = {
+    ca: {
+      title: 'Som transparents amb les galetes',
+      text: "Ens agrada cuidar la teva experiència: fem servir algunes galetes per recordar preferències i millorar el web. Pots acceptar-les o rebutjar-les. Consulta la nostra ",
+      policyLabel: 'Política de galetes',
+      accept: 'Acceptar',
+      reject: 'No, gràcies'
+    }
+  };
+
+  // Force Catalan regardless of browser language
+  function getLang() {
+    return 'ca';
+  }
+
+  function showConsent() {
+    const el = document.getElementById('cookie-consent');
+    if (!el) return;
+    el.classList.remove('hidden');
+  }
+
+  function hideConsent() {
+    const el = document.getElementById('cookie-consent');
+    if (!el) return;
+    el.classList.add('hidden');
+  }
+
+  function init() {
+    try {
+      const saved = localStorage.getItem(CONSENT_KEY);
+      if (saved) return; // already decided
+
+      const lang = getLang();
+      const t = translations[lang] || translations['en'];
+
+      const titleEl = document.getElementById('cc-title');
+      const textEl = document.getElementById('cc-text');
+      const acceptBtn = document.getElementById('cc-accept');
+      const rejectBtn = document.getElementById('cc-reject');
+
+      if (titleEl) titleEl.textContent = t.title;
+      if (textEl) {
+        // insert human text + link to policy (assumes page exists at /politica-de-galetes)
+        textEl.innerHTML = `${t.text}<a href="/politica-de-galetes" class="underline font-medium text-[#1f1a17]"> ${t.policyLabel}</a>.`;
+      }
+      if (acceptBtn) acceptBtn.textContent = t.accept;
+      if (rejectBtn) rejectBtn.textContent = t.reject;
+
+      acceptBtn?.addEventListener('click', () => {
+        localStorage.setItem(CONSENT_KEY, 'accepted');
+        hideConsent();
+        // place for initializing analytics if needed
+      });
+
+      rejectBtn?.addEventListener('click', () => {
+        localStorage.setItem(CONSENT_KEY, 'rejected');
+        hideConsent();
+      });
+
+      // show after small delay to avoid layout jump
+      setTimeout(showConsent, 300);
+    } catch (e) {
+      // fail silently
+      console.error(e);
+    }
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    init();
+  } else {
+    window.addEventListener('DOMContentLoaded', init);
+  }
+</script>

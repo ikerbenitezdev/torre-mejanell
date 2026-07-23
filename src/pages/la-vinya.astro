@@ -1,0 +1,100 @@
+---
+export const lang = 'ca';
+export const slug = 'la-vinya';
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import BuildingAnimation from '../../src/components/home/BuildTower.astro';
+import vinyaElaboracio from '../../src/assets/pages/historia/vinya/vinya-mejanell-elaboracio.webp';
+import vinyaRecollida from '../../src/assets/pages/historia/vinya/vinya-mejanell-recollida.webp';
+import vinyaVi from '../../src/assets/pages/historia/vinya/vinya-mejanell-vi.webp';
+import vinya from '../../src/assets/pages/entorn/vinya-torre-mejanell.webp';
+
+import Hero from '../components/home/Hero.astro';
+
+const wineImages = import.meta.glob<{ default: ImageMetadata }>('../assets/pages/history/*.{jpeg,jpg,png,gif,webp}');
+
+const wineSteps = [
+    {
+        num: "01",
+        title: "La Verema a Mà",
+        subtitle: "El respecte per la terra",
+        description: "Seleccionem els millors raïms directament de les nostres vinyes de forma manual durant la matinada, garantint que el fruit entri fresc i intacte a la bodega de la masia.",
+        image: "../assets/pages/history/verema.webp"
+    },
+    {
+        num: "02",
+        title: "El Premsat Tradicional",
+        subtitle: "L'extracció de l'ànima",
+        description: "Utilitzant els antics cups de pedra restaurats del segle XVIII, premsem el fruit suaument per obtenir el most flor, conservant tota la intensitat aromàtica i el caràcter del terreny.",
+        image: "../assets/pages/history/premsat.webp"
+    },
+    {
+        num: "03",
+        title: "La Criança en Silenci",
+        subtitle: "El temps dins la pedra",
+        description: "El vi madura sota els gruixuts murs medievals de la Torre, on la temperatura i la humitat constants creen un refugi perfecte perquè evolucioni en botes de roure.",
+        image: "../assets/pages/history/crianca.webp"
+    }
+];
+---
+
+<Layout lang={lang} slug={slug} title="La vinya | Torre de Mejanell">
+  <main class="bg-[#fcfbf9] text-[#1f1a17] overflow-x-hidden">
+
+    <Hero 
+        tag="Història"
+        title="La Vinya"
+        subtitle="Coneix el procés de cultiu i elaboració del nostre vi."
+        image={vinya}
+    />
+
+    <!-- Vinya gallery section -->
+    <section class="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="max-w-6xl mx-auto mb-12 text-center">
+            <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d] mb-3">De la vinya a la copa</p>
+            <h2 class="text-3xl sm:text-4xl font-serif tracking-tight text-[#1f1a17]">Els espais on neix el nostre vi</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+            <div class="col-span-1 lg:col-span-2 rounded-[1.5rem] overflow-hidden shadow-lg relative group h-64 sm:h-80 lg:h-[420px]">
+                <Image src={vinyaVi} alt="Elaboració" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-80"></div>
+                <div class="absolute left-6 bottom-6 z-10 text-white">
+                    <h3 class="text-2xl font-serif">Elaboració</h3>
+                    <p class="text-sm mt-1">On el raïm es transforma amb cura i calma.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <div class="rounded-[1.5rem] overflow-hidden shadow-lg relative group">
+                    <Image src={vinyaRecollida} alt="Recollida" class="w-full h-40 sm:h-48 lg:h-[204px] object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    <div class="absolute left-4 bottom-3 z-10 text-white">
+                        <h4 class="text-lg font-semibold">Recollida</h4>
+                    </div>
+                </div>
+
+                <div class="rounded-[1.5rem] overflow-hidden shadow-lg relative group">
+                    <Image src={vinyaElaboracio} alt="Vi" class="w-full h-40 sm:h-48 lg:h-[204px] object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    <div class="absolute left-4 bottom-3 z-10 text-white">
+                        <h4 class="text-lg font-semibold">El producte</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </main>
+</Layout>
+
+<script type="module">
+    import { animate, inView, cubicBezier } from "motion";
+    const premiumEase = cubicBezier(0.16, 1, 0.3, 1);
+
+    if (typeof window !== "undefined") {
+        animate("#hero-animation", { opacity: [0, 1], scale: [0.96, 1] }, { duration: 1.8, easing: premiumEase });
+        inView(".wine-step", (info) => {
+            animate(info.target, { opacity: [0, 1], y: [40, 0] }, { duration: 1, easing: premiumEase });
+        }, { margin: "-20% 0px -20% 0px" });
+    }
+</script>
