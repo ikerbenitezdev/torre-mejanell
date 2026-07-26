@@ -12,12 +12,20 @@ import patiInterior2Img from '../../assets/pages/la-casa/pati-interior2.webp';
 import taulaExteriorImg from '../../assets/pages/la-casa/taula-exteiror.webp';
 import zonaComu1Img from '../../assets/pages/la-casa/zona-comu1.webp';
 import zonaComu2Img from '../../assets/pages/la-casa/zona-comu2.webp';
-
 import historiaTorreImg from '../../assets/pages/historia/historia-torre.webp';
 import torreAntigaImg from '../../assets/pages/historia/torre-mejanell-antiga.webp';
 import vinyaElaboracioImg from '../../assets/pages/historia/vinya/vinya-mejanell-elaboracio.webp';
 import vinyaRecollidaImg from '../../assets/pages/historia/vinya/vinya-mejanell-recollida.webp';
 import vinyaViImg from '../../assets/pages/historia/vinya/vinya-mejanell-vi.webp';
+import room1 from '../../assets/pages/rooms/torre-mejanell-3-persones.webp';
+import room2 from '../../assets/pages/rooms/torre-mejanell-doble2.webp';
+import room3 from '../../assets/pages/rooms/torre-mejanell-2-persones3.webp';
+import room4 from '../../assets/pages/rooms/torre-mejanell-2-persones.webp';
+import room5 from '../../assets/pages/rooms/torre-mejanell-2-persones4.webp';
+import room6 from '../../assets/pages/rooms/torre-mejanell-doble1.webp';
+
+
+
 
 const housePhotos = [
 	{ src: patiExteriorImg, alt: 'Pati exterior de la casa', span: 'md:col-span-5 md:row-span-2' },
@@ -40,11 +48,22 @@ const historyPhotos = [
 	{ src: vinyaRecollidaImg, alt: 'Collita de la vinya', span: 'md:col-span-6' },
 	{ src: vinyaElaboracioImg, alt: 'Elaboració del vi', span: 'md:col-span-6' },
 ];
+
+const roomPhotos = [
+    { src: room1, alt: 'Habitació 3 persones', span: 'md:col-span-6' },
+    { src: room2, alt: 'Habitació doble', span: 'md:col-span-6' },
+    { src: room3, alt: 'Habitació 2 persones', span: 'md:col-span-4' },
+    { src: room4, alt: 'Habitació 2 persones', span: 'md:col-span-4' },
+    { src: room5, alt: 'Habitació 2 persones', span: 'md:col-span-4' },
+    { src: room6, alt: 'Habitació doble', span: 'md:col-span-12' },
+];
+
+const galleryPhotos = [...housePhotos, ...historyPhotos, ...roomPhotos];
 ---
 
 <section class="bg-[#fcfbfa] px-6 py-16 md:py-24">
-	<div class="mx-auto max-w-7xl space-y-16 md:space-y-24">
-		<header class="mx-auto max-w-3xl text-center">
+	<div class="mx-auto max-w-7xl">
+		<header class="mx-auto max-w-3xl text-center pb-12 md:pb-16">
 			<p class="text-xs font-extrabold uppercase tracking-[0.28em] text-[#7a5a3d]">Fotos</p>
 			<h1 class="mt-4 text-4xl font-serif tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-6xl">
 				Galeria de la casa i la seva història
@@ -53,29 +72,28 @@ const historyPhotos = [
 				Una selecció d'imatges de la casa, els espais comuns i la història de Torre de Mejanell.
 			</p>
 		</header>
+		<div class="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4 [column-fill:_balance]">
+			{galleryPhotos.map((photo, index) => {
+				const heightClass = index % 7 === 0
+					? 'h-[28rem]'
+					: index % 7 === 1
+						? 'h-[22rem]'
+						: index % 7 === 2
+							? 'h-[18rem]'
+							: index % 7 === 3
+								? 'h-[24rem]'
+								: index % 7 === 4
+									? 'h-[20rem]'
+									: index % 7 === 5
+										? 'h-[26rem]'
+										: 'h-[19rem]';
 
-		<section class="space-y-8">
-			
-
-			<div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:auto-rows-[220px]">
-				{housePhotos.map((photo) => (
-					<figure class={`group overflow-hidden rounded-[1.75rem] bg-[#e5e1dc] shadow-sm ${photo.span}`}>
-						<Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+				return (
+					<figure class={`mb-4 break-inside-avoid overflow-hidden rounded-[1.75rem] bg-[#e5e1dc] shadow-sm ${heightClass}`}>
+						<Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover transition-transform duration-700 hover:scale-105" />
 					</figure>
-				))}
-			</div>
-		</section>
-
-		<section class="space-y-8">
-			
-
-			<div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:auto-rows-[220px]">
-				{historyPhotos.map((photo) => (
-					<figure class={`group overflow-hidden rounded-[1.75rem] bg-[#e5e1dc] shadow-sm ${photo.span}`}>
-						<Image src={photo.src} alt={photo.alt} class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-					</figure>
-				))}
-			</div>
-		</section>
+				);
+			})}
+		</div>
 	</div>
 </section>
