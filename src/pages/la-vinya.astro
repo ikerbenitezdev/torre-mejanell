@@ -8,7 +8,9 @@ import vinyaElaboracio from '../../src/assets/pages/historia/vinya/vinya-mejanel
 import vinyaRecollida from '../../src/assets/pages/historia/vinya/vinya-mejanell-recollida.webp';
 import vinyaVi from '../../src/assets/pages/historia/vinya/vinya-mejanell-vi.webp';
 import vinya from '../../src/assets/pages/entorn/vinya-torre-mejanell.webp';
-
+import vinyaCamp from '../../src/assets/pages/historia/vinya/camp-vinya.webp';
+import vinyaTall from '../../src/assets/pages/historia/vinya/tall-vinya.webp';
+import viEtiqueta from '../../src/assets/pages/historia/vinya/vi-etiqueta.webp';
 import Hero from '../components/home/Hero.astro';
 
 const wineImages = import.meta.glob<{ default: ImageMetadata }>('../assets/pages/history/*.{jpeg,jpg,png,gif,webp}');
@@ -19,21 +21,21 @@ const wineSteps = [
         title: "La Verema a Mà",
         subtitle: "El respecte per la terra",
         description: "Seleccionem els millors raïms directament de les nostres vinyes de forma manual durant la matinada, garantint que el fruit entri fresc i intacte a la bodega de la masia.",
-        image: "../assets/pages/history/verema.webp"
+        image: {vinyaCamp}  
     },
     {
         num: "02",
         title: "El Premsat Tradicional",
         subtitle: "L'extracció de l'ànima",
         description: "Utilitzant els antics cups de pedra restaurats del segle XVIII, premsem el fruit suaument per obtenir el most flor, conservant tota la intensitat aromàtica i el caràcter del terreny.",
-        image: "../assets/pages/history/premsat.webp"
+        image: {vinyaTall}
     },
     {
         num: "03",
         title: "La Criança en Silenci",
         subtitle: "El temps dins la pedra",
         description: "El vi madura sota els gruixuts murs medievals de la Torre, on la temperatura i la humitat constants creen un refugi perfecte perquè evolucioni en botes de roure.",
-        image: "../assets/pages/history/crianca.webp"
+        image: {viEtiqueta}
     }
 ];
 ---
@@ -47,6 +49,132 @@ const wineSteps = [
         subtitle="Coneix el procés de cultiu i elaboració del nostre vi."
         image={vinya}
     />
+
+    <section class="pb-10 px-4 sm:px-6 max-w-7xl mx-auto mt-20">
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-start">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">1. Condicions naturals</p>
+                    <h3 class="text-2xl sm:text-3xl font-serif text-[#1f1a17]">Un territori poc favorable per a la vinya</h3>
+                    <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                        <p>Els Costers de la Segarra tenen un clima continentalitzat, amb precipitacions escasses i irregulars, estius secs i calorosos, hiverns molt freds i nombroses glaçades.</p>
+                        <p>El document indica que aquesta manca d'aigua dificulta l'expansió de la vinya i explica que els altiplans segarrencs hagin estat tradicionalment més cerealistes que vitivinícoles.</p>
+                        <p>En concret, el text assenyala que:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Les precipitacions són relativament baixes (uns 580 mm anuals a Calaf).</li>
+                            <li>Les sequeres estivals poden durar mesos.</li>
+                            <li>Les temperatures presenten una gran amplitud tèrmica.</li>
+                            <li>Les glaçades són freqüents (aproximadament 70 dies l'any).</li>
+                        </ul>
+                        <p>Per això, el paisatge agrari dominant ha estat el dels cereals de secà, especialment blat i ordi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="rounded-[1.75rem] overflow-hidden shadow-lg relative group aspect-[3/4] max-w-sm mx-auto lg:max-w-none lg:mx-0">
+                    <Image src={vinyaCamp} alt="Camp de vinya" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+                    <div class="absolute left-5 bottom-4 z-10 text-white">
+                        <p class="text-xs font-extrabold uppercase tracking-[0.18em]">La vinya i el territori</p>
+                        <h3 class="text-2xl font-serif mt-1">Camp de vinya</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="pb-10 px-4 sm:px-6 max-w-7xl mx-auto">
+    <div class="space-y-10">
+        <div class="space-y-4">
+            <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">2. La vinya en època romana</p>
+            <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                <p>El document explica que durant l'època romana hi havia explotacions agropecuàries disperses situades en zones adequades per al conreu de cereals de secà, vinya i hortes.</p>
+                <p>Això indica que la vinya ja formava part dels sistemes agraris del territori, encara que no era necessàriament el conreu principal.</p>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">3. La vinya a l'edat mitjana</p>
+            <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                <p>Entre els segles XI i XIII, amb la repoblació i consolidació dels nuclis rurals, els habitants dels Costers de la Segarra es dedicaven a cereals, vinya, ametllers, petits horts i ramaderia de petita escala.</p>
+                <p>La vinya apareix, doncs, com un dels conreus habituals del paisatge medieval, integrada en una agricultura diversificada de subsistència.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="py-10 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="rounded-[2rem] border border-[#e4d9cb] bg-white/90 p-6 sm:p-8 shadow-sm">
+            <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 lg:gap-12 items-start">
+                <div class="space-y-4">
+                    <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">4. Expansió als segles XVII i XVIII</p>
+                    <h3 class="text-2xl sm:text-3xl font-serif text-[#1f1a17]">Creixement agrari i transformació del paisatge</h3>
+                    <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                        <p>El text destaca una recuperació i expansió agrícola important a partir del segle XVII.</p>
+                        <p>Durant aquest període augmenta la superfície ocupada per cereals, vinya, olivera i ametller.</p>
+                        <p>Posteriorment, al segle XVIII, l'augment de la població i de la demanda agrícola va portar els conreus a ocupar vessants que abans no es treballaven.</p>
+                        <p>Això va transformar fortament el paisatge i va afavorir l'aparició de feixes i bancals en molts sectors.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="rounded-[1.75rem] overflow-hidden shadow-lg relative group aspect-[16/10]">
+                        <Image src={vinyaTall} alt="Talls de vinya" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent"></div>
+                        <div class="absolute left-5 bottom-4 z-10 text-white">
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                        <p>El paisatge agrari de l'època es trobava en la seva màxima extensió, amb els cereals ocupant grans superfícies, la vinya arribant al seu màxim històric i una pressió agrícola sobre el territori molt elevada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-10 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">5. Màxim històric al segle XIX</p>
+                    <h3 class="text-2xl sm:text-3xl font-serif text-[#1f1a17]">Cap al 1850</h3>
+                    <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                        <p>Segons el document, la vinya va assolir el seu màxim desenvolupament cap a l'any 1850.</p>
+                        <p>Aquest creixement coincideix amb la crisi de la fil·loxera a França, que va incrementar la demanda de vi procedent d'altres zones productores.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d]">6. La crisi de la fil·loxera</p>
+                    <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                        <p>El canvi més important es produeix a finals del segle XIX i començaments del XX.</p>
+                        <p>El document explica que la fil·loxera, la industrialització, l'emigració cap a les ciutats i el declivi del món rural van provocar una profunda transformació del paisatge agrari.</p>
+                        <p>La conseqüència directa va ser que la vinya fou substituïda pel cereal.</p>
+                        <p>Aquest és probablement el missatge central del document sobre la vinya: després de la crisi fil·loxèrica, el territori abandona gran part del conreu vitícola i reforça la seva especialització cerealista.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="rounded-[1.75rem] overflow-hidden shadow-lg relative group aspect-[16/10]">
+                    <Image src={viEtiqueta} alt="Etiqueta del vi" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent"></div>
+                    <div class="absolute left-5 bottom-4 z-10 text-white">
+                    </div>
+                </div>
+
+                <div class="rounded-[1.75rem] border border-[#e4d9cb] bg-[#fcfbf9] p-6 space-y-4">
+                    <h3 class="text-xl font-serif text-[#1f1a17]">7. Situació actual</h3>
+                    <div class="space-y-4 text-base leading-relaxed text-[#6b5f56]">
+                        <p>En la descripció del paisatge actual, la vinya ja no apareix entre els elements dominants.</p>
+                        <p>El document descriu un territori caracteritzat principalment per conreus de secà, ramaderia estabulada, boscos, garrigues i matollars, i petites zones d'horta per a autoconsum.</p>
+                        <p>Això reflecteix que la vinya, tot i haver tingut una presència històrica significativa, ha deixat de ser un element estructurador del paisatge dels Costers de la Segarra.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Vinya gallery section -->
     <section class="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
