@@ -1,39 +1,16 @@
 ---
 export const lang = 'ca';
 export const slug = 'historia';
+import { motion } from 'motion';
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import BuildingAnimation from '../../src/components/home/BuildTower.astro';
 
 import castellAntic from '../../src/assets/pages/historia/torre-mejanell-antiga.webp'; 
 import historiaTorre from '../../src/assets/pages/historia/historia-torre.webp';
-
-const wineImages = import.meta.glob<{ default: ImageMetadata }>('../assets/pages/history/*.{jpeg,jpg,png,gif,webp}');
-
-const wineSteps = [
-    {
-        num: "01",
-        title: "La Verema a Mà",
-        subtitle: "El respecte per la terra",
-        description: "Seleccionem els millors raïms directament de les nostres vinyes de forma manual durant la matinada, garantint que el fruit entri fresc i intacte a la bodega de la masia.",
-        image: "../assets/pages/history/verema.webp"
-    },
-    {
-        num: "02",
-        title: "El Premsat Tradicional",
-        subtitle: "L'extracció de l'ànima",
-        description: "Utilitzant els antics cups de pedra restaurats del segle XVIII, premsem el fruit suaument per obtenir el most flor, conservant tota la intensitat aromàtica i el caràcter del terreny.",
-        image: "../assets/pages/history/premsat.webp"
-    },
-    {
-        num: "03",
-        title: "La Criança en Silenci",
-        subtitle: "El temps dins la pedra",
-        description: "El vi madura sota els gruixuts murs medievals de la Torre, on la temperatura i la humitat constants creen un refugi perfecte perquè evolucioni en botes de roure.",
-        image: "../assets/pages/history/crianca.webp"
-    }
-];
+import antigaTorre from '../../src/assets/pages/historia/historica-torre.webp';
 ---
+
 
 <Layout lang={lang} slug={slug} title="La nostra història i el vi | Torre de Mejanell">
   <main class="bg-[#fcfbf9] text-[#1f1a17] overflow-x-hidden">
@@ -45,11 +22,11 @@ const wineSteps = [
 
         <div class="w-full lg:w-1/2 max-w-xl relative z-10 space-y-8 text-left lg:pr-12">
             <span class="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#c5a073]">Llegat, pedra i transformació</span>
-            <h1 id="hero-title" class="text-5xl md:text-7xl font-serif text-[#f4efe9] tracking-tight leading-[0.95]">
-                Com es va aixecar <br><span class="italic text-[#c5a073]">la nostra història</span>
+            <h1 id="hero-title" class="text-4xl md:text-6xl font-serif text-[#f4efe9] tracking-tight leading-[0.95]">
+                Restauració del conjunt medieval <br><span class="italic text-[#c5a073]">de la Torre de Mejanell</span>
             </h1>
             <p id="hero-desc" class="text-base text-[#d1ccc6] font-light leading-relaxed max-w-md border-l border-[#c5a073]/30 pl-6">
-                Des dels fonaments de guaita del segle XI fins a la seva evolució com a gran casa pairal. Un viatge arquitectònic esculpit a mà, pedra a pedra.
+                Des de la torre de guaita del segle XI fins als nostres dies.
             </p>
         </div>
 
@@ -58,7 +35,7 @@ const wineSteps = [
         </div>
     </section>
 
-    <!-- Nueva Sección: Historia Medieval -->
+    
     <section class="py-24 px-6 max-w-6xl mx-auto">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <div class="space-y-6">
@@ -76,26 +53,25 @@ const wineSteps = [
         </div>
         
         <!-- Espacio para imagen de detalle (opcional) -->
-        <div class="mt-16 aspect-[21/9] bg-[#e8e4de] rounded-2xl flex items-center justify-center text-[#7a5a3d]/50 italic">
-            <Image src={historiaTorre} alt="Historia de la Torre de Mejanell" class="w-full h-full object-cover rounded-2xl" />
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-14 gap-6 items-center">
+            <div class="lg:col-span-6 aspect-[4/3] bg-[#e8e4de] rounded-2xl overflow-hidden shadow-lg">
+                <Image src={historiaTorre} alt="Historia de la Torre de Mejanell" class="w-full h-full object-cover rounded-2xl" />
+            </div>
+            <div class="lg:col-span-8 aspect-[16/9] bg-[#e8e4de] rounded-2xl overflow-hidden shadow-lg">
+                <Image src={antigaTorre} alt="Antiga Torre de Mejanell" class="w-full h-full object-cover rounded-2xl" />
+            </div>
+        </div>
+        <div class="py-12 flex justify-center items-center">
+            <a href="/preus-i-ocupacio" class="inline-flex items-center justify-center relative z-30 rounded-full text-xs px-8 py-4 font-bold bg-[#1f1a17] hover:bg-[#7a5a3d] transition-all duration-300 shadow-md hover:-translate-y-0.5 uppercase tracking-wider" style="color: #f4efe9; isolation: isolate;">
+                Reserva la teva estada
+            </a>
         </div>
     </section>
 
     
 
-    <section class="bg-[#f6efe4] py-24 px-6 text-center relative border-t border-black/5">
-        <div class="max-w-2xl mx-auto space-y-6 relative z-10">
-            <h2 class="text-3xl font-serif text-[#1f1a17]">Vine a tastar la nostra història</h2>
-            <p class="text-sm md:text-base text-[#6b5f56] font-medium leading-relaxed">
-                Tots els nostres hostes reben una ampolla de benvinguda de la producció limitada de la masia i poden recórrer els antics cups on neix cada verema.
-            </p>
-            <div class="pt-4">
-                <a href="/preus-i-ocupacio" class="inline-flex items-center justify-center relative z-30 rounded-full text-xs px-8 py-4 font-bold bg-[#1f1a17] hover:bg-[#7a5a3d] transition-all duration-300 shadow-md hover:-translate-y-0.5 uppercase tracking-wider" style="color: #f4efe9; isolation: isolate;">
-                    Reserva la teva estada
-                </a>
-            </div>
-        </div>
-    </section>
+
+        
   </main>
 </Layout>
 

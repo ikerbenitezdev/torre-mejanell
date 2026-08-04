@@ -7,32 +7,8 @@ import BuildingAnimation from '../../src/components/home/BuildTower.astro';
 
 import castellAntic from '../../src/assets/pages/historia/torre-mejanell-antiga.webp'; 
 import historiaTorre from '../../src/assets/pages/historia/historia-torre.webp';
+import antigaTorre from '../../src/assets/pages/historia/historica-torre.webp';
 
-const wineImages = import.meta.glob<{ default: ImageMetadata }>('../assets/pages/history/*.{jpeg,jpg,png,gif,webp}');
-
-const wineSteps = [
-    {
-        num: "01",
-        title: "La Verema a Mà",
-        subtitle: "El respecte per la terra",
-        description: "Seleccionem els millors raïms directament de les nostres vinyes de forma manual durant la matinada, garantint que el fruit entri fresc i intacte a la bodega de la masia.",
-        image: "../assets/pages/history/verema.webp"
-    },
-    {
-        num: "02",
-        title: "El Premsat Tradicional",
-        subtitle: "L'extracció de l'ànima",
-        description: "Utilitzant els antics cups de pedra restaurats del segle XVIII, premsem el fruit suaument per obtenir el most flor, conservant tota la intensitat aromàtica i el caràcter del terreny.",
-        image: "../assets/pages/history/premsat.webp"
-    },
-    {
-        num: "03",
-        title: "La Criança en Silenci",
-        subtitle: "El temps dins la pedra",
-        description: "El vi madura sota els gruixuts murs medievals de la Torre, on la temperatura i la humitat constants creen un refugi perfecte perquè evolucioni en botes de roure.",
-        image: "../assets/pages/history/crianca.webp"
-    }
-];
 ---
 
 <Layout lang={lang} slug={slug} title="La nostra història i el vi | Torre de Mejanell">
@@ -62,16 +38,14 @@ const wineSteps = [
     <section class="py-24 px-6 max-w-6xl mx-auto">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <div class="space-y-6">
-                <h2 class="text-4xl font-serif text-[#1f1a17]">El llegat medieval</h2>
+                <h2 class="text-4xl font-serif text-[#1f1a17]">Restauració del conjunt medieval de la Torre de Mejanell</h2>
                 <div class="space-y-4 text-base text-[#6b5f56] leading-relaxed">
-                    <p>La Torre de Mejanell és un antic castell del segle XI del qual s'ha conservat la Torre de Defensa circular amb una alçada actual de 13 metres. La masia es va construir al segle XIV i va ser perfectament integrada a la Torre utilitzant la seva paret corbada com a pròpia de la casa.</p>
-                    <p>Tot el conjunt medieval forma part dels béns comarcals d'interès nacional (BCIN) i dels allotjaments de la ruta jacobea catalana.</p>
-                    <p>La casa ha estat restaurada respectant al màxim les característiques originals i convertida en allotjament rural de qualitat. S'han conservat algunes de les parets del castell així com les arcades, l'estable i el celler.</p>
+                    <p>Des de la torre de guaita del segle XI fins als nostres dies.</p>
                 </div>
             </div>
             <!-- Espacio para imagen histórica 1 -->
             <div class="aspect-[4/3] bg-[#e8e4de] rounded-2xl flex items-center justify-center text-[#7a5a3d]/50 italic">
-               <Image src={castellAntic} alt="Castell de Mejanell" class="w-full h-full object-cover rounded-2xl" />
+               <Image src={antigaTorre} alt="Castell de Mejanell" class="w-full h-full object-cover rounded-2xl" />
             </div>
         </div>
         
@@ -83,19 +57,11 @@ const wineSteps = [
 
     
 
-    <section class="bg-[#f6efe4] py-24 px-6 text-center relative border-t border-black/5">
-        <div class="max-w-2xl mx-auto space-y-6 relative z-10">
-            <h2 class="text-3xl font-serif text-[#1f1a17]">Vine a tastar la nostra història</h2>
-            <p class="text-sm md:text-base text-[#6b5f56] font-medium leading-relaxed">
-                Tots els nostres hostes reben una ampolla de benvinguda de la producció limitada de la masia i poden recórrer els antics cups on neix cada verema.
-            </p>
-            <div class="pt-4">
-                <a href="/preus-i-ocupacio" class="inline-flex items-center justify-center relative z-30 rounded-full text-xs px-8 py-4 font-bold bg-[#1f1a17] hover:bg-[#7a5a3d] transition-all duration-300 shadow-md hover:-translate-y-0.5 uppercase tracking-wider" style="color: #f4efe9; isolation: isolate;">
-                    Reserva la teva estada
-                </a>
-            </div>
-        </div>
-    </section>
+    <div class="pt-4">
+        <a href="/preus-i-ocupacio" class="inline-flex items-center justify-center relative z-30 rounded-full text-xs px-8 py-4 font-bold bg-[#1f1a17] hover:bg-[#7a5a3d] transition-all duration-300 shadow-md hover:-translate-y-0.5 uppercase tracking-wider" style="color: #f4efe9; isolation: isolate;">
+            Reserva la teva estada
+        </a>
+    </div>
   </main>
 </Layout>
 

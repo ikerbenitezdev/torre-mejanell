@@ -25,16 +25,17 @@ const iconClass = "w-6 h-6 text-[#7a5a3d]"; // Usamos el color de tu sección de
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                     { icon: BedDouble, text: 'Llits supletoris' },
-                    { icon: Baby, text: 'Bressol i nadons' },
+                    { icon: Baby, text: 'Bressol' },
                     { icon: ChefHat, text: 'Menjar a domicili' },
                     { icon: Waves, text: 'Piscina' },
-                    { icon: Tv, text: 'TV i DVD' },
+                    { icon: Tv, text: 'TV' },
                     { icon: Flame, text: 'Llar de foc' },
                     { icon: Trees, text: 'Mobles de jardí' },
                     { icon: Sofa, text: 'Taula i cadires' },
                     { icon: Bike, text: 'Bicicletes' },
                     { icon: Dices, text: 'Jocs de taula' },
-                    { icon: Flame, text: 'Barbacoa' }
+                    { icon: Flame, text: 'Barbacoa/Carbó' },
+                    { icon: Flame, text: 'Paellera' }
                 ].map(item => (
                     <div class="flex items-center gap-4 p-5 bg-white/75 rounded-[1.25rem] border border-black/10 shadow-[0_4px_12px_rgba(39,29,22,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c5a073]/50 hover:shadow-[0_8px_24px_rgba(197,160,115,0.15)] cursor-default">
                         <item.icon class={iconClass} /> 
@@ -57,7 +58,7 @@ const iconClass = "w-6 h-6 text-[#7a5a3d]"; // Usamos el color de tu sección de
                     { icon: Flame, text: 'Vitroceràmica' },
                     { icon: Citrus, text: 'Espremedora' },
                     { icon: Utensils, text: 'Batedora' },
-                    { icon: Coffee, text: 'Cafetera' }
+                    { icon: Coffee, text: 'Nespresso i cafetera italiana' }
                 ].map(item => (
                     <div class="flex items-center gap-4 p-5 bg-white/75 rounded-[1.25rem] border border-black/10 shadow-[0_4px_12px_rgba(39,29,22,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c5a073]/50 hover:shadow-[0_8px_24px_rgba(197,160,115,0.15)] cursor-default">
                         <item.icon class={iconClass} /> 
