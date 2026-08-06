@@ -64,6 +64,25 @@ a {
 	color: var(--color-ink);
 }
 
+.room-card {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.room-card.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.room-card {
+		transition: none;
+		opacity: 1;
+		transform: none;
+	}
+}
+
 @keyframes drift {
 	0%,
 	100% {

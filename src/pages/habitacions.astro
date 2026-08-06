@@ -4,6 +4,26 @@ import Hero from '../components/home/Hero.astro';
 import StaysSelector from '../components/home/StaysSelector.astro';
 import { BedDouble, Trees, ChefHat, Citrus, Coffee } from 'lucide-astro';
 import habitacionsHero from '../assets/pages/rooms/torre-mejanell-3-persones.webp'; 
+import { Image } from 'astro:assets';
+import roomTriple from '../assets/pages/rooms/torre-mejanell-3-persones.webp';
+import roomDoubleGround from '../assets/pages/rooms/torre-mejanell-doble2.webp';
+import roomTwoGroundA from '../assets/pages/rooms/torre-mejanell-2-persones3.webp';
+import roomTwoFirst from '../assets/pages/rooms/torre-mejanell-2-persones.webp';
+import roomTwoGroundB from '../assets/pages/rooms/torre-mejanell-2-persones4.webp';
+import roomDoubleFirst from '../assets/pages/rooms/torre-mejanell-doble1.webp';
+import roomIndividual from '../assets/pages/rooms/habitacio-individual1.webp';
+import roomGroundFloor from '../assets/pages/rooms/habitació planta baixa.webp';
+
+const rooms = [
+  { title: 'Habitació triple + bressol (Primera Planta)', text: 'Habitació de tres llits individuals amb bressol i bany dins l’habitació.', image: roomTriple },
+  { title: 'Habitació doble (Planta baixa)', text: 'Habitació a la planta baixa per a dues persones amb bany compartit. ', image: roomDoubleFirst },
+  { title: 'Habitació doble (Planta baixa)', text: 'Habitació a la planta baixa amb dos llits amb bany compartit.', image: roomDoubleGround },
+  { title: 'Habitació doble capicuada (Primera Planta)', text: 'Dos llits individuals amb bany compartit.', image: roomTwoFirst },
+  { title: 'Habitació doble (Primera Planta)', text: 'Llit de matrimoni amb bany compartit.', image: roomTwoGroundA },
+  { title: 'Habitació doble (Segona Planta)', text: 'Dos llits individuals amb bany dins l’habitació.', image: roomTwoGroundB },
+  { title: 'Habitació individual (Segona planta)', text: 'Habitació amb 1 llit estàndar amb opció d’afegir un llit supletori.', image: roomIndividual },
+];
+
 
 export const lang = 'ca';
 export const slug = 'habitacions';
@@ -56,8 +76,27 @@ export const slug = 'habitacions';
             </div>
         </div>
     </section>
-        
-
+    <section class="py-20 bg-[#f4efe9]">
+        <div class="max-w-6xl mx-auto px-6">
+        {rooms.map((room, index) => (
+        <div class="room-card mb-12 grid md:grid-cols-[0.95fr_1.05fr] gap-8 items-center" style={`transition-delay: ${index * 140}ms`}>
+          <div class="overflow-hidden rounded-2xl shadow-lg bg-[#e8e4de] aspect-[16/9]">
+            <Image src={room.image} alt={room.title} class="w-full h-full object-cover object-bottom transition duration-700 ease-out hover:scale-105" />
+                </div>
+          <div class="space-y-4">
+                    <h3 class="text-2xl font-serif text-[#1f1a17]">{room.title}</h3>
+            <p class="text-base text-[#6b5f56]">{room.text}</p>
+                </div>
+            </div>
+          ))}
+          <!-- <Image src={habitacionsHero} alt="Habitacions de la Torre de Mejanell" class="w-full h-auto rounded-2xl shadow-lg" />
+          <div class="mt-6 text-center">
+            <h3 class="text-3xl font-serif text-[#1f1a17]">{room.title}</h3>
+            <p class="text-lg text-[#6b5f56] mt-4">{room.text}</p>
+            <div class="w-12 h-[1px] bg-[#7a5a3d]/40 mx-auto mt-6"></div>
+          </div> -->
+          </div>
+        </section>
         
         
         <div class="my-12 max-w-3xl mx-auto px-5">
@@ -93,9 +132,25 @@ export const slug = 'habitacions';
   const prevBtn = document.getElementById('prev-photo');
   const nextBtn = document.getElementById('next-photo');
   const counter = document.getElementById('modal-counter');
+  const roomCards = document.querySelectorAll<HTMLElement>('.room-card');
 
   let currentGallery: string[] = [];
   let currentIndex = 0;
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    roomCards.forEach((card) => observer.observe(card));
+  } else {
+    roomCards.forEach((card) => card.classList.add('is-visible'));
+  }
 
   function updateModalImage() {
     if (currentGallery.length === 0 || !modalImg || !counter) return;
