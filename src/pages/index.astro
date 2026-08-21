@@ -6,6 +6,7 @@ import HeroSection from '../components/home/HeroSection.astro';
 import MarqueeBar from '../components/home/MarqueeBar.astro';
 import IntroStats from '../components/home/IntroStats.astro';
 import StaysGrid from '../components/home/StaysGrid.astro';
+import KidsFunSpaces from '../components/home/KidsFunSpaces.astro';
 import ExperiencesSection from '../components/home/ExperiencesSection.astro';
 import ServicesGrid from '../components/home/ServicesGrid.astro';
 import SurroundingsBeta from '../components/home/SurroundingsBeta.astro';
@@ -19,11 +20,33 @@ import Footer from '../components/site/Footer.astro';
 
 <Layout lang={lang} slug={slug} title="Torre de Mejanell | Escapada rural" description="Descobreix la nostra casa rural: una antiga masia transformada en un refugi de turisme rural on els somnis es barregen amb l'encant de la natura.">
 	<main>
-		<HeroSection />
+		<HeroSection
+			title="Benvinguts a la Torre de Mejanell"
+			subtitle="Castell de Mejanell"
+			description="Escapa't a un paradís rural ple d'història"
+			primaryLabel="Habitacions"
+			primaryHref="#estancias"
+			secondaryLabel="Preus i ocupació"
+			secondaryHref="/preus-i-ocupacio"
+		/>
 		<!-- <IntroStats /> -->
-		<ExperiencesSection />
-		<StaysGrid />
-		<SurroundingsBeta />
+		<ExperiencesSection title="Una antiga masia restaurada i convertida en un allotjament de turisme rural" />
+		<StaysGrid
+			title="Habitacions"
+			subtitle="Autenticitat · Tranquil·litat · Confort"
+			buttonLabel="Veure més habitacions"
+			buttonHref="/habitacions"
+		/>
+		<KidsFunSpaces lang="ca" />
+		
+		<SurroundingsBeta
+			title="L'entorn de Mejanell"
+			cards={[
+				{ eyebrow: 'Turisme Actiu', title: 'Descobreix rutes úniques i paisatges espectaculars sobre dues rodes', description: 'Descobreix rutes úniques, senders mil·lenaris i paisatges espectaculars sobre dues rodes.', href: '/entorn#turisme', alt: 'Rutes de BTT i senderisme a la Segarra', image: 'btt' },
+				{ eyebrow: 'Gastronomia', title: 'Enoturisme i restaurants de la comarca', description: 'Tasts de vins de proximitat i cuina tradicional de la nostra terra.', href: '/entorn#gastronomia', alt: 'Vinyes i enoturisme a Torre Mejanell', image: 'vinya' },
+				{ eyebrow: 'Cultura', title: 'Patrimoni Històric', description: 'Explora la Ruta del Cister i els castells de la Segarra', href: '/entorn#patrimoni', alt: 'Patrimoni històric i Ruta del Cister', image: 'cister' },
+			]}
+		/>
 		<ServicesGrid />
 		<Reviews />
 		<script id="shapo-embed-js" type="text/javascript" src="https://cdn.shapo.io/js/embed.js" defer></script>	</main>

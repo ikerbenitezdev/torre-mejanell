@@ -1,6 +1,30 @@
 ---
 import { Image } from 'astro:assets';
 
+interface Props {
+	lang?: 'ca' | 'es' | 'en';
+}
+
+const { lang = 'ca' } = Astro.props;
+
+const content = {
+	ca: {
+		heading: 'Galeria de la casa i la seva història',
+		description: "Una selecció d'imatges de la casa, els espais comuns i la història de Torre de Mejanell.",
+		tag: 'Fotos',
+	},
+	es: {
+		heading: 'Galería de la casa y su historia',
+		description: 'Una selección de imágenes de la casa, los espacios comunes y la historia de Torre de Mejanell.',
+		tag: 'Fotos',
+	},
+	en: {
+		heading: 'Gallery of the house and its story',
+		description: 'A selection of images of the house, the shared spaces and the history of Torre de Mejanell.',
+		tag: 'Photos',
+	},
+} as const;
+
 import barbacoaImg from '../../assets/pages/la-casa/barbacoa.webp';
 import cuinaImg from '../../assets/pages/la-casa/cuina-torre-mejanell.webp';
 import dutxaImg from '../../assets/pages/la-casa/dutxa-minusvalids.webp';
@@ -64,12 +88,12 @@ const galleryPhotos = [...housePhotos, ...historyPhotos, ...roomPhotos];
 <section class="bg-[#fcfbfa] px-6 py-16 md:py-24">
 	<div class="mx-auto max-w-7xl">
 		<header class="mx-auto max-w-3xl text-center pb-12 md:pb-16">
-			<p class="text-xs font-extrabold uppercase tracking-[0.28em] text-[#7a5a3d]">Fotos</p>
+			<p class="text-xs font-extrabold uppercase tracking-[0.28em] text-[#7a5a3d]">{content[lang].tag}</p>
 			<h1 class="mt-4 text-4xl font-serif tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-6xl">
-				Galeria de la casa i la seva història
+				{content[lang].heading}
 			</h1>
 			<p class="mt-5 text-base leading-7 text-[#6b5f56]">
-				Una selecció d'imatges de la casa, els espais comuns i la història de Torre de Mejanell.
+				{content[lang].description}
 			</p>
 		</header>
 		<div class="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4 [column-fill:_balance]">

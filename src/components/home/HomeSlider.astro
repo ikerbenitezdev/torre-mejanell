@@ -2,20 +2,41 @@
 import piscina from '../../assets/pages/home/torre-de-mejanell-piscina.webp';
 import casa from '../../assets/pages/home/torre-de-mejanell.webp';
 
-const slides = [
+interface Props {
+	slides?: Array<{
+		label: string;
+		title: string;
+		description: string;
+		image: 'piscina' | 'casa';
+		alt?: string;
+	}>;
+}
+
+const {
+	slides: providedSlides,
+} = Astro.props as Props;
+
+const imageMap = {
+	piscina,
+	casa,
+};
+
+const defaultSlides = [
 	{
-		src: piscina,
+		image: 'piscina' as const,
 		label: 'Piscina',
 		title: 'Agua tranquila y luz abierta',
 		description: 'La imagen que dejamos de momento como referencia principal para el home.',
 	},
 	{
-		src: casa,
+		image: 'casa' as const,
 		label: 'Casa',
 		title: 'La torre y el entorno',
 		description: 'Segunda foto para darle continuidad visual al slider del home.',
 	},
 ];
+
+const slides = providedSlides ?? defaultSlides;
 ---
 
 <section class="mx-auto max-w-7xl px-4 pb-8 lg:px-6 lg:pb-12">
@@ -23,12 +44,14 @@ const slides = [
 		<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,180,108,0.18),transparent_42%)]"></div>
 
 		<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-			{slides.map((slide, index) => (
-				<article class="min-w-full snap-center overflow-hidden rounded-[1.6rem] bg-[#1f1a17] text-white shadow-lg">
-					<div class="grid lg:grid-cols-[1.15fr_0.85fr]">
-						<div class="relative min-h-[320px] lg:min-h-[520px]">
-							<img src={slide.src.src} alt={slide.title} class="absolute inset-0 h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
-						</div>
+			{slides.map((slide, index) => {
+				const imageSrc = imageMap[slide.image];
+				return (
+					<article class="min-w-full snap-center overflow-hidden rounded-[1.6rem] bg-[#1f1a17] text-white shadow-lg">
+						<div class="grid lg:grid-cols-[1.15fr_0.85fr]">
+							<div class="relative min-h-[320px] lg:min-h-[520px]">
+								<img src={imageSrc.src} alt={slide.alt ?? slide.title} class="absolute inset-0 h-full w-full object-cover" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+							</div>
 						<div class="flex flex-col justify-between gap-8 p-6 lg:p-8">
 							<div>
 								<p class="text-xs font-bold uppercase tracking-[0.2em] text-white/60">{slide.label}</p>
@@ -41,9 +64,10 @@ const slides = [
 								<span>Desliza para ver más</span>
 							</div>
 						</div>
-					</div>
-				</article>
-			))}
+						</div>
+					</article>
+				);
+			})}
 		</div>
 	</div>
 </section>

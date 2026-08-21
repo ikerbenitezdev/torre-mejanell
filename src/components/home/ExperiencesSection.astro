@@ -1,12 +1,22 @@
 ---
 import { Image } from 'astro:assets';
 import casaRural from '../../assets/pages/home/castell-mejanell-aerea.webp';
+
+interface Props {
+  title?: string;
+  imageAlt?: string;
+}
+
+const {
+  title = 'Una antiga masia restaurada i convertida en un allotjament de turisme rural',
+  imageAlt = 'Casa Rural',
+} = Astro.props as Props;
 ---
 
 <section id="evolucion" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24 overflow-hidden">
   <div class="max-w-4xl mx-auto text-center mb-16">
      <h2 class="mx-auto max-w-5xl text-center text-4xl leading-[1.1] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
-       Una antiga masia restaurada i convertida en un allotjament de turisme rural
+       {title}
      </h2>
   </div>
 
@@ -15,7 +25,7 @@ import casaRural from '../../assets/pages/home/castell-mejanell-aerea.webp';
       <div class="w-full shadow-2xl rounded-2xl overflow-hidden border border-gray-100">
         <Image 
           src={casaRural} 
-          alt="Casa Rural" 
+          alt={imageAlt} 
           class="w-full h-auto object-cover" 
         />
       </div>

@@ -9,6 +9,28 @@ import logoNegre from '../../../public/logo-negre-torre-mejanell.svg';
 
 const basePaths = { ca: '/', es: '/es/', en: '/en/' } as const;
 
+const routeGroups = [
+    { ca: '', es: '', en: '' },
+    { ca: 'historia', es: 'historia', en: 'history' },
+    { ca: 'habitacions', es: 'habitaciones', en: 'rooms' },
+    { ca: 'la-casa', es: 'la-casa', en: 'the-house' },
+    { ca: 'entorn', es: 'entorno', en: 'surroundings' },
+    { ca: 'localitzacio', es: 'como-llegar', en: 'location' },
+    { ca: 'fotos', es: 'fotos', en: 'photos' },
+    { ca: 'preus-i-reserves', es: 'precios-y-reservas', en: 'prices-and-booking' },
+    { ca: 'turisme', es: 'turismo', en: 'tourism' },
+    { ca: 'opinions', es: 'opiniones', en: 'reviews' },
+    { ca: 'preus-i-ocupacio', es: 'precios-y-ocupacion', en: 'prices-and-occupancy' },
+    { ca: 'la-vinya', es: 'la-viña', en: 'the-vineyard' },
+    { ca: 'els-origens', es: 'los-origenes', en: 'the-origins' },
+    { ca: 'zones-comuns', es: 'zonas-comunes', en: 'common-areas' },
+    { ca: 'contacte', es: 'contacto', en: 'contact' },
+    { ca: 'politica-de-galetes', es: 'politica-de-galetes', en: 'cookie-policy' },
+] as const;
+
+const pricingSlugs = { ca: 'preus-i-ocupacio', es: 'precios-y-ocupacion', en: 'prices-and-occupancy' } as const;
+const bookingLabels = { ca: 'Preus i ocupació', es: 'Precios y ocupación', en: 'Prices & Occupancy' } as const;
+
 // Estructura de páginas incluyendo los submenús de "La Casa"
 const pages = [
     {   labels: { ca: 'Història', es: 'Historia', en: 'History' }, 
@@ -33,10 +55,26 @@ const pages = [
 ];
 
 const currentItem = pages.find((item) => Object.values(item.slugs).includes(slug)) ?? null;
+const currentSlug = (slug || '').replace(/^\/+|\/+$/g, '');
+const currentRouteGroup = routeGroups.find((group) => group[lang] === currentSlug) ?? null;
+const localizedSlugs = currentItem
+    ? currentItem.slugs
+    : currentRouteGroup
+        ? currentRouteGroup
+        : {
+            ca: currentSlug,
+            es: currentSlug,
+            en: currentSlug,
+        };
 
 const buildPath = (targetLang: 'ca' | 'es' | 'en', itemSlug: string) => {
     const base = basePaths[targetLang];
     return itemSlug ? `${base}${itemSlug}/` : base;
+};
+
+const getLocalizedPath = (targetLang: 'ca' | 'es' | 'en') => {
+    const targetSlug = localizedSlugs[targetLang] ?? '';
+    return buildPath(targetLang, targetSlug);
 };
 
 const languageLinks = [
@@ -139,8 +177,7 @@ const isHome = !slug;
                     isHome ? 'bg-black/85 border-white/10 backdrop-blur-md text-white' : 'bg-white border-black/5 text-[#1f1a17]'
                 ]}>
                     {languageLinks.map((item) => {
-                        const targetItem = currentItem ?? pages[0];
-                        const href = buildPath(item.code, targetItem.slugs[item.code]);
+                        const href = getLocalizedPath(item.code);
                         return (
                             <a 
                                 href={href} 
@@ -160,11 +197,11 @@ const isHome = !slug;
                 </div>
             </div>
 
-            <a href={buildPath(lang, 'preus-i-ocupacio')} class:list={[
+            <a href={buildPath(lang, pricingSlugs[lang])} class:list={[
                 'inline-flex items-center justify-center rounded-full text-xs px-4 py-2 sm:text-sm sm:px-5 sm:py-2.5 font-bold transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap shadow-sm',
                 isHome ? 'border border-[#8A0E14] bg-[#8A0E14] text-white hover:bg-[#8A0E14]' : 'border border-[#1f1a17] bg-[#1f1a17] !text-[#f8f4ec] hover:bg-[#332c28]',
             ]}>
-                Preus i ocupació
+                {bookingLabels[lang]}
             </a>
             <button 
                 type="button" 
@@ -221,7 +258,7 @@ const isHome = !slug;
                                 const childActive = currentPath === child.slugs[lang];
                                 return (
                                     <a href={childHref} class:list={[
-                                        'block rounded-lg px-4 py-2.5 text-sm font-medium flex items-center gap-2.5 transition-colors',
+                                        'flex items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors',
                                         childActive ? 'text-[#7a5a3d]' : 'text-[#6b5f56] hover:text-[#1f1a17] hover:bg-black/5'
                                     ]}>
                                          <span class:list={[
@@ -240,8 +277,7 @@ const isHome = !slug;
 
         <div class="mt-6 pt-6 border-t border-black/5 flex gap-4 px-4">
             {languageLinks.map((item) => {
-                const targetItem = currentItem ?? pages[0];
-                const href = buildPath(item.code, targetItem.slugs[item.code]);
+                const href = getLocalizedPath(item.code);
                 return (
                     <a href={href} class:list={[
                         'text-xs font-extrabold tracking-widest uppercase transition-colors',

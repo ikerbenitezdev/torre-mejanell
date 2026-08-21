@@ -1,7 +1,6 @@
 ---
 export const lang = 'ca';
 export const slug = 'historia';
-import { motion } from 'motion';
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import BuildingAnimation from '../../src/components/home/BuildTower.astro';
@@ -12,7 +11,7 @@ import antigaTorre from '../../src/assets/pages/historia/historica-torre.webp';
 ---
 
 
-<Layout lang={lang} slug={slug} title="La nostra història i el vi | Torre de Mejanell">
+<Layout lang={lang} slug={slug} title="Els orígens | Torre de Mejanell">
   <main class="bg-[#fcfbf9] text-[#1f1a17] overflow-x-hidden">
     
     <!-- Hero Section -->
@@ -23,10 +22,10 @@ import antigaTorre from '../../src/assets/pages/historia/historica-torre.webp';
         <div class="w-full lg:w-1/2 max-w-xl relative z-10 space-y-8 text-left lg:pr-12">
             <span class="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#c5a073]">Llegat, pedra i transformació</span>
             <h1 id="hero-title" class="text-4xl md:text-6xl font-serif text-[#f4efe9] tracking-tight leading-[0.95]">
-                Restauració del conjunt medieval <br><span class="italic text-[#c5a073]">de la Torre de Mejanell</span>
+                Els orígens de la Torre de Mejanell
             </h1>
             <p id="hero-desc" class="text-base text-[#d1ccc6] font-light leading-relaxed max-w-md border-l border-[#c5a073]/30 pl-6">
-                Des de la torre de guaita del segle XI fins als nostres dies.
+                Des de la torre de guaita medieval fins a la casa rural que avui acull visitants amb calma, història i autenticitat.
             </p>
         </div>
 
@@ -41,9 +40,10 @@ import antigaTorre from '../../src/assets/pages/historia/historica-torre.webp';
             <div class="space-y-6">
                 <h2 class="text-4xl font-serif text-[#1f1a17]">El llegat medieval</h2>
                 <div class="space-y-4 text-base text-[#6b5f56] leading-relaxed">
-                    <p>La Torre de Mejanell és un antic castell del segle XI del qual s'ha conservat la Torre de Defensa circular amb una alçada actual de 13 metres. La masia es va construir al segle XIV i va ser perfectament integrada a la Torre utilitzant la seva paret corbada com a pròpia de la casa.</p>
-                    <p>Tot el conjunt medieval forma part dels béns comarcals d'interès nacional (BCIN) i dels allotjaments de la ruta jacobea catalana.</p>
-                    <p>La casa ha estat restaurada respectant al màxim les característiques originals i convertida en allotjament rural de qualitat. S'han conservat algunes de les parets del castell així com les arcades, l'estable i el celler.</p>
+                    <p>La Torre de Mejanell és un antic castell del segle XI del qual s'ha conservat la Torre de Defensa circular amb una alçada actual de 13 metres.</p>
+                    <p>La masia es va construir al segle XIV i es va integrar a la torre aprofitant la seva paret corbada com a pròpia de la casa.</p>
+                    <p>Tot el conjunt medieval forma part dels béns comarcals d'interès nacional (BCIN) i de la ruta jacobea catalana, una mostra viva de la història del territori.</p>
+                    <p>La casa ha estat restaurada respectant les característiques originals i convertida en un allotjament rural de qualitat, on encara es poden reconèixer les restes del castell, les arcades, l'estable i el celler.</p>
                 </div>
             </div>
             <!-- Espacio para imagen histórica 1 -->

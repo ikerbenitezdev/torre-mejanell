@@ -1,7 +1,28 @@
 ---
 import { Image } from 'astro:assets';
 
-// Cargamos todas las imágenes de la carpeta hero
+interface Props {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    primaryLabel?: string;
+    primaryHref?: string;
+    secondaryLabel?: string;
+    secondaryHref?: string;
+    altText?: string;
+}
+
+const {
+    title = 'Benvinguts a la Torre de Mejanell',
+    subtitle = 'Castell de Mejanell',
+    description = "Escapa't a un paradís rural ple d'història",
+    primaryLabel = 'Habitacions',
+    primaryHref = '#estancias',
+    secondaryLabel = 'Preus i ocupació',
+    secondaryHref = '/preus-i-ocupacio',
+    altText = 'Castell de Mejanell',
+} = Astro.props as Props;
+
 const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/hero/*.{jpeg,jpg,png,webp}');
 const imageEntries = Object.entries(images);
 ---
@@ -16,7 +37,7 @@ const imageEntries = Object.entries(images);
             >
                 <Image 
                     src={imageLoader()} 
-                    alt="Castell de Mejanell" 
+                    alt={altText} 
                     class="h-full w-full object-cover brightness-110" 
                     widths={[640, 1024, 1920]}
                     sizes="100vw"
@@ -34,19 +55,19 @@ const imageEntries = Object.entries(images);
     <div class="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-10 pt-24 lg:px-6 lg:pt-28">
         <div class="mx-auto mt-30 w-full max-w-5xl text-center">
             <p id="hero-subtitle" class="mb-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-white/80 opacity-0">
-                Castell de Mejanell
+                {subtitle}
             </p>
             <h1 id="hero-title" class="mx-auto max-w-[14ch] font-serif text-[clamp(3.6rem,8vw,7rem)] leading-[0.9] tracking-[-0.04em] text-white opacity-0">
-                Benvinguts a la Torre de Mejanell
+                {title}
             </h1>
             <p id="hero-description" class="mx-auto mt-5 max-w-2xl text-[clamp(1.05rem,1.7vw,1.35rem)] leading-8 text-white/85 opacity-0">
-                Escapa't a un paradís rural ple d'història 
+                {description}
             </p>
         </div>
 
         <div id="hero-buttons" class="mt-8 flex flex-wrap items-center justify-center gap-3 opacity-0">
-            <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="#estancias">Habitacions</a>
-            <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href="/preus-i-ocupacio">Preus i ocupació</a>
+            <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href={primaryHref}>{primaryLabel}</a>
+            <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href={secondaryHref}>{secondaryLabel}</a>
         </div>
     </div>
 </section>

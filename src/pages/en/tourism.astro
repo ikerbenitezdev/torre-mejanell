@@ -1,0 +1,34 @@
+---
+export const lang = 'en';
+export const slug = 'tourism';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout lang={lang} slug={slug} title="Tourism | Torre de Mejanell">
+  <main class="bg-[#fcfbf9] text-[#1f1a17] overflow-x-hidden">
+    <section class="max-w-7xl mx-auto px-6 py-20 lg:py-28 space-y-10">
+      <div class="space-y-4 max-w-3xl">
+        <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-[#7a5a3d]">Tourism</p>
+        <h1 class="text-4xl md:text-5xl font-serif text-[#1f1a17]">Discover the Segarra from Torre de Mejanell</h1>
+        <p class="text-lg text-[#6b5f56] leading-relaxed">
+          The house is an ideal starting point for exploring routes, villages, wines and cultural experiences in the territory.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <article class="rounded-[2rem] border border-[#e5dcd0] bg-white p-8 shadow-sm space-y-3">
+          <h2 class="text-2xl font-serif text-[#1f1a17]">Nature</h2>
+          <p class="text-sm leading-relaxed text-[#6b5f56]">Hiking routes, mountain bikes and landscapes of calm on every outing.</p>
+        </article>
+        <article class="rounded-[2rem] border border-[#e5dcd0] bg-white p-8 shadow-sm space-y-3">
+          <h2 class="text-2xl font-serif text-[#1f1a17]">Gastronomy</h2>
+          <p class="text-sm leading-relaxed text-[#6b5f56]">Wineries, restaurants, markets and local products from a land with a great tradition.</p>
+        </article>
+        <article class="rounded-[2rem] border border-[#e5dcd0] bg-white p-8 shadow-sm space-y-3">
+          <h2 class="text-2xl font-serif text-[#1f1a17]">Culture</h2>
+          <p class="text-sm leading-relaxed text-[#6b5f56]">Festivals, historic heritage, monasteries and medieval towns to discover on each visit.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>

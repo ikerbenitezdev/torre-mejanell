@@ -2,12 +2,109 @@
 export const lang = 'es';
 export const slug = 'habitaciones';
 import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/home/Hero.astro';
+import StaysSelector from '../../components/home/StaysSelector.astro';
+import { BedDouble, Trees, ChefHat } from 'lucide-astro';
+import { Image } from 'astro:assets';
+
+import habitacionsHero from '../../assets/pages/rooms/torre-mejanell-3-persones.webp';
+import roomTriple from '../../assets/pages/rooms/torre-mejanell-3-persones.webp';
+import roomDoubleGround from '../../assets/pages/rooms/torre-mejanell-doble2.webp';
+import roomTwoGroundA from '../../assets/pages/rooms/torre-mejanell-2-persones3.webp';
+import roomTwoFirst from '../../assets/pages/rooms/torre-mejanell-2-persones.webp';
+import roomTwoGroundB from '../../assets/pages/rooms/torre-mejanell-2-persones4.webp';
+import roomDoubleFirst from '../../assets/pages/rooms/torre-mejanell-doble1.webp';
+import roomIndividual from '../../assets/pages/rooms/habitacio-individual1.webp';
+import roomGroundFloor from '../../assets/pages/rooms/habitació planta baixa.webp';
+
+const rooms = [
+  { title: 'Habitación triple + cuna (Primera planta)', text: 'Habitación de tres camas individuales con cuna y baño dentro del dormitorio.', image: roomTriple },
+  { title: 'Habitación doble (Planta baja)', text: 'Habitación a la planta baja para dos personas con baño compartido.', image: roomDoubleFirst },
+  { title: 'Habitación doble (Planta baja)', text: 'Habitación a la planta baja con dos camas y baño compartido.', image: roomDoubleGround },
+  { title: 'Habitación doble capuchina (Primera planta)', text: 'Dos camas individuales con baño compartido.', image: roomTwoFirst },
+  { title: 'Habitación doble (Primera planta)', text: 'Cama de matrimonio con baño compartido.', image: roomTwoGroundA },
+  { title: 'Habitación doble (Segunda planta)', text: 'Dos camas individuales con baño dentro del dormitorio.', image: roomTwoGroundB },
+  { title: 'Habitación individual (Segunda planta)', text: 'Habitación con una cama estándar y opción de añadir una cama supletoria.', image: roomIndividual },
+];
 ---
 
-<Layout lang={lang} slug={slug} title="Habitaciones | Castell de Mejanell">
-  <main class="mx-auto max-w-5xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Habitaciones</h1>
-    <p class="text-base text-[#6b5f56]">Contenido de ejemplo sobre las habitaciones del castillo.</p>
-    <p class="mt-6"><a href="/es/" class="text-sm underline">← Volver al inicio</a></p>
+<Layout lang={lang} slug={slug} title="Habitaciones | Torre de Mejanell">
+  <main class="text-[#1f1a17] overflow-x-hidden relative">
+    <StaysSelector lang={lang} />
+
+    <section class="py-20 bg-[#fcfbf9]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-16 text-center">
+          <h2 class="text-3xl font-serif text-[#1f1a17]">Más que una estancia</h2>
+          <div class="w-12 h-[1px] bg-[#7a5a3d]/40 mx-auto mt-6"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-12">
+          <div class="flex flex-col items-center text-center group">
+            <div class="p-4 rounded-full bg-[#f6efe4] text-[#7a5a3d] mb-6 group-hover:scale-110 transition-transform">
+              <BedDouble size={32} />
+            </div>
+            <h3 class="font-serif text-xl mb-3">Confort de sueño</h3>
+            <p class="text-sm text-[#6b5f56] leading-relaxed">Disfruta de un descanso reparador en camas bien equipadas, en plena calma de la Segarra.</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center group">
+            <div class="p-4 rounded-full bg-[#f6efe4] text-[#7a5a3d] mb-6 group-hover:scale-110 transition-transform">
+              <Trees size={32} />
+            </div>
+            <h3 class="font-serif text-xl mb-3">Entorno privilegiado</h3>
+            <p class="text-sm text-[#6b5f56] leading-relaxed">Despiértate rodeado de naturaleza, viñas y campos con vistas únicas, ideal para desconectar.</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center group">
+            <div class="p-4 rounded-full bg-[#f6efe4] text-[#7a5a3d] mb-6 group-hover:scale-110 transition-transform">
+              <ChefHat size={32} />
+            </div>
+            <h3 class="font-serif text-xl mb-3">Gastronomía local</h3>
+            <p class="text-sm text-[#6b5f56] leading-relaxed">Prueba los productos de la finca y los desayunos artesanales con sabores auténticos de proximidad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-[#f4efe9]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-14 rounded-[2rem] border border-[#e5dcd0] bg-white p-6 shadow-sm lg:p-8">
+          <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <div class="space-y-4">
+              <p class="text-[10px] font-bold uppercase tracking-[0.28em] text-[#7a5a3d]">Mapa del alojamiento</p>
+              <h3 class="text-2xl font-serif text-[#1f1a17]">Distribución de las habitaciones</h3>
+              <p class="text-base text-[#6b5f56] leading-relaxed">Las estancias de Torre de Mejanell se organizan entre planta baja, primera y segunda planta, con espacios pensados para parejas, familias y grupos.</p>
+              <ul class="space-y-2 text-sm text-[#6b5f56]">
+                <li>• Planta baja: habitaciones más accesibles y de fácil acceso.</li>
+                <li>• Primera planta: habitaciones dobles y familiares con baño compartido.</li>
+                <li>• Segunda planta: estancias más tranquilas con baño interior en algunas unidades.</li>
+              </ul>
+            </div>
+            <div class="overflow-hidden rounded-[1.5rem] bg-[#e8e4de] shadow-sm aspect-[4/3]">
+              <Image src={roomGroundFloor} alt="Mapa de las habitaciones de Torre de Mejanell" class="h-full w-full object-cover" loading="eager" />
+            </div>
+          </div>
+        </div>
+        {rooms.map((room, index) => (
+          <div class="room-card mb-12 grid md:grid-cols-[0.95fr_1.05fr] gap-8 items-center" style={`transition-delay: ${index * 140}ms`}>
+            <div class="overflow-hidden rounded-2xl shadow-lg bg-[#e8e4de] aspect-[16/9]">
+              <Image src={room.image} alt={room.title} class="w-full h-full object-cover object-bottom transition duration-700 ease-out hover:scale-105" />
+            </div>
+            <div class="space-y-4">
+              <h3 class="text-2xl font-serif text-[#1f1a17]">{room.title}</h3>
+              <p class="text-base text-[#6b5f56]">{room.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div class="my-12 max-w-3xl mx-auto px-5">
+      <p class="text-base text-[#6b5f56] flex items-start text-left gap-2">
+        <span class="h-1 w-1 rotate-45 transform shrink-0 bg-[#7a5a3d] mt-2.5"></span>
+        <span>Para grupos más numerosos, ofrecemos la posibilidad de alojar hasta 18 personas gracias a los sofás cama disponibles en habitaciones seleccionadas.</span>
+      </p>
+    </div>
   </main>
 </Layout>

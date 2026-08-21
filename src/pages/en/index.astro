@@ -2,12 +2,74 @@
 export const lang = 'en';
 export const slug = '';
 import Layout from '../../layouts/Layout.astro';
+import HeroSection from '../../components/home/HeroSection.astro';
+import StaysGrid from '../../components/home/StaysGrid.astro';
+import KidsFunSpaces from '../../components/home/KidsFunSpaces.astro';
+import ExperiencesSection from '../../components/home/ExperiencesSection.astro';
+import ServicesGrid from '../../components/home/ServicesGrid.astro';
+import SurroundingsBeta from '../../components/home/SurroundingsBeta.astro';
+import Reviews from '../../components/home/Reviews.astro';
 ---
 
-<Layout lang={lang} slug={slug} title="Home | Castell de Mejanell">
-  <main class="mx-auto max-w-6xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Home (EN) - Placeholder</h1>
-    <p class="text-base text-[#6b5f56]">English version placeholder. Replace with real content.</p>
-    <p class="mt-6"><a href="/en/prices-and-occupancy" class="text-sm underline">See prices & occupancy →</a></p>
-  </main>
+<Layout lang={lang} slug={slug} title="Torre de Mejanell | Rural Escape" description="Discover our rural house: a restored farmhouse turned into a rural tourism retreat where dreams mingle with the charm of nature.">
+	<main>
+		<HeroSection
+			title="Welcome to Torre de Mejanell"
+			subtitle="Mejanell Castle"
+			description="Escape to a rural paradise full of history"
+			primaryLabel="Rooms"
+			primaryHref="#estancias"
+			secondaryLabel="Prices and occupancy"
+			secondaryHref="/en/prices-and-occupancy"
+		/>
+		<ExperiencesSection title="An old restored farmhouse turned into a rural tourism accommodation" />
+		<StaysGrid
+			title="Our Rooms"
+			subtitle="Authenticity · Tranquility · Comfort"
+			buttonLabel="View all rooms"
+			buttonHref="/en/rooms"
+		/>
+		<KidsFunSpaces lang="en" />
+		<SurroundingsBeta
+			title="The surroundings of Mejanell"
+			cards={[
+				{ eyebrow: 'Active Tourism', title: 'Discover unique routes and spectacular landscapes on two wheels', description: 'Discover unique routes, ancient trails and spectacular landscapes on two wheels.', href: '/en/surroundings#active-tourism', alt: 'BTT routes and hiking in the Segarra', image: 'btt' },
+				{ eyebrow: 'Gastronomy', title: 'Enotourism and restaurants in the region', description: 'Tastings of local wines and traditional cuisine from our land.', href: '/en/surroundings#gastronomy', alt: 'Vineyards and enotourism at Torre Mejanell', image: 'vinya' },
+				{ eyebrow: 'Culture', title: 'Historic Heritage', description: 'Explore the Cister Route and the castles of the Segarra', href: '/en/surroundings#heritage', alt: 'Historic heritage and the Cister Route', image: 'cister' },
+			]}
+		/>
+		<ServicesGrid
+			eyebrow="Comfort and wellbeing"
+			heading="Services and facilities"
+			houseServicesHeading="House services"
+			kitchenHeading="Fully equipped kitchen"
+			houseItems={[
+				{ icon: 'BedDouble', text: 'Extra beds' },
+				{ icon: 'Baby', text: 'Crib' },
+				{ icon: 'ChefHat', text: 'Food delivery' },
+				{ icon: 'Waves', text: 'Pool' },
+				{ icon: 'Tv', text: 'TV' },
+				{ icon: 'Flame', text: 'Fireplace' },
+				{ icon: 'Trees', text: 'Garden furniture' },
+				{ icon: 'Sofa', text: 'Table and chairs' },
+				{ icon: 'Bike', text: 'Bicycles' },
+				{ icon: 'Dices', text: 'Board games' },
+				{ icon: 'Flame', text: 'Barbecue/Charcoal' },
+				{ icon: 'Flame', text: 'Paella pan' },
+			]}
+			kitchenItems={[
+				{ icon: 'WashingMachine', text: 'Washing machine' },
+				{ icon: 'Utensils', text: 'Dishwasher' },
+				{ icon: 'Refrigerator', text: '2 Fridges' },
+				{ icon: 'CookingPot', text: 'Oven' },
+				{ icon: 'Microwave', text: 'Microwaves' },
+				{ icon: 'Flame', text: 'Ceramic hob' },
+				{ icon: 'Citrus', text: 'Juicer' },
+				{ icon: 'Utensils', text: 'Blender' },
+				{ icon: 'Coffee', text: 'Nespresso and Italian coffee maker' },
+			]}
+		/>
+		<Reviews heading="What our clients say" eyebrow="Testimonials" />
+		<script id="shapo-embed-js" type="text/javascript" src="https://cdn.shapo.io/js/embed.js" defer></script>
+	</main>
 </Layout>

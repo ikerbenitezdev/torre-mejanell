@@ -9,16 +9,35 @@ const { lang = 'ca' } = Astro.props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/rooms/*.{jpeg,jpg,png,gif,webp}', { eager: true });
 
-const rawRooms = [
-    { title: 'Habitació 3 persones', text: 'Habitació de dos llits individuals amb bressol i lavabo.', image: '../../assets/pages/rooms/torre-mejanell-3-persones.webp' },
-    { title: 'Habitació doble', text: 'Habitació a la planta baixa amb llit de matrimoni.', image: '../../assets/pages/rooms/torre-mejanell-doble2.webp' },
-    { title: 'Habitació 2 persones', text: 'Llit de matrimoni', image: '../../assets/pages/rooms/torre-mejanell-2-persones3.webp' },
-    { title: 'Habitació 2 persones', text: 'Dos llits individuals', image: '../../assets/pages/rooms/torre-mejanell-2-persones.webp' },
-    { title: 'Habitació 2 persones', text: 'Dos llits individuals amb lavabo ', image: '../../assets/pages/rooms/torre-mejanell-2-persones4.webp' },
-    { title: 'Habitació doble', text: 'Habitació a la planta baixa per a dues persones. ', image: '../../assets/pages/rooms/torre-mejanell-doble1.webp' },
-];
+const roomContent = {
+    ca: [
+        { title: 'Habitació 3 persones', text: 'Habitació de dos llits individuals amb bressol i lavabo.', image: '../../assets/pages/rooms/torre-mejanell-3-persones.webp' },
+        { title: 'Habitació doble', text: 'Habitació a la planta baixa amb llit de matrimoni.', image: '../../assets/pages/rooms/torre-mejanell-doble2.webp' },
+        { title: 'Habitació 2 persones', text: 'Llit de matrimoni', image: '../../assets/pages/rooms/torre-mejanell-2-persones3.webp' },
+        { title: 'Habitació 2 persones', text: 'Dos llits individuals', image: '../../assets/pages/rooms/torre-mejanell-2-persones.webp' },
+        { title: 'Habitació 2 persones', text: 'Dos llits individuals amb lavabo ', image: '../../assets/pages/rooms/torre-mejanell-2-persones4.webp' },
+        { title: 'Habitació doble', text: 'Habitació a la planta baixa per a dues persones. ', image: '../../assets/pages/rooms/torre-mejanell-doble1.webp' },
+    ],
+    es: [
+        { title: 'Habitación 3 personas', text: 'Habitación de dos camas individuales con cuna y lavabo.', image: '../../assets/pages/rooms/torre-mejanell-3-persones.webp' },
+        { title: 'Habitación doble', text: 'Habitación en la planta baja con cama de matrimonio.', image: '../../assets/pages/rooms/torre-mejanell-doble2.webp' },
+        { title: 'Habitación 2 personas', text: 'Cama de matrimonio', image: '../../assets/pages/rooms/torre-mejanell-2-persones3.webp' },
+        { title: 'Habitación 2 personas', text: 'Dos camas individuales', image: '../../assets/pages/rooms/torre-mejanell-2-persones.webp' },
+        { title: 'Habitación 2 personas', text: 'Dos camas individuales con lavabo', image: '../../assets/pages/rooms/torre-mejanell-2-persones4.webp' },
+        { title: 'Habitación doble', text: 'Habitación en la planta baja para dos personas.', image: '../../assets/pages/rooms/torre-mejanell-doble1.webp' },
+    ],
+    en: [
+        { title: '3-person room', text: 'A room with two single beds, a cot and a washbasin.', image: '../../assets/pages/rooms/torre-mejanell-3-persones.webp' },
+        { title: 'Double room', text: 'A room on the ground floor with a double bed.', image: '../../assets/pages/rooms/torre-mejanell-doble2.webp' },
+        { title: '2-person room', text: 'A double bed', image: '../../assets/pages/rooms/torre-mejanell-2-persones3.webp' },
+        { title: '2-person room', text: 'Two single beds', image: '../../assets/pages/rooms/torre-mejanell-2-persones.webp' },
+        { title: '2-person room', text: 'Two single beds with a washbasin', image: '../../assets/pages/rooms/torre-mejanell-2-persones4.webp' },
+        { title: 'Double room', text: 'A room on the ground floor for two people.', image: '../../assets/pages/rooms/torre-mejanell-doble1.webp' },
+    ],
+} as const;
 
-const rooms = rawRooms.filter(r => images[r.image]);
+const rawRooms = roomContent[lang] ?? roomContent.ca;
+const rooms = rawRooms.filter((room) => images[room.image]);
 ---
 
 <section id="full-screen-slider" class="relative w-full h-[85vh] overflow-hidden">
@@ -38,10 +57,10 @@ const rooms = rawRooms.filter(r => images[r.image]);
     ))}
 
     <!-- Controles -->
-    <button id="prev-btn" class="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-white/10 hover:bg-white/20 transition-all backdrop-blur-md">
+    <button id="prev-btn" class="absolute left-6 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-white/10 hover:bg-white/20 transition-all backdrop-blur-md hidden md:block">
         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
     </button>
-    <button id="next-btn" class="absolute right-6 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-white/10 hover:bg-white/20 transition-all backdrop-blur-md">
+    <button id="next-btn" class="absolute right-6 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-white/10 hover:bg-white/20 transition-all backdrop-blur-md hidden md:block">
         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
     </button>
 </section>

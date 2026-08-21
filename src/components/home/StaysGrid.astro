@@ -3,13 +3,25 @@ import { Image } from 'astro:assets';
 
 interface Props {
     lang?: 'ca' | 'es' | 'en';
+    title?: string;
+    subtitle?: string;
+    buttonLabel?: string;
+    buttonHref?: string;
+    rooms?: Array<{ title: string; text: string; image: string }>;
 }
 
-const { lang = 'ca' } = Astro.props;
+const {
+    lang = 'ca',
+    title = 'Habitacions',
+    subtitle = 'Autenticitat · Tranquil·litat · Confort',
+    buttonLabel = 'Veure més habitacions',
+    buttonHref = '/habitacions',
+    rooms: providedRooms,
+} = Astro.props as Props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('../../assets/pages/rooms/*.{jpeg,jpg,png,gif,webp}');
 
-const rooms = [
+const defaultRooms = [
     {
         title: 'Habitació 3 persones',
         text: 'Habitació de dos llits individuals amb bressol i lavabo. ',
@@ -27,28 +39,17 @@ const rooms = [
     },
 ];
 
-const localizedPaths: Record<'ca' | 'es' | 'en', string> = {
-    ca: '/habitacions',
-    es: '/es/habitaciones',
-    en: '/en/rooms'
-};
-
-const buttonLabels: Record<'ca' | 'es' | 'en', string> = {
-    ca: 'Veure més habitacions',
-    es: 'Ver más habitaciones',
-    en: 'View all rooms'
-};
-
+const rooms = providedRooms ?? defaultRooms;
 const featuredRooms = rooms.slice(0, 3);
 ---
 
 <section id="estancias" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24 overflow-hidden">
     <div class="max-w-4xl mx-auto text-center mb-10">
         <p id="room-title" class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d] opacity-0">
-            Autenticitat · Tranquil·litat · Confort
+            {subtitle}
         </p>
         <h2 id="room-heading" class="max-w-[14ch] mx-auto text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem] opacity-0">
-            {lang === 'es' ? 'Habitaciones' : lang === 'en' ? 'Our Rooms' : 'Habitacions'}
+            {title}
         </h2>
     </div>
 
@@ -84,10 +85,10 @@ const featuredRooms = rooms.slice(0, 3);
     <div class="mt-12 text-center">
         <a 
             id="room-btn"
-            href={localizedPaths[lang]} 
+            href={buttonHref} 
             class="inline-flex items-center justify-center rounded-full text-xs px-6 py-3 sm:text-sm font-bold border border-[#1f1a17] bg-[#1f1a17] !text-[#f8f4ec] transition-all duration-200 hover:bg-[#332c28] hover:-translate-y-0.5 shadow-md opacity-0"
         >
-            {buttonLabels[lang]}
+            {buttonLabel}
         </a>
     </div>
 </section>

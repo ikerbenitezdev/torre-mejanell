@@ -1,0 +1,32 @@
+---
+export const lang = 'en';
+export const slug = 'the-origins';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout lang={lang} slug={slug} title="The origins | Torre de Mejanell">
+  <main class="bg-[#fcfbf9] text-[#1f1a17] overflow-x-hidden">
+    <section class="max-w-7xl mx-auto px-6 py-20 lg:py-28 space-y-10">
+      <div class="space-y-4 max-w-3xl">
+        <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-[#7a5a3d]">The origins</p>
+        <h1 class="text-4xl md:text-5xl font-serif text-[#1f1a17]">The origins of Torre de Mejanell</h1>
+        <p class="text-lg text-[#6b5f56] leading-relaxed">
+          The place preserves the memory of a medieval fortress that, over time, became a lively and welcoming country house full of history.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10">
+        <article class="rounded-[2rem] border border-[#e5dcd0] bg-white p-8 shadow-sm space-y-4">
+          <h2 class="text-2xl font-serif text-[#1f1a17]">A medieval legacy</h2>
+          <p class="text-sm leading-relaxed text-[#6b5f56]">The defensive tower, the walls and the heritage complex speak of a history tied to the land and the defence of the territory.</p>
+          <p class="text-sm leading-relaxed text-[#6b5f56]">The old watchtower from the 11th century still stands as a witness to the strategic importance of the site.</p>
+        </article>
+        <article class="rounded-[2rem] border border-[#e5dcd0] bg-[#f6efe4] p-8 shadow-sm space-y-4">
+          <h2 class="text-2xl font-serif text-[#1f1a17]">A living house</h2>
+          <p class="text-sm leading-relaxed text-[#6b5f56]">The farmhouse built in the 14th century was integrated with the tower and now offers a high-quality rural environment, respecting the original forms.</p>
+          <p class="text-sm leading-relaxed text-[#6b5f56]">The restoration has managed to preserve the character of the place while offering comfort and serenity to its guests.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>

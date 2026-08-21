@@ -1,5 +1,11 @@
 ---
-const items = ['Desconexió natural', 'Escapada rural', 'Arquitectura de pedra', 'Llum i calma', 'Paisatge obert'];
+interface Props {
+	items?: string[];
+}
+
+const {
+	items = ['Desconexió natural', 'Escapada rural', 'Arquitectura de pedra', 'Llum i calma', 'Paisatge obert'],
+} = Astro.props as Props;
 ---
 
 <section aria-hidden="true" class="border-y border-black/10 bg-white/50 backdrop-blur-md">

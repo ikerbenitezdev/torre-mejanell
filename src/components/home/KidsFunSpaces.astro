@@ -1,0 +1,433 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    lang?: 'ca' | 'es' | 'en';
+    title?: string;
+    subtitle?: string;
+    note?: string;
+    cards?: Array<{
+        title: string;
+        text: string;
+        image: string;
+        alt?: string;
+    }>;
+}
+
+const laCasaImages = import.meta.glob<{ default: ImageMetadata }>(
+    '../../assets/pages/la-casa/*.{jpeg,jpg,png,gif,webp}'
+);
+
+const defaultImagePaths = [
+    '../../assets/pages/la-casa/bicis-torre-mejanell.webp',
+    '../../assets/pages/la-casa/casa-arbre-mejanell.webp',
+    '../../assets/pages/la-casa/llit-elastic-torre-mejanell.webp',
+    '../../assets/pages/la-casa/ping-pong-mejanell.webp',
+];
+
+const {
+    lang = 'ca',
+    title,
+    subtitle,
+    note,
+    cards: providedCards,
+} = Astro.props as Props;
+
+const copyByLang = {
+    ca: {
+        title: 'Espais per als més petits',
+        subtitle: 'Jugar, riure i imaginar',
+        note: 'Afegeix les teves 4 imatges al camp image de cada escena.',
+        cards: [
+            {
+                title: 'Espai de joc 1',
+                text: 'Un racó ampli per compartir estones en família.',
+                alt: 'Espai de joc familiar',
+                image: defaultImagePaths[0],
+            },
+            {
+                title: 'Espai de joc 2',
+                text: 'Llum, comoditat i un ambient divertit per als nens.',
+                alt: 'Zona interior per a nens',
+                image: defaultImagePaths[1],
+            },
+            {
+                title: 'Espai de joc 3',
+                text: 'Un escenari ideal per explorar i inventar aventures.',
+                alt: 'Espai infantil de la casa',
+                image: defaultImagePaths[2],
+            },
+            {
+                title: 'Espai de joc 4',
+                text: 'Dissenyat per gaudir plegats amb calma i alegria.',
+                alt: 'Raco infantil a la casa',
+                image: defaultImagePaths[3],
+            },
+        ],
+        placeholders: ['Posa aqui la foto 1', 'Posa aqui la foto 2', 'Posa aqui la foto 3', 'Posa aqui la foto 4'],
+    },
+    es: {
+        title: 'Espacios para los más pequeños',
+        subtitle: 'Jugar, reír e imaginar',
+        note: 'Añade tus 4 imágenes en el campo image de cada escena.',
+        cards: [
+            {
+                title: 'Espacio de juego 1',
+                text: 'Un rincón amplio para compartir momentos en familia.',
+                alt: 'Espacio de juego familiar',
+                image: defaultImagePaths[0],
+            },
+            {
+                title: 'Espacio de juego 2',
+                text: 'Luz, comodidad y un ambiente divertido para niños.',
+                alt: 'Zona interior para niños',
+                image: defaultImagePaths[1],
+            },
+            {
+                title: 'Espacio de juego 3',
+                text: 'Un escenario ideal para explorar e inventar aventuras.',
+                alt: 'Espacio infantil de la casa',
+                image: defaultImagePaths[2],
+            },
+            {
+                title: 'Espacio de juego 4',
+                text: 'Pensado para disfrutar juntos con calma y alegria.',
+                alt: 'Rincon infantil en la casa',
+                image: defaultImagePaths[3],
+            },
+        ],
+        placeholders: ['Pon aqui la foto 1', 'Pon aqui la foto 2', 'Pon aqui la foto 3', 'Pon aqui la foto 4'],
+    },
+    en: {
+        title: 'Spaces for little ones',
+        subtitle: 'Play, laugh and imagine',
+        note: 'Add your 4 images in each scene image field.',
+        cards: [
+            {
+                title: 'Play space 1',
+                text: 'A wide corner to enjoy quality family time together.',
+                alt: 'Family play area',
+                image: defaultImagePaths[0],
+            },
+            {
+                title: 'Play space 2',
+                text: 'Light, comfort and a fun atmosphere for children.',
+                alt: 'Indoor children area',
+                image: defaultImagePaths[1],
+            },
+            {
+                title: 'Play space 3',
+                text: 'An ideal scene to explore and create adventures.',
+                alt: 'Kids area in the house',
+                image: defaultImagePaths[2],
+            },
+            {
+                title: 'Play space 4',
+                text: 'Made to enjoy calm and joyful moments together.',
+                alt: 'Children corner at the house',
+                image: defaultImagePaths[3],
+            },
+        ],
+        placeholders: ['Add image 1 here', 'Add image 2 here', 'Add image 3 here', 'Add image 4 here'],
+    },
+} as const;
+
+const copy = copyByLang[lang] ?? copyByLang.ca;
+
+const cards =
+    providedCards ??
+    copy.cards.map((card) => ({
+        ...card,
+        image: card.image,
+    }));
+
+const sectionTitle = title ?? copy.title;
+const sectionSubtitle = subtitle ?? copy.subtitle;
+const sectionNote = note ?? copy.note;
+
+const safeCards = cards.length >= 4 ? cards.slice(0, 4) : [...cards, ...copy.cards.slice(cards.length)].slice(0, 4).map((card, i) => ({
+    ...card,
+    image: cards[i]?.image ?? '',
+}));
+---
+
+<section id="kids-fun-spaces" class="kids-wrap">
+    <div class="kids-head">
+        <p id="kids-subtitle" class="mb-4 text-sm font-extrabold uppercase tracking-[0.22em] text-[#7a5a3d] opacity-0">{sectionSubtitle}</p>
+        <h2 id="kids-heading" class="mb-10 mx-auto text-4xl leading-[0.95] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem] opacity-0">{sectionTitle}</h2>
+        <!-- <p class="kids-note">{sectionNote}</p> -->
+    </div>
+
+    <div class="kids-stage" aria-live="polite">
+        <div class="kids-scene kids-scene-a" aria-label={safeCards[0].title + ' i ' + safeCards[1].title}>
+            {safeCards.slice(0, 2).map((card, i) => (
+                <article class="kids-panel" aria-label={card.title}>
+                    {
+                        (() => {
+                            const assetLoader = card.image ? laCasaImages[card.image] : undefined;
+                            if (assetLoader) {
+                                return (
+                                    <Image
+                                        src={assetLoader()}
+                                        alt={card.alt ?? card.title}
+                                        width={1600}
+                                        height={1100}
+                                        loading="lazy"
+                                        class="kids-image"
+                                    />
+                                );
+                            }
+
+                            if (card.image) {
+                                return <img src={card.image} alt={card.alt ?? card.title} loading="lazy" class="kids-image" />;
+                            }
+
+                            return (
+                                <div class="kids-placeholder" role="img" aria-label={copy.placeholders[i]}>
+                                    <span>{copy.placeholders[i]}</span>
+                                </div>
+                            );
+                        })()
+                    }
+                    {/* <div class="kids-overlay">
+                        <h3>{card.title}</h3>
+                        <p>{card.text}</p>
+                    </div> */}
+                </article>
+            ))}
+        </div>
+
+        <div class="kids-scene kids-scene-b" aria-label={safeCards[2].title + ' i ' + safeCards[3].title}>
+            {safeCards.slice(2, 4).map((card, i) => (
+                <article class="kids-panel" aria-label={card.title}>
+                    {
+                        (() => {
+                            const assetLoader = card.image ? laCasaImages[card.image] : undefined;
+                            if (assetLoader) {
+                                return (
+                                    <Image
+                                        src={assetLoader()}
+                                        alt={card.alt ?? card.title}
+                                        width={1600}
+                                        height={1100}
+                                        loading="lazy"
+                                        class="kids-image"
+                                    />
+                                );
+                            }
+
+                            if (card.image) {
+                                return <img src={card.image} alt={card.alt ?? card.title} loading="lazy" class="kids-image" />;
+                            }
+
+                            return (
+                                <div class="kids-placeholder" role="img" aria-label={copy.placeholders[i + 2]}>
+                                    <span>{copy.placeholders[i + 2]}</span>
+                                </div>
+                            );
+                        })()
+                    }
+                    {/* <div class="kids-overlay">
+                        <h3>{card.title}</h3>
+                        <p>{card.text}</p>
+                    </div> */}
+                </article>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .kids-wrap {
+        --kids-bg-1: #fff8ea;
+        --kids-bg-2: #ffe6c5;
+        --kids-ink: #2a1c14;
+        --kids-soft: #6d5548;
+        --kids-accent: #ff8a3d;
+        --kids-accent-2: #f7b733;
+        position: relative;
+        margin-top: 2.5rem;
+    }
+
+    .kids-wrap::before {
+        content: none;
+    }
+
+    .kids-head {
+        max-width: 60rem;
+        margin: 0 auto;
+        padding: 2.5rem 1rem 1rem;
+        text-align: center;
+    }
+
+    .kids-note {
+        margin-top: 0.8rem;
+        color: var(--kids-soft);
+        font-size: 0.98rem;
+    }
+
+    .kids-stage {
+        position: relative;
+        min-height: 78vh;
+        margin-top: 1.2rem;
+        overflow: hidden;
+    }
+
+    .kids-scene {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        opacity: 0;
+        animation-duration: 14s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+
+    .kids-scene-a {
+        animation-name: sceneA;
+    }
+
+    .kids-scene-b {
+        animation-name: sceneB;
+    }
+
+    .kids-panel {
+        position: relative;
+        overflow: hidden;
+        min-height: 39vh;
+        border-top: 1px solid rgba(54, 34, 18, 0.14);
+        border-bottom: 1px solid rgba(54, 34, 18, 0.14);
+    }
+
+    .kids-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.03);
+        animation: imageBreath 7s ease-in-out infinite alternate;
+    }
+
+    .kids-placeholder {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 1rem;
+        color: #8a6e5b;
+        font-weight: 700;
+        background:
+            repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.75),
+                rgba(255, 255, 255, 0.75) 12px,
+                rgba(255, 233, 199, 0.9) 12px,
+                rgba(255, 233, 199, 0.9) 24px
+            );
+    }
+
+    .kids-overlay {
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        color: #fff8ef;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+        background: linear-gradient(180deg, rgba(26, 16, 9, 0.05), rgba(26, 16, 9, 0.62));
+        border-radius: 0.8rem;
+        padding: 0.8rem 0.9rem;
+    }
+
+    .kids-overlay h3 {
+        font-size: 1.16rem;
+        margin: 0;
+    }
+
+    .kids-overlay p {
+        margin-top: 0.35rem;
+        font-size: 0.92rem;
+        line-height: 1.45;
+    }
+
+    @media (min-width: 768px) {
+        .kids-head {
+            padding-top: 3rem;
+        }
+
+        .kids-stage {
+            min-height: 88vh;
+        }
+
+        .kids-scene {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .kids-panel {
+            min-height: 88vh;
+            border-top: none;
+            border-bottom: none;
+            border-left: 1px solid rgba(54, 34, 18, 0.14);
+        }
+
+        .kids-panel:first-child {
+            border-left: none;
+        }
+
+        .kids-overlay {
+            left: 1.4rem;
+            right: 1.4rem;
+            bottom: 1.4rem;
+            padding: 1rem 1.1rem;
+        }
+
+        .kids-overlay h3 {
+            font-size: 1.34rem;
+        }
+
+        .kids-overlay p {
+            font-size: 0.98rem;
+        }
+    }
+
+    @keyframes sceneA {
+        0% { opacity: 1; }
+        38% { opacity: 1; }
+        50% { opacity: 0; }
+        88% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    @keyframes sceneB {
+        0% { opacity: 0; }
+        38% { opacity: 0; }
+        50% { opacity: 1; }
+        88% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    @keyframes imageBreath {
+        from { transform: scale(1.03); }
+        to { transform: scale(1.08); }
+    }
+</style>
+
+<script>
+    import { animate, inView, cubicBezier } from "motion";
+
+    const transitionEase = cubicBezier(0.25, 1, 0.5, 1);
+
+    inView("#kids-fun-spaces", () => {
+        animate(
+            "#kids-subtitle",
+            { opacity: [0, 1], y: [20, 0] } as any,
+            { duration: 0.6, easing: transitionEase } as any
+        );
+
+        animate(
+            "#kids-heading",
+            { opacity: [0, 1], y: [30, 0] } as any,
+            { duration: 0.8, delay: 0.15, easing: transitionEase } as any
+        );
+    }, { margin: "-10% 0px -10% 0px" });
+</script>

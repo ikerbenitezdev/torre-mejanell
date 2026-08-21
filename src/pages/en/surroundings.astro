@@ -1,13 +1,286 @@
 ---
 export const lang = 'en';
 export const slug = 'surroundings';
+
 import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/home/Hero.astro';
+import { Image } from 'astro:assets';
+
+import cisterImg from '../../assets/pages/entorn/cister.webp';
+import botigues from '../../assets/pages/entorn/botigues.webp';
+import bttImg from '../../assets/pages/entorn/btt-segarra.webp';
+import vinyaImg from '../../assets/pages/entorn/vinya-torre-mejanell.webp';
+import correfocImg from '../../assets/pages/entorn/correfoc.webp';
+import gastronomia1 from '../../assets/pages/entorn/gastronomia1.webp';
+import gastronomia2 from '../../assets/pages/entorn/gastronomia2.webp';
 ---
 
-<Layout lang={lang} slug={slug} title="Surroundings | Castell de Mejanell">
-  <main class="mx-auto max-w-5xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Surroundings</h1>
-    <p class="text-base text-[#6b5f56]">Information about the surroundings and nearby activities.</p>
-    <p class="mt-6"><a href="/en/" class="text-sm underline">← Back to home</a></p>
+<Layout lang={lang} slug={slug} title="Guide to the surroundings | Torre de Mejanell">
+  <Hero
+    tag="Discover the Segarra"
+    title="The surroundings of Mejanell"
+    subtitle="Easily find everything you can do and discover nearby: activities, gastronomy, local trade and must-see visits."
+    image={cisterImg}
+  />
+
+  <main class="bg-[#fcfbfa] text-[#1f1a17] py-20 md:py-32 relative z-10">
+    <div class="max-w-7xl mx-auto px-8 md:px-12 space-y-28 md:space-y-36">
+      <section id="active-tourism" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Active tourism</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Nature and sport</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              Experience the territory in a different way through outdoor activities, adventure options and nearby sports facilities for all ages.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Adventure and water</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Hiking routes</li>
+                <li>Mountain biking routes</li>
+                <li>Hot air balloon flights</li>
+                <li>Horse riding</li>
+                <li>Cervera Adventure with paintball and other activities</li>
+                <li>Canoeing with Club Nàutic Segre-Rialb and La Pica Trips on the Segre river</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Nearby facilities</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Golf / Pitch &amp; Putt near Guissona</li>
+                <li>Ski at Port del Comte, 1 hour away</li>
+                <li>Covered pools in Cervera</li>
+                <li>Public pools in Sant Ramon</li>
+                <li>Padel courts in BonÀrea and Sant Ramon</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Bicycles available at the house</p>
+            <p class="mt-3 text-sm text-[#6b5f56] leading-relaxed">
+              You have 4 adult mountain bikes and 3 children’s bikes at your disposal, in small and medium sizes.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="grid grid-cols-2 gap-4">
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+              <Image src={bttImg} alt="BTT routes through the Segarra" class="w-full h-full object-cover" />
+            </figure>
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5] mt-10">
+              <Image src={vinyaImg} alt="Walk through vineyards near Mejanell" class="w-full h-full object-cover" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="gastronomy" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Gastronomy</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Recommended bars and restaurants</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              The gastronomy of the Segarra is characterized by the quality of local produce and traditional cooking.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Sant Ramon</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Bar Les Planes</li>
+                <li>Bar Centre, in front of the Monastery</li>
+              </ul>
+              <h3 class="text-lg font-serif text-[#1f1a17] pt-2">Cervera</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>El Gran Cafè</li>
+                <li>Els Comdals</li>
+                <li>Rostisseria Romina, takeaway</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Other options</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Can Jaumet</li>
+                <li>El Gòtic</li>
+                <li>Torrecombelles</li>
+                <li>Guissona area, with buffet</li>
+                <li>La Bassa in Guissona</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm space-y-4">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Enotourism</p>
+            <p class="text-sm text-[#6b5f56] leading-relaxed">
+              Within 25-30 minutes of the house you can visit wineries in the Bages area, the specialised shop <span class="font-medium text-[#7a5a3d]">ARTIUM</span> in Artés, visits to Sant Sadurní d’Anoia with Codorníu and Castell del Remei, with high-quality wines.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="grid grid-cols-2 gap-4">
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+              <Image src={gastronomia1} alt="Local gastronomy" class="w-full h-full object-cover" />
+            </figure>
+            <figure class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5] mt-10">
+              <Image src={gastronomia2} alt="Local gastronomy" class="w-full h-full object-cover" />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="festivals-and-culture" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Festivals and cultural events</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Festivals, culture and traditions</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              A very lively agenda with popular celebrations, theatre, Holy Week, Christmas traditions and food fairs throughout the year.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Popular festivals</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Akelarre de Cervera, in August</li>
+                <li>Fiesta Mayor de Sant Ramon with the Tres Tombs, on 31 August</li>
+                <li>Fira de l'Ou de Sant Guim de Freixenet, in June</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Culture and shows</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Fira del Teatre de Tàrrega, in September</li>
+                <li>La Passió de Cervera, during Holy Week</li>
+                <li>Fira del Torró i la Xocolata d'Agramunt</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm space-y-4">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Christmas traditions</p>
+            <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+              <li>Living Nativity of Sant Guim de la Plana</li>
+              <li>Living nativities in Torres de Fals and other towns</li>
+              <li>Pastorets de Calaf</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+            <Image src={correfocImg} alt="Festivals and traditions of the Segarra" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section id="local-trade" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Local trade</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Local products and markets</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              Local trade and artisanal products.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Bakeries</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Chocolate Box - Cal Colom, in Cervera</li>
+                <li>Pa d'Abans, in Cervera</li>
+                <li>La Garbiana, in Tarroja</li>
+                <li>Bakery in Sant Ramon</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Butchers</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Can Magí, in Torà</li>
+                <li>Can Vilà, in Cervera</li>
+                <li>Guissona area</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#fffaf5] p-8 shadow-sm">
+            <p class="text-xs tracking-wider uppercase font-bold text-[#7a5a3d]">Weekly markets</p>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-sm">
+              <div class="rounded-xl border border-[#d8d3cb]/30 bg-white p-4 shadow-sm">
+                <strong>Monday</strong>
+                <br />
+                <span class="text-[#7a5a3d] font-medium">Tàrrega</span>
+              </div>
+              <div class="rounded-xl border border-[#d8d3cb]/30 bg-white p-4 shadow-sm">
+                <strong>Friday</strong>
+                <br />
+                <span class="text-[#7a5a3d] font-medium">Cervera</span>
+              </div>
+              <div class="rounded-xl border border-[#d8d3cb]/30 bg-white p-4 shadow-sm">
+                <strong>Saturday</strong>
+                <br />
+                <span class="text-[#7a5a3d] font-medium">Calaf</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+            <Image src={botigues} alt="Markets and nearby heritage" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section id="nearby-visits" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <p class="text-xs tracking-[0.3em] uppercase font-bold text-[#7a5a3d]">Nearby visits</p>
+            <h2 class="text-4xl md:text-5xl font-serif text-[#7a5a3d]">Historic and cultural heritage</h2>
+            <p class="text-base md:text-lg text-[#6b5f56] leading-relaxed max-w-2xl">
+              Discover castles and medieval towns that make the Segarra a territory with a unique history and identity.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-white p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Historic heritage</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Castle of Mejanell</li>
+                <li>Monastery of Poblet</li>
+                <li>Routes of the Cistercian Way</li>
+              </ul>
+            </article>
+
+            <article class="rounded-[1.75rem] border border-[#d8d3cb]/50 bg-[#f4f1ed] p-8 shadow-sm space-y-5">
+              <h3 class="text-lg font-serif text-[#1f1a17]">Towns of interest</h3>
+              <ul class="space-y-2 text-sm text-[#6b5f56] leading-relaxed list-disc pl-5">
+                <li>Guissona</li>
+                <li>Calaf</li>
+                <li>Tàrrega</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-[2rem] overflow-hidden bg-[#e5e1dc] shadow-sm aspect-[4/5]">
+            <Image src={cisterImg} alt="Historic and cultural heritage" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 </Layout>

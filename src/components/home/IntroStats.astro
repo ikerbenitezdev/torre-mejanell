@@ -2,23 +2,39 @@
 import basicImage1 from '../../assets/pages/home/exterior-torre-mejanell.webp';
 import basicImage2 from '../../assets/pages/home/escales-torre-mejanell.webp';
 
-const metrics = [
+interface Props {
+    headline?: string;
+    metrics?: Array<{ value: string; label: string }>;
+    image1Alt?: string;
+    image2Alt?: string;
+}
+
+const {
+    headline = 'Una antiga masia transformada en un refugi de turisme rural on els somnis es barregen amb l\'encant de la natura.',
+    metrics: providedMetrics,
+    image1Alt = 'Escala de cargol de pedra a la masia',
+    image2Alt = 'Exterior de la masia de turisme rural amb torre de pedra',
+} = Astro.props as Props;
+
+const defaultMetrics = [
 	{ value: '04', label: 'capas visuales' },
 	{ value: '12', label: 'bloques animados' },
 	{ value: '100%', label: 'estatica y ligera' },
 ];
+
+const metrics = providedMetrics ?? defaultMetrics;
 ---
 
 <section class="mx-auto max-w-7xl px-4 py-16">
     <h2 class="mx-auto max-w-5xl text-center text-4xl leading-[1.1] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
-        Una antiga masia transformada en un refugi de turisme rural on els somnis es barregen amb l'encant de la natura.
+        {headline}
     </h2>
 
     <div class="mt-12 grid gap-8 sm:grid-cols-2">
         <div class="overflow-hidden rounded-lg">
             <img 
                 src={basicImage1.src}
-                alt="Escala de caragol de pedra a la masia" 
+                alt={image1Alt} 
                 class="h-[500px] w-full object-cover sm:h-[600px] lg:h-[700px]"
             />
         </div>
@@ -26,7 +42,7 @@ const metrics = [
         <div class="overflow-hidden rounded-lg">
             <img 
                 src={basicImage2.src}
-                alt="Exterior de la masia de turisme rural amb torre de pedra" 
+                alt={image2Alt} 
                 class="h-[500px] w-full object-cover sm:h-[600px] lg:h-[700px]"
             />
         </div>

@@ -2,18 +2,106 @@
 export const lang = 'en';
 export const slug = 'prices-and-occupancy';
 import Layout from '../../layouts/Layout.astro';
+
+const tableData = {
+  title: 'Price list for Torre de Mejanell',
+  headers: ['Group/people', 'Weekend / 2 days', 'Full week / 7 days'],
+  rows: [
+    {
+      group: 'Up to 14 people',
+      weekend: [
+        { text: '920 € (base price)', isBold: true },
+        { text: '990 € (base price May-June and September)', isBold: false },
+      ],
+      fullWeek: [
+        { text: 'Low season 1900 € (week)', isBold: false },
+        { text: 'July 2250 €', isBold: true, highlightWord: '2250 €' },
+        { text: 'August 2600 €', isBold: false },
+      ],
+    },
+    {
+      group: 'From 15 to 18 people',
+      weekend: [
+        { text: '920 € (base price) + 15 € person/night', isBold: true },
+        { text: '990 € (base price May-June-September) + 15 € person/night', isBold: false },
+      ],
+      fullWeek: [],
+    },
+  ],
+};
 ---
 
-<Layout lang={lang} slug={slug} title="Prices & Occupancy | Castell de Mejanell">
-  <main class="mx-auto max-w-4xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Prices & Occupancy</h1>
-    <p class="mb-4 text-base text-[#6b5f56]">Check availability and current prices via our booking widget.</p>
+<Layout lang={lang} slug={slug} title="Prices & Occupancy | Torre de Mejanell">
+  <main class="mx-auto max-w-7xl px-4 py-10 lg:px-6">
+    <h1 class="mb-2 text-3xl md:text-4xl font-serif text-[#1f1a17]">Prices & Occupancy</h1>
+    <p class="mb-10 text-base text-[#6b5f56]">Check our rates and current availability through the booking calendar.</p>
 
-    <div class="bg-white w-full max-w-[685px]">
-      <script type="text/javascript" src="https://www.escapadarural.com/widget-js/5c09509d3c4e0"></script>
-      <iframe class="w-full h-[75vh] max-h-[800px]" src="https://www.escapadarural.com/widget-html/5c09509d3c4e0" scrolling="no" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    <div class="mb-6">
+      <h2 class="text-xl font-serif font-bold text-[#1f1a17] tracking-tight">{tableData.title}</h2>
     </div>
 
-    <p class="mt-6"><a href="/en/" class="text-sm underline">← Back to home</a></p>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full">
+      <div class="lg:col-span-5 space-y-6 w-full">
+        <div class="overflow-x-auto rounded-2xl border border-black/10 shadow-sm bg-white w-full">
+          <table class="w-full text-left border-collapse min-w-[450px]">
+            <thead>
+              <tr class="bg-[#f6efe4] border-b border-black/10 text-[#1f1a17]">
+                {tableData.headers.map((header) => (
+                  <th class="px-3 py-3.5 text-xs font-bold tracking-wide uppercase text-[#7a5a3d]">{header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-black/5 text-[#4a413a]">
+              {tableData.rows.map((row) => (
+                <tr class="hover:bg-[#fcfbf9] transition-colors">
+                  <td class="px-3 py-4 text-xs md:text-sm font-semibold text-[#1f1a17] bg-[#fdfbfa]/50 w-1/4">{row.group}</td>
+                  <td class="px-3 py-4 text-xs md:text-sm space-y-1 w-2/5">
+                    {row.weekend.map((item) => (
+                      <p class:list={[item.isBold ? 'font-bold text-[#1f1a17]' : 'text-[#6b5f56]']}>{item.text}</p>
+                    ))}
+                  </td>
+                  <td class="px-3 py-4 text-xs md:text-sm space-y-1 w-1/3">
+                    {row.fullWeek.length > 0 ? row.fullWeek.map((item) => (
+                      <p class:list={[item.isBold ? 'text-[#1f1a17] font-medium' : 'text-[#6b5f56]']}>
+                        {item.highlightWord ? <>July <span class="font-bold text-[#1f1a17]">{item.highlightWord}</span></> : item.text}
+                      </p>
+                    )) : <span class="text-gray-300 italic text-sm">—</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-[#fcfbf9] rounded-2xl border border-black/5 p-5 mt-4">
+          <ul class="space-y-2.5 text-sm text-[#6b5f56] font-medium">
+            <li class="flex items-start gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-[#7a5a3d] mt-2 shrink-0"></span><span>Torre de Mejanell reserves the right of admission and stay.</span></li>
+            <li class="flex items-start gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-[#7a5a3d] mt-2 shrink-0"></span><span>To confirm the booking, 20% of the total amount must be paid.</span></li>
+            <li class="flex items-start gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-[#7a5a3d] mt-2 shrink-0"></span><span>Holy Week, Christmas, New Year and bank holidays, please check prices with the owner.</span></li>
+            <li class="flex items-start gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-[#7a5a3d] mt-2 shrink-0"></span><span>Pets, please check with the owner.</span></li>
+            <li class="flex items-start gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-[#7a5a3d] mt-2 shrink-0"></span><span>The price includes: housewares, coal, firewood, tourist tax, bicycles.</span></li>
+            <li class="flex items-start gap-3"><span class="h-1.5 w-1.5 rotate-45 bg-[#7a5a3d] mt-2 shrink-0"></span><span>In case of cancellation, the payment and deposit will be returned in full up to three weeks before arrival.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 w-full flex flex-col">
+        <div class="w-full overflow-x-auto lg:overflow-x-visible rounded-2xl border border-black/10 p-4 shadow-sm bg-white">
+          <div class="min-w-[760px] lg:min-w-0 lg:w-full min-h-[520px] lg:min-h-[550px]">
+            <iframe class="w-full h-full border-0 min-h-[520px] lg:min-h-[550px]" src="https://www.escapadarural.com/widget-html/5c09509d3c4e0" scrolling="no"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mt-16 border-t border-black/10 pt-10 max-w-3xl">
+      <h3 class="text-xl font-serif font-bold text-[#1f1a17] mb-4">Do you have any questions or want to make a direct enquiry?</h3>
+      <p class="text-base text-[#6b5f56] mb-6">If you prefer personalised attention or have special requests for your stay at Torre de Mejanell, please contact us:</p>
+      <div class="flex flex-col sm:flex-row sm:flex-wrap gap-x-8 gap-y-4 text-sm md:text-base font-medium">
+        <a href="mailto:rosa@castelldemejanell.com" class="flex items-center gap-2.5 text-[#1f1a17] hover:text-[#7a5a3d] transition-colors">rosa@castelldemejanell.com</a>
+        <a href="tel:+34610421113" class="flex items-center gap-2.5 text-[#1f1a17] hover:text-[#7a5a3d] transition-colors">(+34) 610 421 113</a>
+        <a href="tel:+34687562123" class="flex items-center gap-2.5 text-[#1f1a17] hover:text-[#7a5a3d] transition-colors">(+34) 687 562 123</a>
+      </div>
+    </section>
   </main>
 </Layout>

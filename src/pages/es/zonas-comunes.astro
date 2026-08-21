@@ -2,12 +2,50 @@
 export const lang = 'es';
 export const slug = 'zonas-comuns';
 import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/home/Hero.astro';
+import { Image } from 'astro:assets';
+
+import imgHero from '../../assets/pages/la-casa/zona-comu1.webp';
+import cuina from '../../assets/pages/la-casa/cuina-torre-mejanell.webp';
+import dutxa from '../../assets/pages/la-casa/dutxa-minusvalids.webp';
+import lavabo from '../../assets/pages/la-casa/lavabo-pica.webp';
+import menjador from '../../assets/pages/la-casa/menajdor-torre-mejanell.webp';
+import patiExterior from '../../assets/pages/la-casa/pati-exterior.webp';
+import patiInterior2 from '../../assets/pages/la-casa/pati-interior2.webp';
+import taulaExteiror from '../../assets/pages/la-casa/taula-exteiror.webp';
+import zonaComu2 from '../../assets/pages/la-casa/zona-comu2.webp';
+import barbacoa from '../../assets/pages/la-casa/barbacoa.webp';
+import piscina from '../../assets/pages/la-casa/piscina-torre-mejanell.webp';
+
+const spaces = [
+  { title: 'Cocina', image: cuina },
+  { title: 'Comedor', image: menjador },
+  { title: 'Patio interior', image: patiInterior2 },
+  { title: 'Exterior', image: patiExterior },
+  { title: 'Mesa exterior', image: taulaExteiror },
+  { title: 'Zona común', image: zonaComu2 },
+  { title: 'Lavabo adaptado', image: dutxa },
+  { title: 'Lavabo con pica', image: lavabo },
+  { title: 'Barbacoa', image: barbacoa },
+  { title: 'Piscina', image: piscina },
+];
 ---
 
-<Layout lang={lang} slug={slug} title="Zonas comuns | Castell de Mejanell">
-  <main class="mx-auto max-w-5xl px-4 py-10 lg:px-6">
-    <h1 class="mb-6 text-3xl font-serif">Zonas comuns</h1>
-    <p class="text-base text-[#6b5f56]">Contenido de ejemplo sobre las zonas comuns del castillo.</p>
-    <p class="mt-6"><a href="/es/" class="text-sm underline">← Volver al inicio</a></p>
+<Layout lang={lang} slug={slug} title="Zonas comunes | Torre de Mejanell">
+  <main class="bg-[#fcfbf9]">
+    <Hero tag="La Casa" title="Zonas comunes" subtitle="Descubre los espacios compartidos de Torre de Mejanell" image={imgHero} />
+
+    <section class="max-w-7xl mx-auto py-24 px-6">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {spaces.map((space) => (
+          <article class="rounded-[2rem] border border-[#e5dcd0] bg-white p-4 shadow-sm overflow-hidden">
+            <div class="aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-[#e8e4de]">
+              <Image src={space.image} alt={space.title} class="h-full w-full object-cover" />
+            </div>
+            <h2 class="mt-5 text-xl font-serif text-[#1f1a17]">{space.title}</h2>
+          </article>
+        ))}
+      </div>
+    </section>
   </main>
 </Layout>
