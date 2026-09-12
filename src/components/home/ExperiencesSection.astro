@@ -15,13 +15,13 @@ const {
 
 <section id="evolucion" class="mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24 overflow-hidden">
   <div class="max-w-4xl mx-auto text-center mb-16">
-     <h2 class="mx-auto max-w-5xl text-center text-4xl leading-[1.1] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem]">
+     <h2 id="experiences-title" class="mx-auto max-w-5xl text-center text-4xl leading-[1.1] tracking-[-0.04em] text-[#1f1a17] sm:text-5xl lg:text-[4.4rem] opacity-0">
        {title}
      </h2>
   </div>
 
   <div class="max-w-5xl mx-auto">
-    <div id="contenedor-presente" class="flex flex-col items-center text-center">
+    <div id="contenedor-presente" class="flex flex-col items-center text-center opacity-0">
       <div class="w-full shadow-2xl rounded-2xl overflow-hidden border border-gray-100">
         <Image 
           src={casaRural} 
@@ -32,3 +32,14 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const { animate, inView } = await import('motion');
+
+    inView('#evolucion', () => {
+      animate('#experiences-title', { opacity: [0, 1], y: [30, 0] }, { duration: 0.8, easing: 'ease-out' });
+      animate('#contenedor-presente', { opacity: [0, 1], y: [50, 0] }, { duration: 0.9, delay: 0.2, easing: [0.25, 1, 0.5, 1] });
+    }, { margin: '-10%' });
+  }
+</script>
