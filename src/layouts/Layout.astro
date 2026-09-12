@@ -94,8 +94,37 @@ const makeUrl = (langKey: Lang) => {
 		<slot />
 		<Footer lang={lang} slug={slug} />
 		<CookieConsent />
+		<button
+			id="scroll-top-button"
+			class="scroll-top-button"
+			type="button"
+			aria-label={lang === 'ca' ? 'Pujar amunt' : lang === 'es' ? 'Subir arriba' : 'Back to top'}
+		>
+			<svg viewBox="0 0 24 24" aria-hidden="true" class="scroll-top-icon">
+				<path d="M12 4.5l6 6.5-1.4 1.4-3.6-3.6V19h-2V8.8L7.4 12.4 6 11l6-6.5z" fill="currentColor"/>
+			</svg>
+		</button>
 	</body>
 </html>
+
+<script>
+	const scrollTopButton = document.getElementById('scroll-top-button');
+
+	const updateScrollTopButton = () => {
+		if (!scrollTopButton) return;
+		const visible = window.scrollY > 300;
+		scrollTopButton.classList.toggle('is-visible', visible);
+		scrollTopButton.setAttribute('aria-hidden', String(!visible));
+	};
+
+	if (scrollTopButton) {
+		scrollTopButton.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+		window.addEventListener('scroll', updateScrollTopButton, { passive: true });
+		updateScrollTopButton();
+	}
+</script>
 
 <style>
 	html,
@@ -107,5 +136,48 @@ const makeUrl = (langKey: Lang) => {
 
 	body {
 		background: #f6efe4;
+	}
+
+	.scroll-top-button {
+		position: fixed;
+		right: 1.25rem;
+		bottom: 1.25rem;
+		z-index: 80;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 3rem;
+		height: 3rem;
+		border: 0;
+		border-radius: 9999px;
+		background: rgba(122, 90, 61, 0.95);
+		color: #fff;
+		box-shadow: 0 16px 32px rgba(31, 26, 23, 0.18);
+		cursor: pointer;
+		opacity: 0;
+		pointer-events: none;
+		transform: translateY(12px);
+		transition: opacity 240ms ease, transform 240ms ease, box-shadow 240ms ease;
+	}
+
+	.scroll-top-button:hover {
+		box-shadow: 0 18px 36px rgba(31, 26, 23, 0.22);
+	}
+
+	.scroll-top-button.is-visible {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
+	}
+
+	.scroll-top-icon {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.scroll-top-button {
+			transition: none;
+		}
 	}
 </style>

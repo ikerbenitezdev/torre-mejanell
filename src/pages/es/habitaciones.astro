@@ -108,3 +108,22 @@ const rooms = [
     </div>
   </main>
 </Layout>
+
+<script>
+  const roomCards = document.querySelectorAll('.room-card');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    roomCards.forEach((card) => observer.observe(card));
+  } else {
+    roomCards.forEach((card) => card.classList.add('is-visible'));
+  }
+</script>
