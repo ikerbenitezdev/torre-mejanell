@@ -70,11 +70,10 @@ const imageEntries = Object.entries(images);
             <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-md transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/15" href={secondaryHref}>{secondaryLabel}</a>
         </div>
 
-        <div class="mobile-scroll-indicator mt-7 flex items-center justify-center self-center md:hidden" aria-hidden="true">
+        <div class="mobile-scroll-indicator mt-12 flex items-center justify-center self-center md:hidden" aria-hidden="true">
             <svg viewBox="0 0 24 24" class="h-7 w-7 text-white/70" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2.7v11.2" />
-                <path d="M7.8 15.8L12 20l4.2-4.2" />
-                <path d="M12 14v6" opacity="0" />
+                <path d="M12 2.2v12.8" />
+                <path d="M7.8 16.2L12 20.5l4.2-4.3" />
             </svg>
         </div>
     </div>
@@ -82,17 +81,17 @@ const imageEntries = Object.entries(images);
 
 <style>
     .mobile-scroll-indicator {
-        opacity: 0.7;
-        animation: bounce-down 2.2s ease-in-out infinite;
+        opacity: 0;
+        animation: bounce-down 2.2s ease-in-out 1.8s infinite;
     }
 
     @keyframes bounce-down {
         0%, 100% {
             transform: translateY(0);
-            opacity: 0.35;
+            opacity: 0.2;
         }
         50% {
-            transform: translateY(7px);
+            transform: translateY(8px);
             opacity: 0.8;
         }
     }
